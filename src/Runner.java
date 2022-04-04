@@ -19,13 +19,15 @@ import java.awt.event.MouseMotionListener;
 import java.awt.MouseInfo;
 
 public class Runner extends JPanel implements ActionListener, MouseListener, KeyListener, MouseMotionListener {
-	Background cafe = new Background(0, 0);
+	Background cafeBg = new Background(0, 0, "/imgs/CafeBG.png");
+	Background cafeTable = new Background(0, 0, "/imgs/Background-01.png");
 	
 	int mouseY = MouseInfo.getPointerInfo().getLocation().y; 
 	int mouseX = MouseInfo.getPointerInfo().getLocation().x;
-	
+	 
 	public void paint(Graphics g) {
-		cafe.paint(g);
+		cafeBg.paint(g);
+		cafeTable.paint(g);
 	}
 	
 	public static void main(String[] args) {
@@ -35,7 +37,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	public Runner() {
 		JFrame f = new JFrame("Cooking");
 		f.setSize(new Dimension(1280, 720));
-		f.setBackground(Color.blue);
+		//f.setBackground();
 		f.add(this);
 		f.addMouseListener(this);
 		f.addMouseMotionListener(this);
@@ -79,7 +81,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	//@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		repaint();
 	}
 
 	//@Override
