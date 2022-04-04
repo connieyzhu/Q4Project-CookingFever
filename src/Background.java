@@ -15,12 +15,12 @@ public class Background {
 	private Image img; 	
 	private AffineTransform tx; 
 
-	public Background(double x, double y) {
+	public Background(double x, double y, String pic) {
 		this.x = x; 
 		this.y = y;
-		img = getImage("/imgs/Background-01.png"); 
+		img = getImage(pic); 
 
-		tx = AffineTransform.getTranslateInstance(x, y );
+		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x, y); 				//initialize the location of the image
 									//use your variables
 	}
@@ -47,7 +47,7 @@ public class Background {
 		tx.setToTranslation(x, y);
 
 		//to scale it up or down to change size, .5 means 50% of original file
-		tx.scale(4.5, 4.5);
+		tx.scale(1.0, 1.0);
 		
 	}
 
@@ -56,7 +56,7 @@ public class Background {
 		tx.setToTranslation(a, b);
 		
 		//to scale it up or down to change size, .5 means 50% of original file
-		tx.scale(4.5, 4.5);
+		tx.scale(1.0, 1.0);
 	}
 
 	private Image getImage(String path) {
