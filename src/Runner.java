@@ -21,12 +21,20 @@ import java.awt.MouseInfo;
 public class Runner extends JPanel implements ActionListener, MouseListener, KeyListener, MouseMotionListener {
 	Background cafeBg = new Background(0, 0, "/imgs/CafeBG.png");
 	Background cafeCounter = new Background(0, 0, "/imgs/CafeCounter.png");
+	Customer daphne = new Customer(300, 130, "Daphne");
+	Customer francis = new Customer(100, 130, "Francis");
+	Customer kyle = new Customer(500, 130, "Kyle");
+	Customer linda = new Customer(700, 130, "Linda");
 	
 	int mouseY = MouseInfo.getPointerInfo().getLocation().y; 
 	int mouseX = MouseInfo.getPointerInfo().getLocation().x;
 	 
 	public void paint(Graphics g) {
 		cafeBg.paint(g);
+		daphne.paint(g);
+		francis.paint(g);
+		kyle.paint(g);
+		linda.paint(g);
 		cafeCounter.paint(g);
 	}
 	
@@ -35,7 +43,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	}
 	
 	public Runner() {
-		JFrame f = new JFrame("Cooking");
+		JFrame f = new JFrame("Cooking Fever");
 		f.setSize(new Dimension(1280, 750));
 		//f.setBackground();
 		f.add(this);
