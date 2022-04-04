@@ -10,12 +10,12 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 import java.util.Random;
 
-public class Peach extends Toppings{
+public class Blueberry extends Toppings{
 	private int x,y; 
 	private Image img;
 	private AffineTransform tx;
 	
-	public Peach(int x, int y){
+	public Blueberry(int x, int y){
 		super(x, y);
 		
 		img = getImage("/imgs/broccoli.png"); // change to batter
