@@ -18,7 +18,6 @@ public class VanillaBatter{
 	public VanillaBatter(int x, int y){
 		this.x = x;
 		this.y = y; 
-		
 		img = getImage("/imgs/broccoli.png"); // change to batter
 		
 		tx = AffineTransform.getTranslateInstance(x, y );
