@@ -1,4 +1,3 @@
-
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -18,7 +17,6 @@ public class ChocolateBatter{
 	public ChocolateBatter(int x, int y){
 		this.x = x;
 		this.y = y; 
-		
 		img = getImage("/imgs/broccoli.png"); // change to batter
 		
 		tx = AffineTransform.getTranslateInstance(x, y );
