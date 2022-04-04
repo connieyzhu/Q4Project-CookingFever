@@ -11,7 +11,7 @@ import java.net.URL;
 import java.awt.Image;
 
 public class Background {
-	public double x, y; //position
+	private double x, y; //position
 	private Image img; 	
 	private AffineTransform tx; 
 
