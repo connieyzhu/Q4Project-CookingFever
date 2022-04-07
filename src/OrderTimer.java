@@ -23,7 +23,7 @@ public class OrderTimer {
 			gx = x;
 			gy = y;
 			tx = x-290;
-			ty = y + 150;
+			ty = y + 90;
 			sec = seconds;
 	    	
 	    	timer = new Timer();
@@ -35,7 +35,7 @@ public class OrderTimer {
 			Graphics2D g2 = (Graphics2D) g;
 			
 			g.setColor(Color.gray);
-			g.fillRect(gx, gy, tx, gy+150);
+			g.fillRect(gx, gy, tx, gy+90);
 			
 			g.setColor(Color.green);
 			g.fillRect(x, y, tx, ty);
@@ -44,8 +44,8 @@ public class OrderTimer {
 	    
 	    class RemindTask extends TimerTask {
 	        public void run() {
-	        	if(y == gy+220) {
-	        		System.out.println("Going Down!");
+	        	if(y == gy+165) {
+	        		System.out.println("Time's Up!");
 	        	}else {
 	    			y += 1;
 	    			ty -= 1;
