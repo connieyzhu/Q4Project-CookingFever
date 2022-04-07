@@ -11,48 +11,46 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 import java.awt.Image;
 import java.util.Timer;
+import java.util.TimerTask;
 
 public class OrderTimer {
-	private int x, y, gx, gy, tx, ty; //position
-	//private Image img; 	
-	//private AffineTransform tx; 
-	
-	public OrderTimer(int x, int y) {
-		this.x = x; 
-		this.y = y;
-		gx = x;
-		gy = y;
-		tx = x-190;
-		ty = y + 150;
-	}
-	
-	public void paint(Graphics g) {
-		//these are the 2 lines of code needed draw an image on the screen
-		Graphics2D g2 = (Graphics2D) g;
-		
-		g.setColor(Color.gray);
-		g.fillRect(gx, gy, tx, gy+150);
-		
-		g.setColor(Color.green);
-		g.fillRect(x, y, tx, ty);
-		
-		update();
-		
-	}
+	private int x, y, gx, gy, tx, ty, sec; 
+	Timer timer;
 
-	/* update the picture variable location */
-	private void update() {
-		
-		if(ty <= gy+150) {
-			y += 1;
-			ty -= 1;
-		}else {
-			y = gy+150;
+	    public OrderTimer(int x, int y, int seconds) {
+	    	this.x = x; 
+			this.y = y;
+			gx = x;
+			gy = y;
+			tx = x-290;
+			ty = y + 150;
+			sec = seconds;
+	    	
+	    	timer = new Timer();
+	        timer.schedule(new RemindTask(), seconds*400);
 		}
-		
-		
-	}
-
+	    
+	    public void paint(Graphics g) {
+			//these are the 2 lines of code needed draw an image on the screen
+			Graphics2D g2 = (Graphics2D) g;
+			
+			g.setColor(Color.gray);
+			g.fillRect(gx, gy, tx, gy+150);
+			
+			g.setColor(Color.green);
+			g.fillRect(x, y, tx, ty);
+			
+		}
+	    
+	    class RemindTask extends TimerTask {
+	        public void run() {
+	        	if(y == gy+220) {
+	        		System.out.println("Going Down!");
+	        	}else {
+	    			y += 1;
+	    			ty -= 1;
+	    			timer.schedule(new RemindTask(), sec*400);
+	    		}
+	        }
+	    }
 }
-
-
