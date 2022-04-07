@@ -25,6 +25,9 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	Customer francis = new Customer(100, 130, "Francis");
 	Customer kyle = new Customer(500, 130, "Kyle");
 	Customer linda = new Customer(700, 130, "Linda");
+	//OrderTimer custTimer = new OrderTimer(300, 70, 5);
+	OrderTimer custTimer = new OrderTimer(300, 75, 1);
+	Background order = new Background(210, 70, "/imgs/Order Bubble.png");
 	
 	int mouseY = MouseInfo.getPointerInfo().getLocation().y; 
 	int mouseX = MouseInfo.getPointerInfo().getLocation().x;
@@ -36,6 +39,8 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		kyle.paint(g);
 		linda.paint(g);
 		cafeCounter.paint(g);
+		custTimer.paint(g);
+		order.paint(g);
 	}
 	
 	public static void main(String[] args) {
