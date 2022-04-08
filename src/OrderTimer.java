@@ -22,7 +22,7 @@ public class OrderTimer {
 			this.y = y;
 			gx = x;
 			gy = y;
-			tx = x-290;
+			tx = x-(x-10);
 			ty = y + 90;
 			sec = seconds;
 	    	
