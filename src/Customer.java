@@ -11,12 +11,13 @@ import java.net.URL;
 import java.awt.Image;
 
 public class Customer {
-	private double x, y; //position
+	private int x, y; //position
+	private double vx = 1;
 	private String name;
 	private Image img; 	
 	private AffineTransform tx; 
 
-	public Customer(double x, double y, String custName) {
+	public Customer(int x, int y, String custName) {
 		this.x = x; 
 		this.y = y;
 		name = custName;
@@ -56,7 +57,7 @@ public class Customer {
 
 	/* update the picture variable location */
 	private void update() {
-
+		
 		tx.setToTranslation(x, y);
 
 		//to scale it up or down to change size, .5 means 50% of original file
