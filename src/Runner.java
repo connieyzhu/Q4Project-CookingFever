@@ -21,13 +21,23 @@ import java.awt.MouseInfo;
 public class Runner extends JPanel implements ActionListener, MouseListener, KeyListener, MouseMotionListener {
 	Background cafeBg = new Background(0, 0, "/imgs/CafeBG.png");
 	Background cafeCounter = new Background(0, 0, "/imgs/CafeCounter.png");
-	Customer daphne = new Customer(300, 130, "Daphne");
-	Customer francis = new Customer(100, 130, "Francis");
-	Customer kyle = new Customer(500, 130, "Kyle");
-	Customer linda = new Customer(700, 130, "Linda");
-	//OrderTimer custTimer = new OrderTimer(300, 70, 5);
-	OrderTimer custTimer = new OrderTimer(300, 75, 1);
-	Background order = new Background(210, 70, "/imgs/Order Bubble.png");
+	Position pos = new Position("Person");
+	Customer francis = new Customer(pos.getX(), 130, "Francis");
+	Customer daphne = new Customer(pos.getX(), 130, "Daphne");
+	Customer kyle = new Customer(pos.getX(), 130, "Kyle");
+	Customer linda = new Customer(pos.getX(), 130, "Linda");
+	OrderTimer custTimer1 = new OrderTimer(110, 75, 1);
+	OrderTimer custTimer2 = new OrderTimer(400, 75, 1);
+	OrderTimer custTimer3 = new OrderTimer(690, 75, 1);
+	OrderTimer custTimer4 = new OrderTimer(980, 75, 1);
+	Background order1 = new Background(20, 70, "/imgs/Order Bubble.png");
+	Background order2 = new Background(310, 70, "/imgs/Order Bubble.png");
+	Background order3 = new Background(600, 70, "/imgs/Order Bubble.png");
+	Background order4 = new Background(890, 70, "/imgs/Order Bubble.png");
+	
+	//Person: (100, 130), (390, 130), (680,130), 970, 130)
+	//Order Form: (20, 70), (310, 70), (600, 70), 890, 70)
+	//Timer: (110, 75), (400, 75), (690, 75), (980, 75)
 	
 	int mouseY = MouseInfo.getPointerInfo().getLocation().y; 
 	int mouseX = MouseInfo.getPointerInfo().getLocation().x;
@@ -39,8 +49,14 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		kyle.paint(g);
 		linda.paint(g);
 		cafeCounter.paint(g);
-		custTimer.paint(g);
-		order.paint(g);
+		custTimer1.paint(g);
+		custTimer2.paint(g);
+		custTimer3.paint(g);
+		custTimer4.paint(g);
+		order1.paint(g);
+		order2.paint(g);
+		order3.paint(g);
+		order4.paint(g);
 	}
 	
 	public static void main(String[] args) {
