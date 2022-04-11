@@ -2,6 +2,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.MouseInfo;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -9,15 +10,22 @@ import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 import java.awt.Image;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Customer {
-	private int x, y; //position
-	private double vx = 1;
+	private int x1, x, y; //position
+	private int sec = 1600;
+	private int vx = 2;
 	private String name;
 	private Image img; 	
 	private AffineTransform tx; 
-
+	Timer timer;
+	OrderTimer custTimer;
+	Background order;
+	
 	public Customer(int x, int y, String custName) {
+		x1 = x-1200;
 		this.x = x; 
 		this.y = y;
 		name = custName;
@@ -33,32 +41,40 @@ public class Customer {
 		if(name == "Linda") {
 			img = getImage("/imgs/L1.png"); 
 		}
-
-		tx = AffineTransform.getTranslateInstance(x, y);
-		init(x, y); 				//initialize the location of the image
+		
+		tx = AffineTransform.getTranslateInstance(x1, y);
+		init(x1, y); 				//initialize the location of the image
 									//use your variables
+		order = new Background(x-80, 70, "/imgs/Order Bubble.png");
+		custTimer = new OrderTimer(x+10, 75, 1);
+		timer = new Timer();
+	
 	}
 	
 	public void changePicture(String newFileName) {
 		img = getImage(newFileName);
-		init(x, y);
+		init(x1, y);
 	}
 	
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
-
+		timer.schedule(new RemindTask(), sec);
 		//call update to update the actually picture location
-		update();
 		g2.drawImage(img, tx, null);
 		
+		if(x1 == x) {
+			//custTimer = new OrderTimer(x+10, 75, 1);
+			custTimer.paint(g);
+			order.paint(g);
+		}
 
 	}
-
+	
 	/* update the picture variable location */
 	private void update() {
 		
-		tx.setToTranslation(x, y);
+		tx.setToTranslation(x1, y);
 
 		//to scale it up or down to change size, .5 means 50% of original file
 		tx.scale(0.4, 0.4);
@@ -82,6 +98,18 @@ public class Customer {
 			e.printStackTrace();
 		}
 		return tempImage;
+	}
+	
+	class RemindTask extends TimerTask {
+	    public void run() {
+	    	if(x1 == x) {
+	    		System.out.println("Customer Arrived!");
+	    	}else {
+				x1 += vx;
+				update();
+				timer.schedule(new RemindTask(), sec);
+			}
+	    }
 	}
 }
 
