@@ -19,15 +19,16 @@ public class OrderTimer {
 
 	    public OrderTimer(int x, int y, int seconds) {
 	    	this.x = x; 
-			this.y = y;
+			this.y = y-15;
 			gx = x;
 			gy = y;
 			tx = x-(x-10);
-			ty = y + 90;
+			ty = y + 110;
 			sec = seconds;
 	    	
 	    	timer = new Timer();
-	        timer.schedule(new RemindTask(), seconds*400);
+	    	timer.schedule(new RemindTask(), sec*400);
+	      
 		}
 	    
 	    public void paint(Graphics g) {
@@ -38,7 +39,15 @@ public class OrderTimer {
 			g.fillRect(gx, gy, tx, gy+90);
 			
 			g.setColor(Color.green);
+			if(y >= 180 && y < 210) {
+				g.setColor(Color.yellow);
+			}else if(y >= 200) {
+				g.setColor(Color.red);
+			}
 			g.fillRect(x, y, tx, ty);
+			
+			
+			//timer.schedule(new RemindTask(), sec*400);
 			
 		}
 	    
