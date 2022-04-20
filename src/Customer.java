@@ -94,6 +94,9 @@ public class Customer {
 	public double getVX() {
 		return leavingVx;
 	}
+	public void setName(String newName) {
+		name = newName;
+	}
 	
 	public void setX1(double x) {
 		x1 = x;
@@ -131,8 +134,9 @@ public class Customer {
 	class RemindTask extends TimerTask {
 	    public void run() {
 	    	if(x1 == x-2000) {
-	    		System.out.println("cust left");
-	    	}else if(totalTime >= 55875.0){ 
+	    		System.out.println("cust return");
+	    		cancel();
+	    	}else if(totalTime >= 59830.0){ 
 	    		x1 += vx;
 	    		ready = false;
 	    		done = true;
