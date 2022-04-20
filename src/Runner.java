@@ -28,6 +28,10 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	OrderTimer timer2 = new OrderTimer(pos.getX(), 75, 1);
 	OrderTimer timer3 = new OrderTimer(pos.getX(), 75, 1);
 	
+	Coffee coffee1 = new Coffee(195, 485); 
+	Coffee coffee2 = new Coffee(255, 490);
+	Coffee coffee3 = new Coffee(315, 495);
+	
 	/*Customer francis = new Customer(pos.getX(), 130, "Francis");
 	Customer daphne = new Customer(pos.getX(), 130, "Daphne");
 	Customer kyle = new Customer(pos.getX(), 130, "Kyle");
@@ -51,6 +55,9 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		timer1.paint(g);
 		timer2.paint(g);
 		timer3.paint(g);
+		coffee1.paint(g);
+		coffee2.paint(g);
+		coffee3.paint(g);
 	}
 	
 	public static void main(String[] args) {
@@ -74,10 +81,25 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		
 	}
 	
+	public Rectangle coffeeGetRect() {
+		return new Rectangle(170, 365, 220, 210);
+	}
 	
 	//@Override
 	public void mouseClicked(MouseEvent arg0) {
-
+	
+	if(arg0.getX()>=170 && arg0.getX()<= 390 && arg0.getY() >= 365 && arg0.getY() <= 600){
+		System.out.print("hi");
+		try {
+			TimeUnit.SECONDS.sleep(3);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			coffee1.change();
+			coffee2.change();
+			coffee3.change();
+		}
 	}
 
 	//@Override
