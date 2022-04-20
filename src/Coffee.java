@@ -17,7 +17,7 @@ public class Coffee{
 	public Coffee(int x, int y){
 		this.x = x;
 		this.y = y; 
-		img = getImage("/imgs/broccoli.png"); // change to cake
+		img = getImage("/imgs/CoffeeEmpty.png"); //empty coffee image
 		
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y);
@@ -31,6 +31,7 @@ public class Coffee{
 		update();
 		
 		g2.drawImage(img, tx, null);
+		//g.drawRect(x, y, 52, 60);
 	
 	}
 	
@@ -57,6 +58,20 @@ public class Coffee{
 		return tempImage;
 	}
 	
+	public void changePicture(String newFileName) {
+		img = getImage(newFileName);
+		init(x, y);
+		
+	}
+	
+	public void change() {
+		changePicture("/imgs/CoffeeFull.png"); 
+	}
+	
+	public Rectangle getRect() {
+		return new Rectangle(x, y, 52, 60);
+	}
+	
 	public int getX() {
 		return x;
 	}
@@ -67,5 +82,7 @@ public class Coffee{
 	
 	
 }
+
+
 
 
