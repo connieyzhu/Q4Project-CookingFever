@@ -16,7 +16,7 @@ import java.util.TimerTask;
 public class Customer {
 	private double x1, x, y, totalTime; //position
 	private int sec = 1600;
-	private double vx = -0.5;
+	private double vx = -1;
 	private double leavingVx = -0.01;
 	private String name;
 	private boolean ready, done;
@@ -132,7 +132,7 @@ public class Customer {
 	    public void run() {
 	    	if(x1 == x-2000) {
 	    		System.out.println("cust left");
-	    	}else if(totalTime >= 90742){//totalTime >= 90742){
+	    	}else if(totalTime >= 55875.0){ 
 	    		x1 += vx;
 	    		ready = false;
 	    		done = true;
