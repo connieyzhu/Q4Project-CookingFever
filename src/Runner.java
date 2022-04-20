@@ -21,11 +21,17 @@ import java.awt.MouseInfo;
 public class Runner extends JPanel implements ActionListener, MouseListener, KeyListener, MouseMotionListener {
 	Background cafeBg = new Background(0, 0, "/imgs/CafeBG.png");
 	Background cafeCounter = new Background(0, 0, "/imgs/CafeCounter.png");
-	Position pos = new Position("Person");
-	Customer francis = new Customer(pos.getX(), 130, "Francis");
+	Position pos = new Position("timer");
+	
+	OrderTimer timer = new OrderTimer(pos.getX(), 75, 1);
+	OrderTimer timer1 = new OrderTimer(pos.getX(), 75, 1);
+	OrderTimer timer2 = new OrderTimer(pos.getX(), 75, 1);
+	OrderTimer timer3 = new OrderTimer(pos.getX(), 75, 1);
+	
+	/*Customer francis = new Customer(pos.getX(), 130, "Francis");
 	Customer daphne = new Customer(pos.getX(), 130, "Daphne");
 	Customer kyle = new Customer(pos.getX(), 130, "Kyle");
-	Customer linda = new Customer(pos.getX(), 130, "Linda");
+	Customer linda = new Customer(pos.getX(), 130, "Linda");*/
 	
 	//Person: (100, 130), (390, 130), (680,130), 970, 130)
 	//Order Form: (20, 70), (310, 70), (600, 70), 890, 70)
@@ -36,11 +42,15 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	 
 	public void paint(Graphics g) {
 		cafeBg.paint(g);
-		daphne.paint(g);
+		/*daphne.paint(g);
 		francis.paint(g);
 		kyle.paint(g);
-		linda.paint(g);
+		linda.paint(g);*/
 		cafeCounter.paint(g);
+		timer.paint(g);
+		timer1.paint(g);
+		timer2.paint(g);
+		timer3.paint(g);
 	}
 	
 	public static void main(String[] args) {
