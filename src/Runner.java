@@ -17,6 +17,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.MouseInfo;
+import java.util.concurrent.TimeUnit;
+import java.util.TimerTask;
 
 public class Runner extends JPanel implements ActionListener, MouseListener, KeyListener, MouseMotionListener {
 	Background cafeBg = new Background(0, 0, "/imgs/CafeBG.png");
