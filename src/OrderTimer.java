@@ -21,6 +21,7 @@ public class OrderTimer {
 	Position wait;
 	Background order;
 	private boolean time;
+	private boolean restart;
 	private int count = 0;
 	private String custName;
 	
@@ -33,6 +34,7 @@ public class OrderTimer {
 			//this.y = y-15;
 	    	this.y = y;
 	    	time = false;
+	    	restart = false;
 			gx = x;
 			gy = y;
 			tx = x-(x-10);
@@ -90,12 +92,17 @@ public class OrderTimer {
 	    	if(x == "return") {
 	    		double newX = wait.getWait();
 	        	cust.setX1(newX);
+	        	cust.setName(name.getName());
+	        	restart = true;
+	        	
+	        	System.out.println("should return");
 	    	}
 	    }
 	    
 	    class RemindTask extends TimerTask {
 	        public void run() {
 	        	if(time == false && y == gy+165) {
+	        		restart = false;
 	        		timer.schedule(new Leave(), sec*400); //400
 	        	}else if(y == gy+165) {
 	        		System.out.println("Time's Up!");
@@ -112,11 +119,11 @@ public class OrderTimer {
 	    class Leave extends TimerTask {
 	    	 public void run() {
 		        	if(cust.getX1() <= cust.getX()-2000) {
-		        		
-		        		cancel();
-		        	}else {
 		        		updateLeave("leave");
 		        		timer.schedule(new Leave(), sec*400);
+		        	}else {
+		        		updateLeave("return");
+		        		cancel();
 		        	}
 		        }
 	    }
