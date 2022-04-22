@@ -79,9 +79,18 @@ public class Coffee{
 		return y;
 	}
 
+	public void setPosition(int x2, int y2) {
+		// TODO Auto-generated method stub
+		this.x = x2;
+		this.y = y2; 
+		tx.setToTranslation(x, y);
+		tx.scale(1,1);
+	}
 	
 	
 }
+
+
 
 
 
