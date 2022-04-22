@@ -116,7 +116,9 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 
 	//@Override
 	public void mousePressed(MouseEvent arg0) {
-	
+		coffee1.setPosition(arg0.getX(), arg0.getY());
+		coffee2.setPosition(arg0.getX(), arg0.getY());
+		coffee3.setPosition(arg0.getX(), arg0.getY());
 	}
 
 	//@Override
@@ -154,7 +156,9 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		coffee1.setPosition(e.getX(), e.getY());
+		coffee2.setPosition(e.getX(), e.getY());
+		coffee3.setPosition(e.getX(), e.getY());
 	}
 
 	@Override
