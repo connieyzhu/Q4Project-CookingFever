@@ -13,6 +13,7 @@ public class Coffee{
 	private int x,y; 
 	private Image img;
 	private AffineTransform tx;
+	boolean filled = false; 
 	
 	public Coffee(int x, int y){
 		this.x = x;
@@ -65,7 +66,8 @@ public class Coffee{
 	}
 	
 	public void change() {
-		changePicture("/imgs/CoffeeFull.png"); 
+		changePicture("/imgs/CoffeeFull.png");
+		filled = true; 
 	}
 	
 	public Rectangle getRect() {
