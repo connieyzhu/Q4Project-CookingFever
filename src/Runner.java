@@ -13,16 +13,19 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.tools.DocumentationTool.Location;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.MouseInfo;
+import java.awt.Point;
 import java.util.concurrent.TimeUnit;
 import java.util.TimerTask;
 
 public class Runner extends JPanel implements ActionListener, MouseListener, KeyListener, MouseMotionListener {
 	Background cafeBg = new Background(0, 0, "/imgs/CafeBG.png");
-	Background cafeCounter = new Background(0, 0, "/imgs/CafeCounter.png");
+	Background cafeCounter = new Background(0, 0, "/imgs/CafeCounterv2.png");
 	Position pos = new Position("timer");
 	
 	OrderTimer timer = new OrderTimer(pos.getX(), 75, 1);
@@ -45,6 +48,8 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	
 	int mouseY = MouseInfo.getPointerInfo().getLocation().y; 
 	int mouseX = MouseInfo.getPointerInfo().getLocation().x;
+	private boolean b; 
+	
 	 
 	public void paint(Graphics g) {
 		cafeBg.paint(g);
@@ -102,6 +107,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 			coffee2.change();
 			coffee3.change();
 		}
+	
 	}
 
 	//@Override
@@ -116,9 +122,10 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 
 	//@Override
 	public void mousePressed(MouseEvent arg0) {
-		coffee1.setPosition(arg0.getX(), arg0.getY());
-		coffee2.setPosition(arg0.getX(), arg0.getY());
-		coffee3.setPosition(arg0.getX(), arg0.getY());
+//		coffee1.setPosition(arg0.getX(), arg0.getY());
+//		coffee2.setPosition(arg0.getX(), arg0.getY());
+//		coffee3.setPosition(arg0.getX(), arg0.getY());
+		//fix to not follow the mouse when the mouse is clicked
 	}
 
 	//@Override
@@ -156,18 +163,22 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
-		coffee1.setPosition(e.getX(), e.getY());
-		coffee2.setPosition(e.getX(), e.getY());
-		coffee3.setPosition(e.getX(), e.getY());
+	
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		coffee1.setPosition(e.getX(), e.getY());
+		coffee2.setPosition(e.getX(), e.getY());
+		coffee3.setPosition(e.getX(), e.getY());
 	}
 
 }
+
+
+
+
 
 
 
