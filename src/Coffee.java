@@ -14,6 +14,8 @@ public class Coffee{
 	private Image img;
 	private AffineTransform tx;
 	boolean filled = false; 
+	private Rectangle rectangle;
+
 	
 	public Coffee(int x, int y){
 		this.x = x;
@@ -22,6 +24,7 @@ public class Coffee{
 		
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y);
+		rectangle = new Rectangle(x, y, 52, 60);
 	}
 	
 	public void paint(Graphics g) {
@@ -32,7 +35,7 @@ public class Coffee{
 		update();
 		
 		g2.drawImage(img, tx, null);
-		//g.drawRect(x, y, 52, 60);
+		g.drawRect(x, y, 52, 60);
 	
 	}
 	
@@ -74,6 +77,10 @@ public class Coffee{
 		return new Rectangle(x, y, 52, 60);
 	}
 	
+	public Rectangle getBounds() {
+        return rectangle;
+    }
+	
 	public int getX() {
 		return x;
 	}
@@ -91,7 +98,6 @@ public class Coffee{
 	
 	
 }
-
 
 
 
