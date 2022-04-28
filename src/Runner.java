@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JFrame;
@@ -15,15 +16,21 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.tools.DocumentationTool.Location;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.concurrent.TimeUnit;
 import java.util.TimerTask;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Runner extends JPanel implements ActionListener, MouseListener, KeyListener, MouseMotionListener {
+	
+	private ArrayList<Coffee> coffeeList;
+	private Coffee hitBox;
+    private Point offset;
+	
 	Background cafeBg = new Background(0, 0, "/imgs/CafeBG.png");
 	Background cafeCounter = new Background(0, 0, "/imgs/CafeCounterv2.png");
 	Position pos = new Position("timer");
@@ -36,6 +43,8 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	Coffee coffee1 = new Coffee(195, 485); 
 	Coffee coffee2 = new Coffee(255, 490);
 	Coffee coffee3 = new Coffee(315, 495);
+	
+	ChocolateBatter chocBatter = new ChocolateBatter(475, 610);
 	
 	/*Customer francis = new Customer(pos.getX(), 130, "Francis");
 	Customer daphne = new Customer(pos.getX(), 130, "Daphne");
@@ -65,6 +74,11 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		coffee1.paint(g);
 		coffee2.paint(g);
 		coffee3.paint(g);
+		chocBatter.paint(g);
+		
+		
+		g.drawRect(505, 620, 130, 85);
+		g.drawRect(645, 620, 130, 85);
 	}
 	
 	public static void main(String[] args) {
@@ -73,7 +87,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	
 	public Runner() {
 		JFrame f = new JFrame("Cooking Fever");
-		f.setSize(new Dimension(1280, 750));
+ 		f.setSize(new Dimension(1280, 750));
 		//f.setBackground();
 		f.add(this);
 		f.addMouseListener(this);
@@ -86,7 +100,11 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
 		
+		coffeeList = new ArrayList<>();
+		coffeeList.add(coffee1);
+		coffeeList.add(coffee2);
 	}
+	
 	
 	public Rectangle coffeeGetRect() {
 		return new Rectangle(170, 365, 220, 210);
@@ -95,21 +113,29 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	//@Override
 	public void mouseClicked(MouseEvent arg0) {
 	
-	if(arg0.getX()>=170 && arg0.getX()<= 390 && arg0.getY() >= 365 && arg0.getY() <= 600){
-		System.out.print("hi");
-		try {
-			TimeUnit.SECONDS.sleep(3);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-			coffee1.change();
-			coffee2.change();
-			coffee3.change();
-		}
-	
+//		if(arg0.getX()>=170 && arg0.getX()<= 390 && arg0.getY() >= 365 && arg0.getY() <= 600){
+//			System.out.print("hi");
+//			try {
+//				TimeUnit.SECONDS.sleep(3);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			//coffee1.change();
+//			//coffee2.change();
+//			//coffee3.change();
+//		}
+//		
+//		if(arg0.getX()>=505 && arg0.getX()<= 635 && arg0.getY() >= 620 && arg0.getY() <= 705){
+//			System.out.println("choc");
+//		}
+//		if(arg0.getX()>=chocBatter.getX() && arg0.getX()<= chocBatter.getX() + 135 && arg0.getY() >= chocBatter.getY() && arg0.getY() <= chocBatter.getY() + 105){
+//			System.out.println("yes");
+//		}
+		
 	}
-
+		
+	
 	//@Override
 	public void mouseEntered(MouseEvent arg0) {
 		
@@ -122,16 +148,23 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 
 	//@Override
 	public void mousePressed(MouseEvent arg0) {
-//		coffee1.setPosition(arg0.getX(), arg0.getY());
-//		coffee2.setPosition(arg0.getX(), arg0.getY());
-//		coffee3.setPosition(arg0.getX(), arg0.getY());
-		//fix to not follow the mouse when the mouse is clicked
+		Point mp = arg0.getPoint();
+		for (Coffee box : coffeeList) {
+			if (box.getBounds().contains(mp)) {
+				hitBox = box;
+				System.out.println("hi");
+				offset = new Point();
+				offset.x = mp.x - box.getBounds().x;
+				offset.y = mp.y - box.getBounds().y;
+			}
+		}
+
 	}
 
 	//@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		 
+		hitBox = null;
 	}
 
 	//@Override
@@ -145,6 +178,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		// TODO Auto-generated method stub
 			//increment score depending on key code for forward and back
 			//will also move chicken forward or back
+		
 			
 	}
 
@@ -169,22 +203,17 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
-		coffee1.setPosition(e.getX(), e.getY());
-		coffee2.setPosition(e.getX(), e.getY());
-		coffee3.setPosition(e.getX(), e.getY());
+		if (hitBox != null) {
+			Point mp = e.getPoint();
+			Rectangle bounds = hitBox.getBounds();
+			bounds.x = mp.x - offset.x;
+			bounds.y = mp.y - offset.y;
+			for(Coffee box: coffeeList) {
+				if(box.equals(hitBox)) {
+					box.setPosition(bounds.x, bounds.y);
+				}
+			}
+		}
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
