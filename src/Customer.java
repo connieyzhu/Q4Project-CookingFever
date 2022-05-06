@@ -14,27 +14,32 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Customer {
-	private double x1, x, y, totalTime; //position
+	private double x1, x, y, originalX1; //position
 	private int sec = 1600;
-	private double vx = -1;
-	private double leavingVx = -0.01;
+	private double vx = 1;
+	private double leavingVx = 0.5;
 	private String name;
-	private boolean ready, done;
+	private boolean ready, done, repaint, restart;
 	private Image img; 	
 	private AffineTransform tx; 
+	Position names;
 	Timer timer;
 	OrderTimer custTimer;
 	Background order;
 	Position pos = new Position("wait");
 	
-	public Customer(int x, int y, String custName) {
-		x1 = pos.getWait();
+	public Customer(int x, int x1, int y, String custName) {
+		this.x1 = x1;
+		System.out.println("Pos " + x1);
 		this.x = x; 
 		this.y = y;
+		originalX1 = x1;
 		ready = false;
 		done = false;
-		totalTime = 0;
+		repaint = false;
+		restart = false;
 		name = custName;
+		names = new Position("name");
 		if(name == "Daphne") {
 			img = getImage("/imgs/D1.png"); 
 		}
@@ -68,14 +73,7 @@ public class Customer {
 		timer.schedule(new RemindTask(), sec);
 		//call update to update the actually picture location
 		g2.drawImage(img, tx, null);
-		
 		update();
-		
-		/*if(ready) {
-			//custTimer = new OrderTimer(x+10, 75, 1);
-			//custTimer.paint(g);
-			order.paint(g);
-		}*/
 
 	}
 	
@@ -83,28 +81,31 @@ public class Customer {
 		return ready;
 	}
 	
-	public double getX1() {
-		return x1;
-	}
-	
-	public double getX() {
-		return x;
-	}
-	
-	public double getVX() {
-		return leavingVx;
-	}
 	public void setName(String newName) {
 		name = newName;
+		if(name == "Daphne") {
+			img = getImage("/imgs/D1.png"); 
+		}
+		if(name == "Kyle") {
+			img = getImage("/imgs/K1.png"); 
+		}
+		if(name == "Francis") {
+			img = getImage("/imgs/F1.png"); 
+		}
+		if(name == "Linda") {
+			img = getImage("/imgs/L1.png"); 
+		}
 	}
 	
-	public void setX1(double x) {
-		x1 = x;
+	
+	public void setDone(boolean x) {
+		done = x;
 	}
 	
 	/* update the picture variable location */
 	private void update() {
 		
+	 
 		tx.setToTranslation(x1, y);
 
 		//to scale it up or down to change size, .5 means 50% of original file
@@ -133,23 +134,25 @@ public class Customer {
 	
 	class RemindTask extends TimerTask {
 	    public void run() {
-	    	if(x1 == x-2000) {
-	    		System.out.println("cust return");
-	    		cancel();
-	    	}else if(totalTime >= 59830.0){ 
-	    		x1 += vx;
+	    	if(x1 >= 2000){
+	    		 restart = true;
+	    		 done = false;
+	    		 setName(names.getName());
+	    		 x1 = originalX1;
+	    		 leavingVx -= 0.1;
+	    		 vx = leavingVx;
+	    		 timer.schedule(new RemindTask(), sec);
+	    	}else if(done){ 
+	    		x1 += leavingVx;
 	    		ready = false;
-	    		done = true;
 				update();
-				sec = 30000;
 				timer.schedule(new RemindTask(), sec);
 	    	}else if(x1 == x) {
-	    		totalTime++;
-				System.out.println(totalTime);
 	    		ready = true;
 	    		timer.schedule(new RemindTask(), sec);
-	    	}else {
-				x1 += vx;
+	    	}else if(x1 < x){
+				restart = false;
+	    		x1 += vx;
 				update();
 				timer.schedule(new RemindTask(), sec);
 			}
