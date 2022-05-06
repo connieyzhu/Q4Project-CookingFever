@@ -27,8 +27,8 @@ import java.util.List;
 
 public class Runner extends JPanel implements ActionListener, MouseListener, KeyListener, MouseMotionListener {
 	
-	private ArrayList<Coffee> coffeeList;
-	private Coffee hitBox;
+	private ArrayList<Object> objectList;
+	private Object hitBox;
     private Point offset;
 	
 	Background cafeBg = new Background(0, 0, "/imgs/CafeBG.png");
@@ -44,7 +44,8 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	Coffee coffee2 = new Coffee(255, 490);
 	Coffee coffee3 = new Coffee(315, 495);
 	
-	ChocolateBatter chocBatter = new ChocolateBatter(475, 610);
+	Object one = new Object(0, 0, "Strawberry");
+	Object two = new Object(50, 50, "ChocBlueBake");
 	
 	/*Customer francis = new Customer(pos.getX(), 130, "Francis");
 	Customer daphne = new Customer(pos.getX(), 130, "Daphne");
@@ -74,11 +75,14 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		coffee1.paint(g);
 		coffee2.paint(g);
 		coffee3.paint(g);
-		chocBatter.paint(g);
-		
+		for(Object obj: objectList) {
+			obj.paint(g);
+		}
 		
 		g.drawRect(505, 620, 130, 85);
 		g.drawRect(645, 620, 130, 85);
+		g.drawRect(550, 550, 80, 50);
+		g.drawRect(660, 550, 80, 50);
 	}
 	
 	public static void main(String[] args) {
@@ -100,9 +104,9 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
 		
-		coffeeList = new ArrayList<>();
-		coffeeList.add(coffee1);
-		coffeeList.add(coffee2);
+		objectList = new ArrayList<>();
+		objectList.add(one);
+		objectList.add(two);
 	}
 	
 	
@@ -148,8 +152,21 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 
 	//@Override
 	public void mousePressed(MouseEvent arg0) {
+		if(arg0.getX()>=505 && arg0.getX()<= 635 && arg0.getY() >= 640 && arg0.getY() <= 705) {
+			objectList.add(new Object(505, 620, "ChocBatter"));
+		}
+		if(arg0.getX()>=645 && arg0.getX()<= 775 && arg0.getY() >= 640 && arg0.getY() <= 705) {
+			objectList.add(new Object(645, 620, "VanBatter"));
+		}
+		if(arg0.getX()>=550 && arg0.getX()<= 630 && arg0.getY() >= 550 && arg0.getY() <= 630) {
+			objectList.add(new Object(550, 550, "Strawberry"));
+		}
+		if(arg0.getX()>=660 && arg0.getX()<= 740 && arg0.getY() >= 550 && arg0.getY() <= 630) {
+			objectList.add(new Object(660, 550, "Blueberry"));
+		}
+		
 		Point mp = arg0.getPoint();
-		for (Coffee box : coffeeList) {
+		for (Object box : objectList) {
 			if (box.getBounds().contains(mp)) {
 				hitBox = box;
 				System.out.println("hi");
@@ -208,7 +225,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 			Rectangle bounds = hitBox.getBounds();
 			bounds.x = mp.x - offset.x;
 			bounds.y = mp.y - offset.y;
-			for(Coffee box: coffeeList) {
+			for(Object box: objectList) {
 				if(box.equals(hitBox)) {
 					box.setPosition(bounds.x, bounds.y);
 				}
