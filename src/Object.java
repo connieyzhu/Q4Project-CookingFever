@@ -12,14 +12,16 @@ import java.util.Random;
 public class Object{
 	private int x,y; 
 	private Image img;
+	private String type;
 	private AffineTransform tx;
 	boolean filled = false; 
 	private Rectangle rectangle;
 	
 
-	public Object(int x, int y, String type){
+	public Object(int x, int y, String s){
 		this.x = x;
 		this.y = y; 
+		type = s;
 		if(type.equals("Blueberry")) {
 			img = getImage("/imgs/Blueberry.png");
 			rectangle = new Rectangle(x, y, 100, 55);
@@ -135,6 +137,10 @@ public class Object{
 	}
 	public int getY() {
 		return y;
+	}
+	
+	public String getType() {
+		return type;
 	}
 
 	public void setPosition(int x2, int y2) {
