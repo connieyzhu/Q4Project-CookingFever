@@ -34,11 +34,12 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	Background cafeBg = new Background(0, 0, "/imgs/CafeBG.png");
 	Background cafeCounter = new Background(0, 0, "/imgs/CafeCounterv2.png");
 	Position pos = new Position("timer");
+	Position posWait = new Position("wait");
 	
-	OrderTimer timer = new OrderTimer(pos.getX(), 75, 1);
-	OrderTimer timer1 = new OrderTimer(pos.getX(), 75, 1);
-	OrderTimer timer2 = new OrderTimer(pos.getX(), 75, 1);
-	OrderTimer timer3 = new OrderTimer(pos.getX(), 75, 1);
+	OrderTimer timer = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
+	OrderTimer timer1 = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
+	OrderTimer timer2 = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
+	OrderTimer timer3 = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
 	
 	Coffee coffee1 = new Coffee(195, 485); 
 	Coffee coffee2 = new Coffee(255, 490);
