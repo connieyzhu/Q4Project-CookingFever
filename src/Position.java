@@ -22,11 +22,13 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Position {
 	int num;
+	static int count = 0;
+	static int posCount = 0;
 	int[] arr = new int[4];
 	int[] person = {100, 390, 680, 970};
 	int[] order = {20, 310, 600, 890};
 	int[] timer = {110, 400, 690, 980};
-	int[] wait = {1200, 3000, 5000, 8000};
+	int[] wait = {-1800, -4000, -8000, -12000};
 	String[] names = {"Daphne", "Linda", "Francis", "Kyle"};
 	boolean[] available = {true, true, true, true};
 	boolean[] availableWait = {true, true, true, true};
@@ -75,29 +77,22 @@ public class Position {
 		count = 0;
 	}
 	public void updateXAvail() {
-		int count = 0;
+		/*for(int i = 0; i < available.length; i++) {
+			available[i] = true;
+		}*/
+		
+		int posCount = 0;
 		for(int i = 0; i < available.length; i++) {
 			if(!available[i]) {
-				count++;
+				posCount++;
 			}
 		}
-		if(count == 4) {
+		if(posCount == 4) {
 			for(int i = 0; i < available.length; i++) {
 				available[i] = true;
 			}
 		}
-		count = 0;
-	}
-	
-	public int getWait() {
-		newNum();
-		updateWaitAvail();
-		if(!availableWait[num]) {
-			newNum();
-			getWait();
-		}
-		availableWait[num] = false;
-		return wait[num];
+		posCount = 0;
 	}
 	
 	public int newNum() {
@@ -105,14 +100,34 @@ public class Position {
 		return num;
 	}
 	
+	public int getWait() {
+		newNum();
+		if(!availableWait[num]) {
+			newNum();
+			getWait();
+		}
+		availableWait[num] = false;
+		count++;
+		
+		if(count%4 == 0) {
+			updateWaitAvail();
+		}
+		return wait[num];
+	}
+	
 	public int getX() {
 		newNum();
-		updateXAvail();
+		//updateXAvail();
 		if(!available[num]) {
 			newNum();
 			getX();
 		}
 		available[num] = false;
+		posCount++;
+		
+		if(posCount%4 == 0) {
+			updateXAvail();
+		}
 		return arr[num];
 	}
 }
