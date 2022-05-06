@@ -14,42 +14,35 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class OrderTimer {
-	private int x, y, gx, gy, tx, ty, sec, personX; 
+	private int x, y, gx, gy, tx, ty, sec, personX, ogT, ogTy; 
 	Timer timer;
 	Customer cust;
 	Position name;
-	Position wait;
 	Background order;
-	private boolean time;
-	private boolean restart;
+	Position waiting;
 	private int count = 0;
 	private String custName;
-	
-		public OrderTimer() {
-			time = false;
-		}
-	    public OrderTimer(int x, int y, int seconds) {
+	Customer cust1;
+		
+	    public OrderTimer(int x, int y, int seconds, int wait) {
 	    	personX = x-10;
+	    	System.out.println("person " + personX);
 	    	this.x = x; 
-			//this.y = y-15;
 	    	this.y = y;
-	    	time = false;
-	    	restart = false;
 			gx = x;
 			gy = y;
 			tx = x-(x-10);
 			ty = y + 100;
 			sec = seconds;
+			ogT = y;
+			ogTy = y + 100;
 	    	
-			wait = new Position("wait");
+			waiting = new Position("wait");
 			name = new Position("name");
 			custName = name.getName();
 			order = new Background(x-90, 70, "/imgs/Order Bubble.png");
-			cust = new Customer(personX, 130, custName);
+			cust = new Customer(personX, wait, 130, custName);
 	    	timer = new Timer();
-	    	//timer.schedule(new RemindTask(), sec*8000);
-	 
-	    	
 		}
 	    
 	    public void runner() {
@@ -62,6 +55,7 @@ public class OrderTimer {
 	    public void paint(Graphics g) {
 			//these are the 2 lines of code needed draw an image on the screen
 			Graphics2D g2 = (Graphics2D) g;
+			
 			
 			if(cust.getReady()) {
 				g.setColor(Color.gray);
@@ -77,57 +71,30 @@ public class OrderTimer {
 				}
 				g.fillRect(x, y, tx, ty);
 				order.paint(g);
+				
 				runner();
 			}
-			
-			cust.paint(g2);
-			
-		}
+				cust.paint(g2);
+	    }
 	    
-	    public void updateLeave(String x) {
-	    	if(x == "leave") {
-	    		double newX = cust.getX1() + cust.getVX();
-	        	cust.setX1(newX);
-	    	}
-	    	if(x == "return") {
-	    		double newX = wait.getWait();
-	        	cust.setX1(newX);
-	        	cust.setName(name.getName());
-	        	restart = true;
-	        	
-	        	System.out.println("should return");
-	    	}
+	    public void done(boolean x) {
+	    	cust.setDone(x);
 	    }
 	    
 	    class RemindTask extends TimerTask {
 	        public void run() {
-	        	if(time == false && y == gy+165) {
-	        		restart = false;
-	        		timer.schedule(new Leave(), sec*400); //400
-	        	}else if(y == gy+165) {
-	        		System.out.println("Time's Up!");
-	        		time = false;
+	        	if(y == gy+165) {
+	        		done(true);
+	        		y = ogT;
+	        		ty = ogTy;
+	        		count = 0;
+	        		System.out.println("invoke done"); 
 	        	}else {
 	    			y += 1;
 	    			ty -= 1;
-	    			time = true;
 	    			timer.schedule(new RemindTask(), sec*400); //400
 	    		}
 	        }
 	    }
-	    
-	    class Leave extends TimerTask {
-	    	 public void run() {
-		        	if(cust.getX1() <= cust.getX()-2000) {
-		        		updateLeave("leave");
-		        		timer.schedule(new Leave(), sec*400);
-		        	}else {
-		        		updateLeave("return");
-		        		cancel();
-		        	}
-		        }
-	    }
-	    public boolean getTime() {
-	    	return time;
-	    }
+	  
 }
