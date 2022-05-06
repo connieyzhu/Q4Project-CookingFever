@@ -34,12 +34,11 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	Background cafeBg = new Background(0, 0, "/imgs/CafeBG.png");
 	Background cafeCounter = new Background(0, 0, "/imgs/CafeCounterv2.png");
 	Position pos = new Position("timer");
-	Position posWait = new Position("wait");
 	
-	OrderTimer timer = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
-	OrderTimer timer1 = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
-	OrderTimer timer2 = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
-	OrderTimer timer3 = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
+	OrderTimer timer = new OrderTimer(pos.getX(), 75, 1);
+	OrderTimer timer1 = new OrderTimer(pos.getX(), 75, 1);
+	OrderTimer timer2 = new OrderTimer(pos.getX(), 75, 1);
+	OrderTimer timer3 = new OrderTimer(pos.getX(), 75, 1);
 	
 	Coffee coffee1 = new Coffee(195, 485); 
 	Coffee coffee2 = new Coffee(255, 490);
@@ -84,6 +83,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		g.drawRect(645, 620, 130, 85);
 		g.drawRect(550, 550, 80, 50);
 		g.drawRect(660, 550, 80, 50);
+		g.drawRect(500, 400, 280, 140);
 	}
 	
 	public static void main(String[] args) {
@@ -183,6 +183,17 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		hitBox = null;
+		Point mp = arg0.getPoint();
+		for(int i = 0; i < objectList.size(); i++) {
+			if (objectList.get(i).getBounds().contains(mp)) {
+				if(arg0.getX()>=500 && arg0.getX()<= 780 && arg0.getY() >= 4000 && arg0.getY() <= 540) {
+					System.out.println("in");
+				}else {
+					objectList.remove(i);
+				}
+			}
+		}
+		//g.drawRect(500, 400, 280, 140);
 	}
 
 	//@Override
