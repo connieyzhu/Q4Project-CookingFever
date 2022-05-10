@@ -21,7 +21,6 @@ In this game, the goal is to collect as many coins as possible from all the cust
 ### Background Class
 
 The background class contains the image for the cafe setting, including the chairs, counter, and baking items. 
-
 ![CafeCounterv2](https://user-images.githubusercontent.com/78383220/167712700-01114c76-7cf9-4c74-bf99-39d1ad0696aa.png)
 
 
@@ -44,3 +43,30 @@ The position class is able to track the position of each customer at all times, 
 ![L2](https://user-images.githubusercontent.com/78383220/167713062-d0e320aa-1440-46a2-a5d3-589ee0cc1134.png)  ![K2](https://user-images.githubusercontent.com/78383220/167713105-3ab415a8-30ae-455a-ad63-706a68b48778.png) ![F2](https://user-images.githubusercontent.com/78383220/167713167-04bca766-1a60-4daf-8880-a7a5f8b0aec2.png)  ![D2](https://user-images.githubusercontent.com/78383220/167713191-ee35291d-1a14-4407-8ca6-219e817f671e.png)
 
 ## METHODS
+
+### Paint Method
+
+The paint method is an important part of the game, as it allows all the objects to show up on the screen with the specified positions and any other parameters that the constructors entail.
+
+(img) 
+
+### Change Picture Method
+
+The change picture method is located in every class, and it allows the images of the objects to change when a certain action has been completed, usually when a timer runs out, such as on the coffee machine or oven. 
+
+(img)
+
+## Help
+
+Reopen or relaunch eclipse or the game if you run into any issues!
+
+## Authors 
+
+- Daniela Fisher: danielafisher05@gmail.com
+- Jenny Zhu: 
+- Connie Zhu: 
+
+## Version History 
+
+1. 0.1
+   * Initial Release
