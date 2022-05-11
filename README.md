@@ -63,8 +63,8 @@ Reopen or relaunch eclipse or the game if you run into any issues!
 ## Authors 
 
 - Daniela Fisher: danielafisher05@gmail.com
-- Jenny Zhu: 
-- Connie Zhu: 
+- Jenny Zhu:  jenny.enki@gmail.com
+- Connie Zhu: connieyzhu3@gmail.com
 
 ## Version History 
 
