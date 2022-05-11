@@ -6,7 +6,7 @@ We hope you have fun playing our new version of Cooking Fever!
 
 ## Description 
 
-In this game, the goal is to collect as many coins as possible from all the customers in the allocated amount of time. Make sure to complete as amny orders as you can without sending away any customers! There is a three-second timer on the coffee machine, and a 5 second timer on the oven for the cakes. Drag the coffee, toppings, and cakes to complete the orders and don't forget to have fun!!!
+In this game, the goal is to collect as many coins as possible from all the customers in the allocated amount of time. Make sure to complete as many orders as you can without sending away any customers! There is a three-second timer on the coffee machine, and a 5 second timer on the oven for the cakes. Drag the coffee, toppings, and cakes to complete the orders and don't forget to have fun!!!
 
 ## How to Play
 
