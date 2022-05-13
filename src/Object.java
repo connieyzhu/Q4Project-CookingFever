@@ -16,6 +16,8 @@ public class Object{
 	private AffineTransform tx;
 	boolean filled = false; 
 	private Rectangle rectangle;
+	private boolean insideSquares;
+	private int insideX, insideY;
 	
 
 	public Object(int x, int y, String s){
@@ -124,9 +126,6 @@ public class Object{
 		filled = true; 
 	}
 	
-	public Rectangle getRect() {
-		return new Rectangle(x, y, 52, 60);
-	}
 	
 	public Rectangle getBounds() {
         return rectangle;
@@ -142,6 +141,24 @@ public class Object{
 	public String getType() {
 		return type;
 	}
+	
+	public boolean isInside() {
+		return insideSquares;
+	}
+	
+	public void setInside(boolean b, int ix, int iy) {
+		insideSquares = b;
+		insideX = ix;
+		insideY = iy;
+	}
+	
+	public int getInsideX() {
+		return insideX;
+	}
+	
+	public int getInsideY() {
+		return insideY;
+	}
 
 	public void setPosition(int x2, int y2) {
 		// TODO Auto-generated method stub
@@ -151,5 +168,11 @@ public class Object{
 		tx.scale(1,1);
 	}
 	
-	
+	public boolean objectExit() {
+		//g.drawRect(500, 390, 280, 150);
+		if(x < 500 || x > 780 || y < 390 || y > 540) {
+			return true;
+		}
+		return false;
+	}
 }
