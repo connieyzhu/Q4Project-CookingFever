@@ -30,6 +30,12 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	private ArrayList<Object> objectList;
 	private Object hitBox;
     private Point offset;
+    
+    private boolean spot1 = false;
+    private boolean spot2 = false;
+    private boolean spot3 = false;
+    private boolean spot4 = false;
+    private boolean inside = false;
 	
 	Background cafeBg = new Background(0, 0, "/imgs/CafeBG.png");
 	Background cafeCounter = new Background(0, 0, "/imgs/CafeCounterv2.png");
@@ -83,11 +89,20 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		g.drawRect(645, 620, 130, 85);
 		g.drawRect(550, 550, 80, 50);
 		g.drawRect(660, 550, 80, 50);
-		g.drawRect(500, 400, 280, 140);
+		
+		//Holder
+		g.drawRect(500, 390, 280, 150);
+		g.drawRect(500, 390, 140, 70);
+		g.drawRect(500, 460, 140, 80);
+		g.drawRect(640, 390, 140, 70);
+		g.drawRect(640, 460, 140, 80);
+		
+		
 	}
 	
 	public static void main(String[] args) {
 		Runner f = new Runner();
+		
 	}
 	
 	public Runner() {
@@ -113,6 +128,19 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	
 	public Rectangle coffeeGetRect() {
 		return new Rectangle(170, 365, 220, 210);
+	}
+	
+	public void checkSpots() {
+		for(Object obj: objectList) {
+			if(obj.getX() != 485 && obj.getY() != 370) {
+				spot1 = false;
+				System.out.println("alse");
+			}else {
+				spot1 = true;
+				System.out.println("true");
+				break;
+			}
+		}
 	}
 	
 	//@Override
@@ -143,11 +171,12 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	
 	//@Override
 	public void mouseEntered(MouseEvent arg0) {
-		
+		checkSpots();
 	}
 
 	//@Override
 	public void mouseExited(MouseEvent arg0) {
+		
 		
 	}
 
@@ -170,7 +199,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		for (Object box : objectList) {
 			if (box.getBounds().contains(mp)) {
 				hitBox = box;
-				System.out.println("hi");
 				offset = new Point();
 				offset.x = mp.x - box.getBounds().x;
 				offset.y = mp.y - box.getBounds().y;
@@ -182,18 +210,71 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	//@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
+		/*for(int j = 0; j < objectList.size(); j++) {
+			if(hitBox.equals(objectList.get(j)) && (objectList.get(j).getType().equals("Blueberry") || objectList.get(j).getType().equals("Strawberry"))) {
+				for(int i = 0; i < objectList.size(); i++) {
+					if(objectList.get(j).getX() >= objectList.get(i).getX() && objectList.get(j).getX() <= objectList.get(i).getX() + objectList.get(i).getBounds().getWidth() && 
+							objectList.get(j).getY() >= objectList.get(i).getY() && objectList.get(j).getY() <= objectList.get(i).getY() + objectList.get(i).getBounds().getHeight()) {
+						if(objectList.get(j).getType().equals("Blueberry")) {
+							if(objectList.get(i).getType().equals("ChocBatter")) {
+								objectList.set(i, new Object(objectList.get(i).getX(), objectList.get(i).getY(), "ChocBlueBatter"));
+							}
+							if(objectList.get(i).getType().equals("VanBatter")) {
+								objectList.set(i, new Object(objectList.get(i).getX(), objectList.get(i).getY(), "VanBlueBatter"));
+							}
+						}
+						if(objectList.get(j).getType().equals("Strawberry")) {
+							if(objectList.get(i).getType().equals("ChocBatter")) {
+								objectList.set(i, new Object(objectList.get(i).getX(), objectList.get(i).getY(), "ChocStrawBatter"));
+							}
+							if(objectList.get(i).getType().equals("VanBatter")) {
+								objectList.set(i, new Object(objectList.get(i).getX(), objectList.get(i).getY(), "VanStrawBatter"));
+							}
+						}
+					}
+				}
+				objectList.remove(j);
+				
+			}
+		}*/
 		hitBox = null;
 		Point mp = arg0.getPoint();
+		int px = arg0.getX();
+		int py = arg0.getY();
 		for(int i = 0; i < objectList.size(); i++) {
 			if (objectList.get(i).getBounds().contains(mp)) {
-				if(arg0.getX()>=500 && arg0.getX()<= 780 && arg0.getY() >= 4000 && arg0.getY() <= 540) {
-					System.out.println("in");
+				if(px>=500 && px<= 780 && py >= 390 && py <= 540) {
+					if(px>=500 && px<= 640 && py >= 390 && py <= 460 && !spot1) {
+						objectList.get(i).setPosition(485, 370);
+						spot1 = true;
+						objectList.get(i).setInside(true, 485, 370);
+					}
+					if(px>=500 && px<= 640 && py >= 460 && py <= 540 && !spot2) {
+						objectList.get(i).setPosition(475, 440);
+						spot2 = true;
+						objectList.get(i).setInside(true, 475, 440);
+					}
+					if(px>=640 && px<= 780 && py >= 390 && py <= 460 && !spot3) {
+						objectList.get(i).setPosition(605, 370);
+						spot3 = true;
+						objectList.get(i).setInside(true, 605, 370);
+					}
+					if(px>=640 && px<= 780 && py >= 460 && py <= 540 && !spot4) {
+						objectList.get(i).setPosition(615, 440);
+						spot4 = true;
+						objectList.get(i).setInside(true, 615, 440);
+					}
+				}else if(objectList.get(i).isInside()) {
+					objectList.get(i).setPosition(objectList.get(i).getInsideX(), objectList.get(i).getInsideY());
 				}else {
 					objectList.remove(i);
 				}
 			}
 		}
-		//g.drawRect(500, 400, 280, 140);
+//		g.drawRect(500, 390, 140, 70);
+//		g.drawRect(500, 460, 140, 80);
+//		g.drawRect(640, 390, 140, 70);
+//		g.drawRect(640, 460, 140, 80);
 	}
 
 	//@Override
@@ -234,6 +315,11 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		// TODO Auto-generated method stub
 		if (hitBox != null) {
 			Point mp = e.getPoint();
+			if(mp.getX() >= 500 && mp.getX() <= 780 && mp.getY() >= 390 && mp.getY() <= 540) {
+				inside = true;
+			}else {
+				inside = false;
+			}
 			Rectangle bounds = hitBox.getBounds();
 			bounds.x = mp.x - offset.x;
 			bounds.y = mp.y - offset.y;
