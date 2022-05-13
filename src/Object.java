@@ -165,17 +165,21 @@ public class Object{
 		if(type.equals("ChocBatter")) {
 			if(fruit.equals("Strawberry")) {
 				changePicture("/imgs/ChocStrawUnbake.png");
+				type = "ChocStrawBatter";
 			}
 			if(fruit.equals("Blueberry")) {
 				changePicture("/imgs/ChocBlueUnbake.png");
+				type = "ChocBlueBatter";
 			}
 		}
 		if(type.equals("VanBatter")) {
 			if(fruit.equals("Strawberry")) {
 				changePicture("/imgs/VanStrawUnbake.png");
+				type = "VanStrawBatter";
 			}
 			if(fruit.equals("Blueberry")) {
 				changePicture("/imgs/VanBlueUnbake.png");
+				type = "VanBlueBatter";
 			}
 		}
 	}
