@@ -126,6 +126,42 @@ public class Object{
 		filled = true; 
 	}
 	
+	public void ovenChange() {
+		if(type.equals("VanStrawBake")) {
+			changePicture("/imgs/VanStrawOven.png");
+		}
+		
+		if(type.equals("VanBlueBake")) {
+			changePicture("/imgs/VanBlueOven.png");
+		}
+		
+		if(type.equals("ChoocStrawBake")) {
+			changePicture("/imgs/ChocStrawOven.png");
+		}
+		
+		if(type.equals("ChocBlueBake")) {
+			changePicture("/imgs/ChocBlueOven.png");
+		}
+	}
+	
+	public void bakeChange() {
+		if(type.equals("VanStrawBake")) {
+			changePicture("/imgs/VanStrawBake.png");
+		}
+		
+		if(type.equals("VanBlueBake")) {
+			changePicture("/imgs/VanBlueBake.png");
+		}
+		
+		if(type.equals("ChoocStrawBake")) {
+			changePicture("/imgs/ChocStrawBake.png");
+		}
+		
+		if(type.equals("ChocBlueBake")) {
+			changePicture("/imgs/ChocBlueBake.png");
+		}
+	}
+	
 	
 	public Rectangle getBounds() {
         return rectangle;
