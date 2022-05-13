@@ -40,11 +40,12 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	Background cafeBg = new Background(0, 0, "/imgs/CafeBG.png");
 	Background cafeCounter = new Background(0, 0, "/imgs/CafeCounterv2.png");
 	Position pos = new Position("timer");
+	Position posWait = new Position("wait");
 	
-	OrderTimer timer = new OrderTimer(pos.getX(), 75, 1);
-	OrderTimer timer1 = new OrderTimer(pos.getX(), 75, 1);
-	OrderTimer timer2 = new OrderTimer(pos.getX(), 75, 1);
-	OrderTimer timer3 = new OrderTimer(pos.getX(), 75, 1);
+	OrderTimer timer = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
+	OrderTimer timer1 = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
+	OrderTimer timer2 = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
+	OrderTimer timer3 = new OrderTimer(pos.getX(), 75, 1, posWait.getWait()); 
 	
 	Coffee coffee1 = new Coffee(195, 485); 
 	Coffee coffee2 = new Coffee(255, 490);
@@ -52,11 +53,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	
 	Object one = new Object(0, 0, "Strawberry");
 	Object two = new Object(50, 50, "ChocBlueBake");
-	
-	/*Customer francis = new Customer(pos.getX(), 130, "Francis");
-	Customer daphne = new Customer(pos.getX(), 130, "Daphne");
-	Customer kyle = new Customer(pos.getX(), 130, "Kyle");
-	Customer linda = new Customer(pos.getX(), 130, "Linda");*/
 	
 	//Person: (100, 130), (390, 130), (680,130), 970, 130)
 	//Order Form: (20, 70), (310, 70), (600, 70), 890, 70)
@@ -69,10 +65,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	 
 	public void paint(Graphics g) {
 		cafeBg.paint(g);
-		/*daphne.paint(g);
-		francis.paint(g);
-		kyle.paint(g);
-		linda.paint(g);*/
 		cafeCounter.paint(g);
 		timer.paint(g);
 		timer1.paint(g);
