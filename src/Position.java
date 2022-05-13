@@ -101,17 +101,18 @@ public class Position {
 	}
 	
 	public int getWait() {
-		newNum();
-		if(!availableWait[num]) {
-			newNum();
-			getWait();
+		int num = 0;
+		int i = 0;
+		while(i < availableWait.length) {
+			if(availableWait[i]) {
+				num = i;
+				i = availableWait.length;
+			}else {
+				i++;
+			}
 		}
-		availableWait[num] = false;
-		count++;
 		
-		if(count%4 == 0) {
-			updateWaitAvail();
-		}
+		availableWait[num] = false;
 		return wait[num];
 	}
 	
