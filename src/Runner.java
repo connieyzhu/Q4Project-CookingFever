@@ -210,33 +210,33 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	//@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		/*for(int j = 0; j < objectList.size(); j++) {
-			if(hitBox.equals(objectList.get(j)) && (objectList.get(j).getType().equals("Blueberry") || objectList.get(j).getType().equals("Strawberry"))) {
-				for(int i = 0; i < objectList.size(); i++) {
-					if(objectList.get(j).getX() >= objectList.get(i).getX() && objectList.get(j).getX() <= objectList.get(i).getX() + objectList.get(i).getBounds().getWidth() && 
-							objectList.get(j).getY() >= objectList.get(i).getY() && objectList.get(j).getY() <= objectList.get(i).getY() + objectList.get(i).getBounds().getHeight()) {
-						if(objectList.get(j).getType().equals("Blueberry")) {
-							if(objectList.get(i).getType().equals("ChocBatter")) {
-								objectList.set(i, new Object(objectList.get(i).getX(), objectList.get(i).getY(), "ChocBlueBatter"));
+		for(int i = 0; i < objectList.size(); i++) {
+			if(hitBox.equals(objectList.get(i)) && (objectList.get(i).getType().equals("Blueberry") || objectList.get(i).getType().equals("Strawberry"))) {
+				for(Object batter:objectList) {
+					if(objectList.get(i).getX() >= batter.getX() && objectList.get(i).getX() <= batter.getX() + batter.getBounds().getWidth() && 
+							objectList.get(i).getY() >= batter.getY() && objectList.get(i).getY() <= batter.getY() + batter.getBounds().getHeight()) {
+						if(objectList.get(i).getType().equals("Blueberry")) {
+							if(batter.getType().equals("ChocBatter")) {
+								batter.addFruitChange("Blueberry");
+								batter.setPosition(batter.getX() + 32, batter.getY() + 5);
+							}else if(batter.getType().equals("VanBatter")) {
+								batter.addFruitChange("Blueberry");
+								batter.setPosition(batter.getX() + 32, batter.getY() + 5);
 							}
-							if(objectList.get(i).getType().equals("VanBatter")) {
-								objectList.set(i, new Object(objectList.get(i).getX(), objectList.get(i).getY(), "VanBlueBatter"));
-							}
-						}
-						if(objectList.get(j).getType().equals("Strawberry")) {
-							if(objectList.get(i).getType().equals("ChocBatter")) {
-								objectList.set(i, new Object(objectList.get(i).getX(), objectList.get(i).getY(), "ChocStrawBatter"));
-							}
-							if(objectList.get(i).getType().equals("VanBatter")) {
-								objectList.set(i, new Object(objectList.get(i).getX(), objectList.get(i).getY(), "VanStrawBatter"));
+						}else if(objectList.get(i).getType().equals("Strawberry")) {
+							if(batter.getType().equals("ChocBatter")) {
+								batter.addFruitChange("Strawberry");
+								batter.setPosition(batter.getX() + 32, batter.getY() + 5);
+							}else if(batter.getType().equals("VanBatter")) {
+								batter.addFruitChange("Strawberry");
+								batter.setPosition(batter.getX() + 32, batter.getY() + 5);
 							}
 						}
 					}
 				}
-				objectList.remove(j);
-				
+				objectList.remove(i);
 			}
-		}*/
+		}
 		hitBox = null;
 		Point mp = arg0.getPoint();
 		int px = arg0.getX();
