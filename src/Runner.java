@@ -40,12 +40,13 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	Background cafeBg = new Background(0, 0, "/imgs/CafeBG.png");
 	Background cafeCounter = new Background(0, 0, "/imgs/CafeCounterv2.png");
 	Position pos = new Position("timer");
+	
 	Position posWait = new Position("wait");
 	
 	OrderTimer timer = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
 	OrderTimer timer1 = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
 	OrderTimer timer2 = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
-	OrderTimer timer3 = new OrderTimer(pos.getX(), 75, 1, posWait.getWait()); 
+	OrderTimer timer3 = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
 	
 	Coffee coffee1 = new Coffee(195, 485); 
 	Coffee coffee2 = new Coffee(255, 490);
@@ -53,6 +54,11 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	
 	Object one = new Object(0, 0, "Strawberry");
 	Object two = new Object(50, 50, "ChocBlueBake");
+	
+	/*Customer francis = new Customer(pos.getX(), 130, "Francis");
+	Customer daphne = new Customer(pos.getX(), 130, "Daphne");
+	Customer kyle = new Customer(pos.getX(), 130, "Kyle");
+	Customer linda = new Customer(pos.getX(), 130, "Linda");*/
 	
 	//Person: (100, 130), (390, 130), (680,130), 970, 130)
 	//Order Form: (20, 70), (310, 70), (600, 70), 890, 70)
@@ -65,6 +71,10 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	 
 	public void paint(Graphics g) {
 		cafeBg.paint(g);
+		/*daphne.paint(g);
+		francis.paint(g);
+		kyle.paint(g);
+		linda.paint(g);*/
 		cafeCounter.paint(g);
 		timer.paint(g);
 		timer1.paint(g);
@@ -89,7 +99,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		g.drawRect(640, 390, 140, 70);
 		g.drawRect(640, 460, 140, 80);
 		
-		
+		checkSpots();
 	}
 	
 	public static void main(String[] args) {
@@ -126,9 +136,35 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		for(Object obj: objectList) {
 			if(obj.getX() != 485 && obj.getY() != 370) {
 				spot1 = false;
-				System.out.println("alse");
+				//System.out.println("alse");
 			}else {
 				spot1 = true;
+				System.out.println("true");
+				break;
+			}
+		}
+		for(Object obj: objectList) {
+			if(obj.getX() != 475 && obj.getY() != 440) {
+				spot2 = false;
+			}else {
+				spot2 = true;
+				break;
+			}
+		}
+		for(Object obj: objectList) {
+			if(obj.getX() != 605 && obj.getY() != 370) {
+				spot3 = false;
+			}else {
+				spot3 = true;
+				break;
+			}
+		}
+		for(Object obj: objectList) {
+			if(obj.getX() != 615 && obj.getY() != 440) {
+				spot4 = false;
+				//System.out.println("alse");
+			}else {
+				spot4 = true;
 				System.out.println("true");
 				break;
 			}
@@ -194,6 +230,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				offset = new Point();
 				offset.x = mp.x - box.getBounds().x;
 				offset.y = mp.y - box.getBounds().y;
+				System.out.println("press");
 			}
 		}
 
@@ -210,18 +247,14 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 						if(objectList.get(i).getType().equals("Blueberry")) {
 							if(batter.getType().equals("ChocBatter")) {
 								batter.addFruitChange("Blueberry");
-								batter.setPosition(batter.getX() + 32, batter.getY() + 5);
 							}else if(batter.getType().equals("VanBatter")) {
 								batter.addFruitChange("Blueberry");
-								batter.setPosition(batter.getX() + 32, batter.getY() + 5);
 							}
 						}else if(objectList.get(i).getType().equals("Strawberry")) {
 							if(batter.getType().equals("ChocBatter")) {
 								batter.addFruitChange("Strawberry");
-								batter.setPosition(batter.getX() + 32, batter.getY() + 5);
 							}else if(batter.getType().equals("VanBatter")) {
 								batter.addFruitChange("Strawberry");
-								batter.setPosition(batter.getX() + 32, batter.getY() + 5);
 							}
 						}
 					}
