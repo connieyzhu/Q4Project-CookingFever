@@ -36,7 +36,7 @@ public class OrderTimer {
 			sec = seconds;
 			ogT = y;
 			ogTy = y + 100;
-	    	
+	    	 
 			waiting = new Position("wait");
 			name = new Position("name");
 			custName = name.getName();
@@ -55,7 +55,6 @@ public class OrderTimer {
 	    public void paint(Graphics g) {
 			//these are the 2 lines of code needed draw an image on the screen
 			Graphics2D g2 = (Graphics2D) g;
-			
 			
 			if(cust.getReady()) {
 				g.setColor(Color.gray);
@@ -88,7 +87,6 @@ public class OrderTimer {
 	        		y = ogT;
 	        		ty = ogTy;
 	        		count = 0;
-	        		System.out.println("invoke done"); 
 	        	}else {
 	    			y += 1;
 	    			ty -= 1;
