@@ -12,21 +12,19 @@ import java.net.URL;
 import java.awt.Image;
 import java.util.Timer;
 import java.util.TimerTask;
+ 
 
 public class Customer {
 	private double x1, x, y, originalX1; //position
-	private int sec = 1600;
+	private final int sec = 1600;
 	private double vx = 1;
 	private double leavingVx = 0.5;
 	private String name;
-	private boolean ready, done, repaint, restart;
+	private boolean ready, done;
 	private Image img; 	
 	private AffineTransform tx; 
 	Position names;
 	Timer timer;
-	OrderTimer custTimer;
-	Background order;
-	Position pos = new Position("wait");
 	
 	public Customer(int x, int x1, int y, String custName) {
 		this.x1 = x1;
@@ -36,8 +34,6 @@ public class Customer {
 		originalX1 = x1;
 		ready = false;
 		done = false;
-		repaint = false;
-		restart = false;
 		name = custName;
 		names = new Position("name");
 		if(name == "Daphne") {
@@ -56,10 +52,7 @@ public class Customer {
 		tx = AffineTransform.getTranslateInstance(x1, y);
 		init(x1, y); 				//initialize the location of the image
 									//use your variables
-		//order = new Background(x-80, 70, "/imgs/Order Bubble.png");
-		//custTimer = new OrderTimer(x+10, 75, 1);
 		timer = new Timer();
-		//custTimer = new OrderTimer();
 	}
 	
 	public void changePicture(String newFileName) {
@@ -80,7 +73,7 @@ public class Customer {
 	public boolean getReady() {
 		return ready;
 	}
-	
+
 	public void setName(String newName) {
 		name = newName;
 		if(name == "Daphne") {
@@ -101,7 +94,7 @@ public class Customer {
 	public void setDone(boolean x) {
 		done = x;
 	}
-	
+
 	/* update the picture variable location */
 	private void update() {
 		
@@ -135,12 +128,9 @@ public class Customer {
 	class RemindTask extends TimerTask {
 	    public void run() {
 	    	if(x1 >= 2000){
-	    		 restart = true;
 	    		 done = false;
 	    		 setName(names.getName());
 	    		 x1 = originalX1;
-	    		 leavingVx -= 0.1;
-	    		 vx = leavingVx;
 	    		 timer.schedule(new RemindTask(), sec);
 	    	}else if(done){ 
 	    		x1 += leavingVx;
@@ -151,7 +141,6 @@ public class Customer {
 	    		ready = true;
 	    		timer.schedule(new RemindTask(), sec);
 	    	}else if(x1 < x){
-				restart = false;
 	    		x1 += vx;
 				update();
 				timer.schedule(new RemindTask(), sec);
