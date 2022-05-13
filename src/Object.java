@@ -161,7 +161,24 @@ public class Object{
 			changePicture("/imgs/ChocBlueBake.png");
 		}
 	}
-	
+	public void addFruitChange(String fruit) {
+		if(type.equals("ChocBatter")) {
+			if(fruit.equals("Strawberry")) {
+				changePicture("/imgs/ChocStrawUnbake.png");
+			}
+			if(fruit.equals("Blueberry")) {
+				changePicture("/imgs/ChocBlueUnbake.png");
+			}
+		}
+		if(type.equals("VanBatter")) {
+			if(fruit.equals("Strawberry")) {
+				changePicture("/imgs/VanStrawUnbake.png");
+			}
+			if(fruit.equals("Blueberry")) {
+				changePicture("/imgs/VanBlueUnbake.png");
+			}
+		}
+	}
 	
 	public Rectangle getBounds() {
         return rectangle;
