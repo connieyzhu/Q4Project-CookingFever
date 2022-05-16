@@ -227,6 +227,7 @@ public class Object{
 		// TODO Auto-generated method stub
 		this.x = x2;
 		this.y = y2; 
+		rectangle.setLocation(x2, y2);
 		tx.setToTranslation(x, y);
 		tx.scale(scale, scale); //previously 1
 	}
