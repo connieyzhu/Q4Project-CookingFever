@@ -50,14 +50,9 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	
 	Object cake = new Object(21, 71, "ChocBlueBake", 0.5);
 	
-	Object coffee1 = new Object(195, 485, "Coffee");
-	Object coffee2 = new Object(255, 490, "Coffee");
-	Object coffee3 = new Object(315, 495, "Coffee");
-	
-	/*Customer francis = new Customer(pos.getX(), 130, "Francis");
-	Customer daphne = new Customer(pos.getX(), 130, "Daphne");
-	Customer kyle = new Customer(pos.getX(), 130, "Kyle");
-	Customer linda = new Customer(pos.getX(), 130, "Linda");*/
+	Object coffee1 = new Object(195, 485, "Coffee", 1.0);
+	Object coffee2 = new Object(255, 490, "Coffee", 1.0);
+	Object coffee3 = new Object(315, 495, "Coffee", 1.0);
 	
 	//Person: (100, 130), (390, 130), (680,130), 970, 130)
 	//Order Form: (20, 70), (310, 70), (600, 70), 890, 70)
@@ -70,10 +65,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	 
 	public void paint(Graphics g) {
 		cafeBg.paint(g);
-		/*daphne.paint(g);
-		francis.paint(g);
-		kyle.paint(g);
-		linda.paint(g);*/
 		cafeCounter.paint(g);
 		timer.paint(g);
 		timer1.paint(g);
@@ -240,16 +231,16 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	//@Override
 	public void mousePressed(MouseEvent arg0) {
 		if(arg0.getX()>=505 && arg0.getX()<= 635 && arg0.getY() >= 640 && arg0.getY() <= 705) {
-			objectList.add(new Object(505, 620, "ChocBatter"));
+			objectList.add(new Object(505, 620, "ChocBatter", 1.0));
 		}
 		if(arg0.getX()>=645 && arg0.getX()<= 775 && arg0.getY() >= 640 && arg0.getY() <= 705) {
-			objectList.add(new Object(645, 620, "VanBatter"));
+			objectList.add(new Object(645, 620, "VanBatter", 1.0));
 		}
 		if(arg0.getX()>=550 && arg0.getX()<= 630 && arg0.getY() >= 550 && arg0.getY() <= 630) {
-			objectList.add(new Object(550, 550, "Strawberry"));
+			objectList.add(new Object(550, 550, "Strawberry", 1.0));
 		}
 		if(arg0.getX()>=660 && arg0.getX()<= 740 && arg0.getY() >= 550 && arg0.getY() <= 630) {
-			objectList.add(new Object(660, 550, "Blueberry"));
+			objectList.add(new Object(660, 550, "Blueberry", 1.0));
 		}
 		
 		Point mp = arg0.getPoint();
