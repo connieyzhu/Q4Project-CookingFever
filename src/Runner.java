@@ -48,6 +48,8 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	OrderTimer timer2 = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
 	OrderTimer timer3 = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
 	
+	Object cake = new Object(21, 71, "ChocBlueBake", 0.5);
+	
 	Object coffee1 = new Object(195, 485, "Coffee");
 	Object coffee2 = new Object(255, 490, "Coffee");
 	Object coffee3 = new Object(315, 495, "Coffee");
@@ -77,6 +79,9 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		timer1.paint(g);
 		timer2.paint(g);
 		timer3.paint(g);
+		
+		cake.paint(g);
+		
 		coffee1.paint(g);
 		coffee2.paint(g);
 		coffee3.paint(g);
