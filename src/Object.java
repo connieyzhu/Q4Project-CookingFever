@@ -18,12 +18,14 @@ public class Object{
 	private Rectangle rectangle;
 	private boolean insideSquares;
 	private int insideX, insideY;
+	private double scale;
 	
 
-	public Object(int x, int y, String s){
+	public Object(int x, int y, String s, double setScale){
 		this.x = x;
 		this.y = y; 
 		type = s;
+		scale = setScale;
 		if(type.equals("Blueberry")) {
 			img = getImage("/imgs/Blueberry.png");
 			rectangle = new Rectangle(x, y, 100, 55);
@@ -76,6 +78,10 @@ public class Object{
 			img = getImage("/imgs/VanUnbake.png");
 			rectangle = new Rectangle(x + 32, y, 125, 95);
 		}
+		if(type.equals("CoffeeOrder")) {
+			img = getImage("/imgs/CoffeeFull.png");
+			rectangle = new Rectangle(x + 32, y, 125, 95);
+		}
 		
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y);
@@ -91,17 +97,17 @@ public class Object{
 		g2.drawImage(img, tx, null);
 	
 	}
-	
+
 	private void update() {
 		tx.setToTranslation(x, y);
 
 		//to scale it up or down to change size, .5 means 50% of original file
-		tx.scale(1.0, 1.0);
+		tx.scale(scale, scale); //previously 1.0
 	}
 	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
-		tx.scale(.04,.04);
+		tx.scale(scale, scale); //previously 0.04
 	}
 	
 	private Image getImage(String path) {
@@ -222,7 +228,7 @@ public class Object{
 		this.x = x2;
 		this.y = y2; 
 		tx.setToTranslation(x, y);
-		tx.scale(1,1);
+		tx.scale(scale, scale); //previously 1
 	}
 	
 	public boolean objectExit() {
