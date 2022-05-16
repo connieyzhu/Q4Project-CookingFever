@@ -89,6 +89,13 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		g.drawRect(640, 460, 140, 80);
 		
 		checkSpots();
+		
+		g.drawRect(940, 375, 190, 75);
+		g.drawRect(940, 455, 190, 75);
+		g.drawRect(915, 535, 190, 75);
+		g.drawRect(915, 615, 190, 75);
+		
+		checkOven(); 
 	}
 	
 	public static void main(String[] args) {
@@ -120,6 +127,48 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	
 	public Rectangle coffeeGetRect() {
 		return new Rectangle(170, 365, 220, 210);
+	}
+	
+	public Rectangle ovenGetRect() {
+		return new Rectangle(700, 500, 220, 210);
+	}
+	
+	public void checkOven() {
+		for(Object obj: objectList) {
+			if(obj.getX()>=940 && obj.getX()<=1130 && obj.getY()>=375 && obj.getY()<=450) {
+				oven1 = true; 
+			}else {
+				oven1 = false;
+				break; 
+			}
+		}
+		
+		for(Object obj: objectList) {
+			if(obj.getX()>=940 && obj.getX()<=1130 && obj.getY()>=455 && obj.getY()<=530) {
+				oven2 = true;
+			}else {
+				oven2 = false;
+				break; 
+			}
+		}
+		
+		for(Object obj: objectList) {
+			if(obj.getX()>=915 && obj.getX()<=1105 && obj.getY()>=535 && obj.getY()<=710) {
+				oven3 = true;
+			}else {
+				oven3 = false; 
+				break; 
+			}
+		}
+		
+		for(Object obj: objectList) {
+			if(obj.getX()>=915 && obj.getX()<=1105 && obj.getY()>=615 && obj.getY()<=690) {
+				oven4 = true;
+			}else {
+				oven4 = false; 
+				break; 
+			}
+		}
 	}
 	
 	public void checkSpots() {
@@ -290,6 +339,42 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				}
 			}
 		}
+		
+		for(int i = 0; i < objectList.size(); i++) {
+			if (objectList.get(i).getBounds().contains(mp)) {
+				if(px>=940 && px<= 1130 && py >= 375 && py <= 790) {
+					if(px>=940 && px<= 1130 && py >= 375 && py <= 450 && !oven1) {
+						objectList.get(i).setPosition(950, 375);
+						oven1 = true;
+						objectList.get(i).setInside(true, 950, 375);
+						objectList.get(i).ovenChange(); 
+					}
+					if(px>=940 && px<= 1130 && py >= 455 && py <= 530 && !oven2) {
+						objectList.get(i).setPosition(945, 455);
+						oven2 = true;
+						objectList.get(i).setInside(true, 945, 455);
+						objectList.get(i).ovenChange(); 
+					}
+					if(px>=915 && px<= 1105 && py >= 535 && py <= 710 && !oven3) {
+						objectList.get(i).setPosition(915, 535);
+						oven3 = true;
+						objectList.get(i).setInside(true, 915, 535);
+						objectList.get(i).ovenChange(); 
+					}
+					if(px>=915 && px<= 1105 && py >= 615 && py <= 790 && !oven4) {
+						objectList.get(i).setPosition(915, 615);
+						oven4 = true;
+						objectList.get(i).setInside(true, 915, 615);
+						objectList.get(i).ovenChange(); 
+					}
+				}else if(objectList.get(i).isInside()) {
+					objectList.get(i).setPosition(objectList.get(i).getInsideX(), objectList.get(i).getInsideY());
+				}else {
+					objectList.remove(i);
+				}
+			}
+		}
+		
 //		g.drawRect(500, 390, 140, 70);
 //		g.drawRect(500, 460, 140, 80);
 //		g.drawRect(640, 390, 140, 70);
