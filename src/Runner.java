@@ -48,12 +48,9 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	OrderTimer timer2 = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
 	OrderTimer timer3 = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
 	
-	Coffee coffee1 = new Coffee(195, 485); 
-	Coffee coffee2 = new Coffee(255, 490);
-	Coffee coffee3 = new Coffee(315, 495);
-	
-	Object one = new Object(0, 0, "Strawberry");
-	Object two = new Object(50, 50, "ChocBlueBake");
+	Object coffee1 = new Object(195, 485, "Coffee");
+	Object coffee2 = new Object(255, 490, "Coffee");
+	Object coffee3 = new Object(315, 495, "Coffee");
 	
 	/*Customer francis = new Customer(pos.getX(), 130, "Francis");
 	Customer daphne = new Customer(pos.getX(), 130, "Daphne");
@@ -123,8 +120,9 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		f.setVisible(true);
 		
 		objectList = new ArrayList<>();
-		objectList.add(one);
-		objectList.add(two);
+		objectList.add(coffee1);
+		objectList.add(coffee2);
+		objectList.add(coffee3);
 	}
 	
 	
