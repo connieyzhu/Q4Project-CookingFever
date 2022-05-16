@@ -12,6 +12,7 @@ import java.net.URL;
 import java.awt.Image;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class OrderTimer {
 	private int x, y, gx, gy, tx, ty, sec, personX, ogT, ogTy; 
@@ -20,9 +21,12 @@ public class OrderTimer {
 	Position name;
 	Background order;
 	Position waiting;
+	Position orderItem;
 	private int count = 0;
 	private String custName;
 	Customer cust1;
+	Object[] orders;
+	Object item;
 		
 	    public OrderTimer(int x, int y, int seconds, int wait) {
 	    	personX = x-10;
@@ -36,6 +40,23 @@ public class OrderTimer {
 			sec = seconds;
 			ogT = y;
 			ogTy = y + 100;
+			orderItem = new Position("orderItem");
+			orders = new Object[ThreadLocalRandom.current().nextInt(1, 4)];
+			
+			int itemX = x-75;
+			int itemY = y+5;
+			for(int i = 0; i < orders.length; i++) {
+				double scale = 0.5;
+				String newOrderItem = orderItem.getItem();
+				if(newOrderItem.equals("CoffeeOrder")) {
+					itemX = x-70;
+					scale = 0.75;
+				}
+				item = new Object(itemX, itemY, newOrderItem, scale);
+				orders[i] = item;
+				itemX = x-75;
+				itemY += 50;
+			}
 	    	 
 			waiting = new Position("wait");
 			name = new Position("name");
@@ -50,6 +71,10 @@ public class OrderTimer {
 	    		timer.schedule(new RemindTask(), sec*400);
 	    		count++;
 	    	}
+	    }
+	    
+	    public Object[] custOrder() {
+	    	return orders;
 	    }
 	    
 	    public void paint(Graphics g) {
@@ -71,6 +96,10 @@ public class OrderTimer {
 				g.fillRect(x, y, tx, ty);
 				order.paint(g);
 				
+				for(int i = 0; i < orders.length; i++) {
+					orders[i].paint(g2);
+				}
+				
 				runner();
 			}
 				cust.paint(g2);
@@ -80,6 +109,23 @@ public class OrderTimer {
 	    	cust.setDone(x);
 	    }
 	    
+	    public void generateNewOrder() {
+	    	int itemX = x-75;
+			int itemY = y+5;
+			for(int i = 0; i < orders.length; i++) {
+				double scale = 0.5;
+				String newOrderItem = orderItem.getItem();
+				if(newOrderItem.equals("CoffeeOrder")) {
+					itemX = x-70;
+					scale = 0.75;
+				}
+				item = new Object(itemX, itemY, newOrderItem, scale);
+				orders[i] = item;
+				itemX = x-75;
+				itemY += 50;
+			}
+	    }
+	    
 	    class RemindTask extends TimerTask {
 	        public void run() {
 	        	if(y == gy+165) {
@@ -87,6 +133,7 @@ public class OrderTimer {
 	        		y = ogT;
 	        		ty = ogTy;
 	        		count = 0;
+	        		generateNewOrder();
 	        	}else {
 	    			y += 1;
 	    			ty -= 1;
