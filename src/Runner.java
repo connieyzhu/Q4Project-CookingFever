@@ -174,6 +174,32 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		}
 	}
 	
+	public void fruitChange() {
+		for(int i = 0; i < objectList.size(); i++) {
+			if(hitBox.equals(objectList.get(i)) && (objectList.get(i).getType().equals("Blueberry") || objectList.get(i).getType().equals("Strawberry"))) {
+				for(Object batter:objectList) {
+					if(objectList.get(i).getX() >= batter.getX() && objectList.get(i).getX() <= batter.getX() + batter.getBounds().getWidth() && 
+							objectList.get(i).getY() >= batter.getY() && objectList.get(i).getY() <= batter.getY() + batter.getBounds().getHeight()) {
+						if(objectList.get(i).getType().equals("Blueberry")) {
+							if(batter.getType().equals("ChocBatter")) {
+								batter.addFruitChange("Blueberry");
+							}else if(batter.getType().equals("VanBatter")) {
+								batter.addFruitChange("Blueberry");
+							}
+						}else if(objectList.get(i).getType().equals("Strawberry")) {
+							if(batter.getType().equals("ChocBatter")) {
+								batter.addFruitChange("Strawberry");
+							}else if(batter.getType().equals("VanBatter")) {
+								batter.addFruitChange("Strawberry");
+							}
+						}
+					}
+				}
+				objectList.remove(i);
+			}
+		}
+	}
+	
 	//@Override
 	public void mouseClicked(MouseEvent arg0) {
 	
@@ -242,29 +268,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	//@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		for(int i = 0; i < objectList.size(); i++) {
-			if(hitBox.equals(objectList.get(i)) && (objectList.get(i).getType().equals("Blueberry") || objectList.get(i).getType().equals("Strawberry"))) {
-				for(Object batter:objectList) {
-					if(objectList.get(i).getX() >= batter.getX() && objectList.get(i).getX() <= batter.getX() + batter.getBounds().getWidth() && 
-							objectList.get(i).getY() >= batter.getY() && objectList.get(i).getY() <= batter.getY() + batter.getBounds().getHeight()) {
-						if(objectList.get(i).getType().equals("Blueberry")) {
-							if(batter.getType().equals("ChocBatter")) {
-								batter.addFruitChange("Blueberry");
-							}else if(batter.getType().equals("VanBatter")) {
-								batter.addFruitChange("Blueberry");
-							}
-						}else if(objectList.get(i).getType().equals("Strawberry")) {
-							if(batter.getType().equals("ChocBatter")) {
-								batter.addFruitChange("Strawberry");
-							}else if(batter.getType().equals("VanBatter")) {
-								batter.addFruitChange("Strawberry");
-							}
-						}
-					}
-				}
-				objectList.remove(i);
-			}
-		}
+		fruitChange();
 		hitBox = null;
 		Point mp = arg0.getPoint();
 		int px = arg0.getX();
