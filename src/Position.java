@@ -32,6 +32,10 @@ public class Position {
 	String[] names = {"Daphne", "Linda", "Francis", "Kyle"};
 	boolean[] available = {true, true, true, true};
 	boolean[] availableWait = {true, true, true, true};
+	String[] orderItems = {"ChocBlueBake", "ChocStrawBake", "VanBlueBake",
+							"VanStrawBake", "CoffeeOrder"};
+	String item;
+	
 	
 	public Position(String purpose) {
 		if(purpose == "Person") {
@@ -55,6 +59,10 @@ public class Position {
 		
 		if(purpose == "wait") {
 			getWait();
+		}
+		
+		if(purpose == "orderItem") {
+			getItem();
 		}
 	}
 	
@@ -131,4 +139,9 @@ public class Position {
 		}
 		return arr[num];
 	}
+	
+	public String getItem() {
+		item = orderItems[ThreadLocalRandom.current().nextInt(0, 5)];
+		return item;
+	} 
 }
