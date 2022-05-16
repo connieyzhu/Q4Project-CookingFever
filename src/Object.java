@@ -32,7 +32,7 @@ public class Object{
 		}
 		if(type.equals("ChocBlueBake")) {
 			img = getImage("/imgs/ChocBlueBake.png");
-			rectangle = new Rectangle(x, y, 125, 95);
+			rectangle = new Rectangle(x, y, 125, 85);
 		}
 		if(type.equals("ChocBlueBatter")) {
 			img = getImage("/imgs/ChocBlueUnbake.png");
@@ -40,7 +40,7 @@ public class Object{
 		}
 		if(type.equals("ChocStrawBake")) {
 			img = getImage("/imgs/ChocStrawBake.png");
-			rectangle = new Rectangle(x, y, 125, 95);
+			rectangle = new Rectangle(x, y, 125, 85);
 		}
 		if(type.equals("ChocStrawBatter")) {
 			img = getImage("/imgs/ChocStrawUnbake.png");
@@ -48,7 +48,7 @@ public class Object{
 		}
 		if(type.equals("ChocBatter")) {
 			img = getImage("/imgs/ChocUnbake.png");
-			rectangle = new Rectangle(x + 32, y, 125, 95);
+			rectangle = new Rectangle(x, y, 125, 85);
 		}
 		if(type.equals("Coffee")) {
 			img = getImage("/imgs/CoffeeEmpty.png");
@@ -60,7 +60,7 @@ public class Object{
 		}
 		if(type.equals("VanBlueBake")) {
 			img = getImage("/imgs/VanBlueBake.png");
-			rectangle = new Rectangle(x, y, 125, 95);
+			rectangle = new Rectangle(x, y, 125, 85);
 		}
 		if(type.equals("VanBlueBatter")) {
 			img = getImage("/imgs/VanBlueUnbake.png");
@@ -68,7 +68,7 @@ public class Object{
 		}
 		if(type.equals("VanStrawBake")) {
 			img = getImage("/imgs/VanStrawBake.png");
-			rectangle = new Rectangle(x, y, 125, 95);
+			rectangle = new Rectangle(x, y, 125, 85);
 		}
 		if(type.equals("VanStrawBatter")) {
 			img = getImage("/imgs/VanStrawUnbake.png");
@@ -76,7 +76,7 @@ public class Object{
 		}
 		if(type.equals("VanBatter")) {
 			img = getImage("/imgs/VanUnbake.png");
-			rectangle = new Rectangle(x + 32, y, 125, 95);
+			rectangle = new Rectangle(x, y, 125, 85);
 		}
 		if(type.equals("CoffeeOrder")) {
 			img = getImage("/imgs/CoffeeFull.png");
