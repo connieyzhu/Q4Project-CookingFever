@@ -332,6 +332,8 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 						spot4 = true;
 						objectList.get(i).setInside(true, 645, 440);
 					}
+				}else if(px>=60 && px<= 190 && py >= 600 && py <= 720) {
+					objectList.remove(i);
 				}else if(objectList.get(i).isInside()) {
 					objectList.get(i).setPosition(objectList.get(i).getInsideX(), objectList.get(i).getInsideY());
 				}else {
