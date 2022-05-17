@@ -180,7 +180,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				//System.out.println("alse");
 			}else {
 				spot1 = true;
-				System.out.println("true");
 				break;
 			}
 		}
@@ -206,7 +205,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				//System.out.println("alse");
 			}else {
 				spot4 = true;
-				System.out.println("true");
 				break;
 			}
 		}
@@ -266,7 +264,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	
 	//@Override
 	public void mouseEntered(MouseEvent arg0) {
-		checkSpots();
+		
 	}
 
 	//@Override
