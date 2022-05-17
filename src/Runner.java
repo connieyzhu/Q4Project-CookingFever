@@ -64,6 +64,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	int mouseY = MouseInfo.getPointerInfo().getLocation().y; 
 	int mouseX = MouseInfo.getPointerInfo().getLocation().x;
 	private boolean b; 
+	int total = 0;
 	
 	 
 	public void paint(Graphics g) {
@@ -238,8 +239,76 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	
 	//@Override
 	public void mouseClicked(MouseEvent arg0) {
-	
+		
+		if(timer.getCoin().getCollect()) {
+			int x = timer.getCoin().getX();
+			int y = timer.getCoin().getY();
+			int numCollect = 0;
+			while(numCollect < 1) {
+				if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
+					System.out.println("collect");
+					timer.getCoin().setCollect(false);
+					total += timer.getTotal();
+					numCollect++;
+				}
+			}
+		}
+		
+		if(timer1.getCoin().getCollect()) {
+			int x = timer1.getCoin().getX();
+			int y = timer1.getCoin().getY();
+			int numCollect = 0;
+			while(numCollect < 1) {
+				if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
+					System.out.println("collect");
+					timer1.getCoin().setCollect(false);
+					total += timer1.getTotal();
+					numCollect++;
+				}
+			}
+		}
+		
+		if(timer2.getCoin().getCollect()) {
+			int x = timer2.getCoin().getX();
+			int y = timer2.getCoin().getY();
+			int numCollect = 0;
+			while(numCollect < 1) {
+				if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
+					System.out.println("collect");
+					timer2.getCoin().setCollect(false);
+					total += timer2.getTotal();
+					numCollect++;
+				}
+			}
+		}
+		
+		if(timer3.getCoin().getCollect()) {
+			int x = timer3.getCoin().getX();
+			int y = timer3.getCoin().getY();
+			int numCollect = 0;
+			while(numCollect < 1) {
+				if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
+					System.out.println("collect");
+					timer3.getCoin().setCollect(false);
+					total += timer3.getTotal();
+					numCollect++;
+				}
+			}
+		}
+		
 //		if(arg0.getX()>=170 && arg0.getX()<= 390 && arg0.getY() >= 365 && arg0.getY() <= 600){
+//			System.out.print("hi");
+//			try {
+//				TimeUnit.SECONDS.sleep(3);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			//coffee1.change();
+//			//coffee2.change();
+//			//coffee3.change();
+//		}
+//		/*if(arg0.getX()>=170 && arg0.getX()<= 390 && arg0.getY() >= 365 && arg0.getY() <= 600){
 //			System.out.print("hi");
 //			try {
 //				TimeUnit.SECONDS.sleep(3);
@@ -257,7 +326,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 //		}
 //		if(arg0.getX()>=chocBatter.getX() && arg0.getX()<= chocBatter.getX() + 135 && arg0.getY() >= chocBatter.getY() && arg0.getY() <= chocBatter.getY() + 105){
 //			System.out.println("yes");
-//		}
+//		}*/
 		
 	}
 		
