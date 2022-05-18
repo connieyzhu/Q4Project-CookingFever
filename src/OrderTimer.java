@@ -82,7 +82,7 @@ public class OrderTimer {
 			order = new Background(x-90, 70, "/imgs/Order Bubble.png");
 			cust = new Customer(personX, wait, 130, custName);
 	    	timer = new Timer();
-	    	coin = new Coin(personX+70, 300);
+	    	coin = new Coin(personX+70, 290);
 		}
 	    
 	    public void runner() {
