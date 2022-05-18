@@ -55,7 +55,7 @@ public class OrderTimer {
 					scale = 0.75;
 					totalMoney += 4;
 				}else {
-					totalMoney += 8;
+					totalMoney += 15;
 				}
 				item = new Object(itemX, itemY, newOrderItem, scale);
 				orders[i] = item;
@@ -144,7 +144,7 @@ public class OrderTimer {
 					scale = 0.75;
 					totalMoney += 4;
 				}else {
-					totalMoney += 8;
+					totalMoney += 15;
 				}
 				item = new Object(itemX, itemY, newOrderItem, scale);
 				orders[i] = item;
