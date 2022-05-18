@@ -36,6 +36,10 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
     private boolean spot3 = false;
     private boolean spot4 = false;
     private boolean inside = false;
+    private int spot1Index;
+    private int spot2Index;
+    private int spot3Index;
+    private int spot4Index;
     
     private boolean oven1 = false;
     private boolean oven2 = false;
@@ -43,7 +47,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
     private boolean oven4 = false;
 	
 	Background cafeBg = new Background(0, 0, "/imgs/CafeBG.png");
-	Background cafeCounter = new Background(0, 0, "/imgs/CafeCounterv2.png");
+	Background cafeCounter = new Background(0, 0, "/imgs/CafeCounter.png");
 	Position pos = new Position("timer");
 	
 	Position posWait = new Position("wait");
@@ -65,7 +69,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	int mouseX = MouseInfo.getPointerInfo().getLocation().x;
 	private boolean b; 
 	int total = 0;
-	
 	 
 	public void paint(Graphics g) {
 		cafeBg.paint(g);
@@ -101,7 +104,9 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		g.drawRect(915, 535, 190, 75);
 		g.drawRect(915, 615, 190, 75);
 		
-		checkOven(); 
+		//checkOven(); 
+		g.drawRect(60, 600, 130, 120);
+		
 	}
 	
 	public static void main(String[] args) {
@@ -135,7 +140,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		return new Rectangle(170, 365, 220, 210);
 	}
 	
-	public void checkOven() {
+	/*public void checkOven() {
 		for(Object obj: objectList) {
 			if(obj.getX()>=940 && obj.getX()<=1130 && obj.getY()>=375 && obj.getY()<=450) {
 				oven1 = true; 
@@ -171,42 +176,35 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				break; 
 			}
 		}
-	}
+	}*/
 	
 	
 	public void checkSpots() {
-		for(Object obj: objectList) {
-			if(obj.getX() != 485 && obj.getY() != 370) {
-				spot1 = false;
-				//System.out.println("alse");
-			}else {
-				spot1 = true;
-				break;
-			}
-		}
-		for(Object obj: objectList) {
-			if(obj.getX() != 475 && obj.getY() != 440) {
-				spot2 = false;
-			}else {
-				spot2 = true;
-				break;
-			}
-		}
-		for(Object obj: objectList) {
-			if(obj.getX() != 605 && obj.getY() != 370) {
-				spot3 = false;
-			}else {
-				spot3 = true;
-				break;
-			}
-		}
-		for(Object obj: objectList) {
-			if(obj.getX() != 615 && obj.getY() != 440) {
-				spot4 = false;
-				//System.out.println("alse");
-			}else {
-				spot4 = true;
-				break;
+		for(int i = 0; i < objectList.size(); i++) {
+			if(i == spot1Index) {
+				if(objectList.get(i).getX() != 515 && objectList.get(i).getY() != 370) {
+					spot1 = false;
+				}else {
+					spot1 = true;
+				}
+			}else if(i == spot2Index) {
+				if(objectList.get(i).getX() != 505 && objectList.get(i).getY() != 440) {
+					spot2 = false;
+				}else {
+					spot2 = true;
+				}
+			}else if(i == spot3Index) {
+				if(objectList.get(i).getX() != 641 && objectList.get(i).getY() != 370) {
+					spot3 = false;
+				}else {
+					spot3 = true;
+				}
+			}else if(i == spot4Index) {
+				if(objectList.get(i).getX() != 645 && objectList.get(i).getY() != 440) {
+					spot4 = false;
+				}else {
+					spot4 = true;
+				}
 			}
 		}
 	}
@@ -238,7 +236,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	}
 	
 	//@Override
-	public void mouseClicked(MouseEvent arg0) {
+public void mouseClicked(MouseEvent arg0) {
 		
 		if(timer.getCoin().getCollect()) {
 			int x = timer.getCoin().getX();
@@ -380,26 +378,31 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		int py = arg0.getY();
 		for(int i = 0; i < objectList.size(); i++) {
 			if (objectList.get(i).getBounds().contains(mp)) {
-				if(px>=500 && px<= 780 && py >= 390 && py <= 540) {
-					if(px>=500 && px<= 640 && py >= 390 && py <= 460 && !spot1) {
+				if(px>=500 && px<= 780 && py >= 390 && py <= 540 && (!spot1 || !spot2 || !spot3 || !spot4)) {
+					if(!spot1) {
 						objectList.get(i).setPosition(515, 370);
 						spot1 = true;
+						spot1Index = i;
 						objectList.get(i).setInside(true, 515, 370);
-					}
-					if(px>=500 && px<= 640 && py >= 460 && py <= 540 && !spot2) {
+						System.out.println("spot1 filled");
+					}else if(!spot2) {
 						objectList.get(i).setPosition(505, 440);
 						spot2 = true;
+						spot2Index = i;
 						objectList.get(i).setInside(true, 505, 440);
-					}
-					if(px>=640 && px<= 780 && py >= 390 && py <= 460 && !spot3) {
-						objectList.get(i).setPosition(635, 370);
+						System.out.println("spot2 filled");
+					}else if(!spot3) {
+						System.out.println("spot3 filled");
+						objectList.get(i).setPosition(641, 370);
 						spot3 = true;
-						objectList.get(i).setInside(true, 635, 370);
-					}
-					if(px>=640 && px<= 780 && py >= 460 && py <= 540 && !spot4) {
+						spot3Index = i;
+						objectList.get(i).setInside(true, 641, 370);
+					}else if(!spot4) {
 						objectList.get(i).setPosition(645, 440);
 						spot4 = true;
+						spot4Index = i;
 						objectList.get(i).setInside(true, 645, 440);
+						System.out.println("spot4 filled");
 					}
 				}else if(px>=60 && px<= 190 && py >= 600 && py <= 720) {
 					objectList.remove(i);
@@ -411,7 +414,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 			}
 		}
 		
-		for(int i = 0; i < objectList.size(); i++) {
+		/*for(int i = 0; i < objectList.size(); i++) {
 			if (objectList.get(i).getBounds().contains(mp)) {
 				if(px>=940 && px<= 1130 && py >= 375 && py <= 790) {
 					if(px>=940 && px<= 1130 && py >= 375 && py <= 450 && !oven1) {
@@ -444,7 +447,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 					objectList.remove(i);
 				}
 			}
-		}
+		}*/
 //		g.drawRect(500, 390, 140, 70);
 //		g.drawRect(500, 460, 140, 80);
 //		g.drawRect(640, 390, 140, 70);
