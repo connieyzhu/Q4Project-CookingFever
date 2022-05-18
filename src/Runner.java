@@ -107,6 +107,11 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		//checkOven(); 
 		g.drawRect(60, 600, 130, 120);
 		
+		//scoring
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+		g.setColor(Color.WHITE);
+		g.drawString(total + "", 600, 47);
+		
 	}
 	
 	public static void main(String[] args) {
