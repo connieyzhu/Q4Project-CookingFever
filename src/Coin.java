@@ -11,14 +11,16 @@ import java.util.Random;
 
 public class Coin{
 	private int x,y; 
+	private boolean collected;
 	private Image img;
 	private AffineTransform tx;
 	
 	public Coin(int x, int y){
 		this.x = x;
 		this.y = y;
+		collected = false;
 		
-		img = getImage("/imgs/broccoli.png"); // change to batter
+		img = getImage("/imgs/Coin.png"); // change to batter
 		
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y);
@@ -65,7 +67,12 @@ public class Coin{
 		return y;
 	}
 
-	
+	public boolean getCollect() {
+		return collected;
+	}
+	public void setCollect(boolean collect) {
+		collected = collect;
+	}
 	
 }
 
