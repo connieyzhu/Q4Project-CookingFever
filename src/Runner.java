@@ -45,6 +45,11 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
     private boolean oven2 = false;
     private boolean oven3 = false;
     private boolean oven4 = false;
+
+    private int oven1Index;
+    private int oven2Index;
+    private int oven3Index;
+    private int oven4Index;
 	
 	Background cafeBg = new Background(0, 0, "/imgs/CafeBG.png");
 	Background cafeCounter = new Background(0, 0, "/imgs/CafeCounter.png");
