@@ -167,7 +167,7 @@ public class OrderTimer {
 	    	return personX;
 	    }
 	    
-	   public boolean isInside(int xVal, int yVal) {
+	   public boolean itemIsInside(int xVal, int yVal) {
 		   int numX1 = x-100;
 		   int numY1 = 50;
 		   int numX2 = x-100+270;
