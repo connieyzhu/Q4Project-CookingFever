@@ -26,6 +26,7 @@ public class OrderTimer {
 	private String custName;
 	Customer cust1;
 	Object[] orders;
+	boolean[] orderReceived;
 	Object item;
 	Coin coin;
 	private int totalMoney = 0;
@@ -83,6 +84,11 @@ public class OrderTimer {
 			cust = new Customer(personX, wait, 130, custName);
 	    	timer = new Timer();
 	    	coin = new Coin(personX+70, 290);
+	    	orderReceived = new boolean[orders.length];
+	    	
+	    	for(int i = 0; i < orderReceived.length; i++) {
+	    		orderReceived[i] = false;
+	    	}
 		}
 	    
 	    public void runner() {
@@ -90,10 +96,6 @@ public class OrderTimer {
 	    		timer.schedule(new RemindTask(), sec*secondsAmt);
 	    		count++;
 	    	}
-	    }
-	    
-	    public Object[] custOrder() {
-	    	return orders;
 	    }
 	    
 	    public void paint(Graphics g) {
@@ -159,6 +161,29 @@ public class OrderTimer {
 	    
 	    public int getTotal() {
 	    	return totalMoney;
+	    }
+	    
+	    public int getPersonX() {
+	    	return personX;
+	    }
+	    
+	   public boolean isInside(int xVal, int yVal) {
+		   int numX1 = x-100;
+		   int numY1 = 50;
+		   int numX2 = x-100+270;
+		   int numY2 = 280;
+		   if(xVal >= numX1 && xVal <= numX2 && yVal >= numY1 && numY2 <= numY2) {
+	    		return true;
+	    	}
+	    	return false;
+	    }
+	   
+	    public Object[] custOrder() {
+	    	return orders;
+	    }
+	    
+	    public void setOrderReceived(int index, boolean x) {
+	    	orderReceived[index] = x;
 	    }
 	    
 	    class RemindTask extends TimerTask {
