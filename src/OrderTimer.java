@@ -26,10 +26,10 @@ public class OrderTimer {
 	private String custName;
 	Customer cust1;
 	Object[] orders;
-	boolean[] orderReceived;
 	Object item;
 	Coin coin;
 	private int totalMoney = 0;
+	private boolean orderIsDone;
 		
 	    public OrderTimer(int x, int y, int seconds, int wait) {
 	    	personX = x-10;
@@ -45,6 +45,7 @@ public class OrderTimer {
 			ogTy = y + 100;
 			orderItem = new Position("orderItem");
 			orders = new Object[ThreadLocalRandom.current().nextInt(1, 4)];
+			orderIsDone = false;
 			
 			int itemX = x-75;
 			int itemY = y+5;
@@ -54,9 +55,9 @@ public class OrderTimer {
 				if(newOrderItem.equals("CoffeeOrder")) {
 					itemX = x-70;
 					scale = 0.75;
-					totalMoney += 4;
+					/*totalMoney += 4;
 				}else {
-					totalMoney += 15;
+					totalMoney += 15;*/
 				}
 				item = new Object(itemX, itemY, newOrderItem, scale);
 				orders[i] = item;
@@ -84,11 +85,6 @@ public class OrderTimer {
 			cust = new Customer(personX, wait, 130, custName);
 	    	timer = new Timer();
 	    	coin = new Coin(personX+70, 290);
-	    	orderReceived = new boolean[orders.length];
-	    	
-	    	for(int i = 0; i < orderReceived.length; i++) {
-	    		orderReceived[i] = false;
-	    	}
 		}
 	    
 	    public void runner() {
@@ -102,7 +98,7 @@ public class OrderTimer {
 			//these are the 2 lines of code needed draw an image on the screen
 			Graphics2D g2 = (Graphics2D) g;
 			
-			if(cust.getReady()) {
+			if(cust.getReady() && !orderIsDone) {
 				g.setColor(Color.gray);
 				g.fillRect(gx, gy, tx, gy+90);
 				
@@ -130,6 +126,19 @@ public class OrderTimer {
 				}
 	    }
 	    
+	    public void itemGiven(Object item) {
+	    	for(int i = 0; i < orders.length; i++) {
+	    		if(orders[i].getType().equals(item.getType())) {
+	    			if(orders[i].getType().equals("CoffeeOrder")) {
+						totalMoney += 4;
+					}else {
+						totalMoney += 15;
+					}
+	    			orders[i] = null;
+	    		}
+	    	}
+	    }
+	 
 	    public void done(boolean x) {
 	    	cust.setDone(x);
 	    }
@@ -144,9 +153,9 @@ public class OrderTimer {
 				if(newOrderItem.equals("CoffeeOrder")) {
 					itemX = x-70;
 					scale = 0.75;
-					totalMoney += 4;
+					/*totalMoney += 4;
 				}else {
-					totalMoney += 15;
+					totalMoney += 15;*/
 				}
 				item = new Object(itemX, itemY, newOrderItem, scale);
 				orders[i] = item;
@@ -169,11 +178,10 @@ public class OrderTimer {
 	    
 	   public boolean itemIsInside(int xVal, int yVal) {
 		   int numX1 = x-100;
-		   int numY1 = 50;
-		   int numX2 = x-100+270;
-		   int numY2 = 280;
-		   if(xVal >= numX1 && xVal <= numX2 && yVal >= numY1 && numY2 <= numY2) {
-	    		return true;
+		   int numX2 = x+170;
+		   if(xVal >= numX1 && xVal <= numX2 && yVal >= 50 && yVal <= 280) {
+	    		System.out.println(xVal + " " + yVal);
+			   return true;
 	    	}
 	    	return false;
 	    }
@@ -181,9 +189,10 @@ public class OrderTimer {
 	    public Object[] custOrder() {
 	    	return orders;
 	    }
-	    
-	    public void setOrderReceived(int index, boolean x) {
-	    	orderReceived[index] = x;
+	
+	    public boolean setOrderDone(boolean x) {
+	    	orderIsDone = x;
+	    	return orderIsDone;
 	    }
 	    
 	    class RemindTask extends TimerTask {
@@ -198,6 +207,9 @@ public class OrderTimer {
 	        	}else {
 	    			y += 1;
 	    			ty -= 1;
+	    			/*if(orderIsDone) {
+	    				y = gy+165;
+	    			}*/
 	    			timer.schedule(new RemindTask(), sec*secondsAmt); //400
 	    		}
 	        }
