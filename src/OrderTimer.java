@@ -28,8 +28,9 @@ public class OrderTimer {
 	Object[] orders;
 	Object item;
 	Coin coin;
-	private int totalMoney = 0;
-	private boolean orderIsDone;
+	private int totalMoney;
+	boolean[] orderIsDone;
+	private int numX1, numX2;
 		
 	    public OrderTimer(int x, int y, int seconds, int wait) {
 	    	personX = x-10;
@@ -45,7 +46,8 @@ public class OrderTimer {
 			ogTy = y + 100;
 			orderItem = new Position("orderItem");
 			orders = new Object[ThreadLocalRandom.current().nextInt(1, 4)];
-			orderIsDone = false;
+			orderIsDone = new boolean[orders.length];
+			totalMoney = 0;
 			
 			int itemX = x-75;
 			int itemY = y+5;
@@ -61,6 +63,7 @@ public class OrderTimer {
 				}
 				item = new Object(itemX, itemY, newOrderItem, scale);
 				orders[i] = item;
+				orderIsDone[i] = false;
 				itemX = x-75;
 				itemY += 50;
 			}
@@ -85,6 +88,20 @@ public class OrderTimer {
 			cust = new Customer(personX, wait, 130, custName);
 	    	timer = new Timer();
 	    	coin = new Coin(personX+70, 290);
+	    	
+	    	if(x == 110) {
+	    		numX1 = 10;
+		    	numX2 = 290;
+	    	}else if(x == 400){
+	    		numX1 = 300;
+		    	numX2 = 580;
+	    	}else if(x == 690) {
+	    		numX1 = 590;
+		    	numX2 = 870;
+	    	}else {
+	    		numX1 = 880;
+		    	numX2 = 1160;
+	    	}
 		}
 	    
 	    public void runner() {
@@ -98,7 +115,7 @@ public class OrderTimer {
 			//these are the 2 lines of code needed draw an image on the screen
 			Graphics2D g2 = (Graphics2D) g;
 			
-			if(cust.getReady() && !orderIsDone) {
+			if(cust.getReady() && !orderDone()) {
 				g.setColor(Color.gray);
 				g.fillRect(gx, gy, tx, gy+90);
 				
@@ -114,7 +131,9 @@ public class OrderTimer {
 				order.paint(g);
 				
 				for(int i = 0; i < orders.length; i++) {
-					orders[i].paint(g2);
+					if(!orderIsDone[i]) {
+						orders[i].paint(g2);
+					}
 				}
 				
 				runner();
@@ -126,17 +145,21 @@ public class OrderTimer {
 				}
 	    }
 	    
-	    public void itemGiven(Object item) {
-	    	for(int i = 0; i < orders.length; i++) {
-	    		if(orders[i].getType().equals(item.getType())) {
-	    			if(orders[i].getType().equals("CoffeeOrder")) {
-						totalMoney += 4;
-					}else {
-						totalMoney += 15;
-					}
-	    			orders[i] = null;
+	    public void itemGiven(int index) {
+	    	if(orders[index].getType().equals("CoffeeOrder")) {
+				totalMoney += 4;
+			}else {
+				totalMoney += 15;
+			}
+	    }
+	    
+	    public boolean orderDone() {
+	    	for(int i = 0; i < orderIsDone.length; i++) {
+	    		if(!orderIsDone[i]) {
+	    			return false;
 	    		}
 	    	}
+	    	return true;
 	    }
 	 
 	    public void done(boolean x) {
@@ -177,27 +200,42 @@ public class OrderTimer {
 	    }
 	    
 	   public boolean itemIsInside(int xVal, int yVal) {
-		   int numX1 = x-100;
-		   int numX2 = x+170;
-		   if(xVal >= numX1 && xVal <= numX2 && yVal >= 50 && yVal <= 280) {
-	    		System.out.println(xVal + " " + yVal);
+		   System.out.println("location: " + numX1 + " " + numX2);
+		   if(xVal >= numX1 && xVal <= numX2 && yVal >= 50 && yVal <= 330) {
+	    		System.out.println(xVal + " " + yVal);  
 			   return true;
 	    	}
-	    	return false;
+	    	System.out.println("itemfalse");
+		   return false;
 	    }
 	   
 	    public Object[] custOrder() {
 	    	return orders;
 	    }
-	
-	    public boolean setOrderDone(boolean x) {
-	    	orderIsDone = x;
+	    
+	    public boolean[] orderDoneArr() {
 	    	return orderIsDone;
+	    }
+	    
+	    public void setOrderDone(int index, boolean x) {
+	    	if(orders[index].getType().equals("CoffeeOrder")) {
+				totalMoney += 4;
+			}else {
+				totalMoney += 15;
+			}
+	    	orderIsDone[index] = x;
 	    }
 	    
 	    class RemindTask extends TimerTask {
 	        public void run() {
-	        	if(y == gy+165) {
+	        	if(orderDone()) {
+	        		done(true);
+	        		y = ogT;
+	        		ty = ogTy;
+	        		count = 0;
+	        		coin.setCollect(true);
+	        		generateNewOrder();
+	        	}else if(y == gy+165) {
 	        		done(true);
 	        		y = ogT;
 	        		ty = ogTy;
