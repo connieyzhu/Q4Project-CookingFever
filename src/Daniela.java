@@ -27,7 +27,7 @@ import java.util.List;
 
 public class Runner extends JPanel implements ActionListener, MouseListener, KeyListener, MouseMotionListener {
 	
-	private ArrayList<Object> objectList;
+	private static ArrayList<Object> objectList;
 	private Object hitBox;
     private Point offset;
     
@@ -36,7 +36,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
     private boolean spot3 = false;
     private boolean spot4 = false;
     private boolean inside = false;
-    
     private int spot1Index;
     private int spot2Index;
     private int spot3Index;
@@ -53,7 +52,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
     private int oven4Index;
 	
 	Background cafeBg = new Background(0, 0, "/imgs/CafeBG.png");
-	Background cafeCounter = new Background(0, 0, "/imgs/CafeCounter.png");
+	Background cafeCounter = new Background(0, 0, "/imgs/CafeCounterv2.png");
 	Position pos = new Position("timer");
 	
 	Position posWait = new Position("wait");
@@ -74,7 +73,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	int mouseY = MouseInfo.getPointerInfo().getLocation().y; 
 	int mouseX = MouseInfo.getPointerInfo().getLocation().x;
 	private boolean b; 
-	int total = 0;
+	
 	 
 	public void paint(Graphics g) {
 		cafeBg.paint(g);
@@ -110,18 +109,8 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		g.drawRect(915, 535, 190, 75);
 		g.drawRect(915, 615, 190, 75);
 		
-		//checkOven(); 
-		g.drawRect(60, 600, 130, 120);
+		checkOven();
 		
-		g.drawRect(10, 50, 280, 280);
-		g.drawRect(300, 50, 280, 280);
-		g.drawRect(590, 50, 280, 280);
-		g.drawRect(880, 50, 280, 280);
-		
-		//scoring
-		g.setFont(new Font("Serif", Font.PLAIN, 30));
-		g.setColor(Color.WHITE);
-		g.drawString(total + "", 600, 47);
 	}
 	
 	public static void main(String[] args) {
@@ -147,79 +136,72 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		objectList = new ArrayList<>();
 		objectList.add(coffee1);
 		objectList.add(coffee2);
-		objectList.add(coffee3);
+		objectList.add(coffee3); 
 	}
 	
-	
-	public Rectangle coffeeGetRect() {
-		return new Rectangle(170, 365, 220, 210);
+	public void checkOven() {
+		for(int i = 2; i< objectList.size(); i++) {
+			if(i==oven1Index) {
+				if(objectList.get(i).getX() != 970 && objectList.get(i).getY() != 375) {
+					oven1= false;
+				}else {
+					oven1 = true; 
+				}
+			}else if(i==oven1Index) {
+				if(objectList.get(i).getX() != 950 && objectList.get(i).getY() != 452) {
+					oven2= false;
+				}else {
+					oven2 = true; 
+				}
+			}else if(i==oven1Index) {
+				if(objectList.get(i).getX() != 933 && objectList.get(i).getY() !=530) {
+					oven3= false;
+				}else {
+					oven3 = true; 
+				}
+			}else if(i==oven1Index) {
+				if(objectList.get(i).getX() != 920 && objectList.get(i).getY() != 609) {
+					oven4= false;
+				}else {
+					oven4 = true; 
+				}
+			}
+		}	
 	}
-	
-	/*public void checkOven() {
-		for(Object obj: objectList) {
-			if(obj.getX()>=940 && obj.getX()<=1130 && obj.getY()>=375 && obj.getY()<=450) {
-				oven1 = true; 
-			}else {
-				oven1 = false;
-				break; 
-			}
-		}
-		
-		for(Object obj: objectList) {
-			if(obj.getX()>=940 && obj.getX()<=1130 && obj.getY()>=455 && obj.getY()<=530) {
-				oven2 = true;
-			}else {
-				oven2 = false;
-				break; 
-			}
-		}
-		
-		for(Object obj: objectList) {
-			if(obj.getX()>=915 && obj.getX()<=1105 && obj.getY()>=535 && obj.getY()<=710) {
-				oven3 = true;
-			}else {
-				oven3 = false; 
-				break; 
-			}
-		}
-		
-		for(Object obj: objectList) {
-			if(obj.getX()>=915 && obj.getX()<=1105 && obj.getY()>=615 && obj.getY()<=690) {
-				oven4 = true;
-			}else {
-				oven4 = false; 
-				break; 
-			}
-		}
-	}*/
-	
 	
 	public void checkSpots() {
-		for(int i = 0; i < objectList.size(); i++) {
-			if(i == spot1Index) {
-				if(objectList.get(i).getX() != 515 && objectList.get(i).getY() != 370) {
-					spot1 = false;
-				}else {
-					spot1 = true;
-				}
-			}else if(i == spot2Index) {
-				if(objectList.get(i).getX() != 505 && objectList.get(i).getY() != 440) {
-					spot2 = false;
-				}else {
-					spot2 = true;
-				}
-			}else if(i == spot3Index) {
-				if(objectList.get(i).getX() != 641 && objectList.get(i).getY() != 370) {
-					spot3 = false;
-				}else {
-					spot3 = true;
-				}
-			}else if(i == spot4Index) {
-				if(objectList.get(i).getX() != 645 && objectList.get(i).getY() != 440) {
-					spot4 = false;
-				}else {
-					spot4 = true;
-				}
+		for(Object obj: objectList) {
+			if(obj.getX() != 485 && obj.getY() != 370) {
+				spot1 = false;
+				//System.out.println("alse");
+			}else {
+				spot1 = true;
+				break;
+			}
+		}
+		for(Object obj: objectList) {
+			if(obj.getX() != 475 && obj.getY() != 440) {
+				spot2 = false;
+			}else {
+				spot2 = true;
+				break;
+			}
+		}
+		for(Object obj: objectList) {
+			if(obj.getX() != 605 && obj.getY() != 370) {
+				spot3 = false;
+			}else {
+				spot3 = true;
+				break;
+			}
+		}
+		for(Object obj: objectList) {
+			if(obj.getX() != 615 && obj.getY() != 440) {
+				spot4 = false;
+				//System.out.println("alse");
+			}else {
+				spot4 = true;
+				break;
 			}
 		}
 	}
@@ -250,113 +232,45 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		}
 	}
 	
+	public static ArrayList<Object> getObjectList(){
+		return objectList;
+	}
+	public static Object getObject(int index) {
+		return objectList.get(index); 
+	}
+	
 	//@Override
-public void mouseClicked(MouseEvent arg0) {
-		
-		if(timer.getCoin().getCollect()) {
-			System.out.println("coins ready");
-			int x = timer.getCoin().getX();
-			int y = timer.getCoin().getY();
-			int numCollect = 0;
-			while(numCollect < 1) {
-				if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
-					System.out.println("collect");
-					timer.getCoin().setCollect(false);
-					for(int i = 0; i < timer.orderDoneArr().length; i++) {
-						if(timer.orderDoneArr()[i]) {
-							if(timer.custOrder()[i].getType().equals("CoffeeOrder")) {
-								total += 4;
-							}else {
-								total += 15;
-							}
-						}
-					}
-					//total += timer.getTotal();
-					//System.out.println("total = " + timer.getTotal());
-					numCollect++;
-				}
-			}
-		}
-		
-		if(timer1.getCoin().getCollect()) {
-			int x = timer1.getCoin().getX();
-			int y = timer1.getCoin().getY();
-			int numCollect = 0;
-			while(numCollect < 1) {
-				if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
-					System.out.println("collect");
-					timer1.getCoin().setCollect(false);
-					total += timer1.getTotal();
-					numCollect++;
-				}
-			}
-		}
-		
-		if(timer2.getCoin().getCollect()) {
-			int x = timer2.getCoin().getX();
-			int y = timer2.getCoin().getY();
-			int numCollect = 0;
-			while(numCollect < 1) {
-				if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
-					System.out.println("collect");
-					timer2.getCoin().setCollect(false);
-					total += timer2.getTotal();
-					numCollect++;
-				}
-			}
-		}
-		
-		if(timer3.getCoin().getCollect()) {
-			int x = timer3.getCoin().getX();
-			int y = timer3.getCoin().getY();
-			int numCollect = 0;
-			while(numCollect < 1) {
-				if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
-					System.out.println("collect");
-					timer3.getCoin().setCollect(false);
-					total += timer3.getTotal();
-					numCollect++;
-				}
-			}
-		}
-		
-//		if(arg0.getX()>=170 && arg0.getX()<= 390 && arg0.getY() >= 365 && arg0.getY() <= 600){
-//			System.out.print("hi");
-//			try {
-//				TimeUnit.SECONDS.sleep(3);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
+	public void mouseClicked(MouseEvent arg0) {
+//		for(int i = 3; i < objectList.size(); i++) {
+//			if(objectList.get(i).getType().equals("VanStrawBakeOven")){
+//				if(arg0.getX()==objectList.get(i).getX() && arg0.getY()==objectList.get(i).getY()) {
+//					objectList.get(i).fullBakeChange(); 
+//				}
 //			}
-//			//coffee1.change();
-//			//coffee2.change();
-//			//coffee3.change();
-//		}
-//		/*if(arg0.getX()>=170 && arg0.getX()<= 390 && arg0.getY() >= 365 && arg0.getY() <= 600){
-//			System.out.print("hi");
-//			try {
-//				TimeUnit.SECONDS.sleep(3);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
+//			
+//			if(objectList.get(i).getType().equals("VanBlueBakeOven")){
+//				if(arg0.getX()==objectList.get(i).getX() && arg0.getY()==objectList.get(i).getY()) {
+//					objectList.get(i).fullBakeChange(); 
+//				}
 //			}
-//			//coffee1.change();
-//			//coffee2.change();
-//			//coffee3.change();
+//			
+//			if(objectList.get(i).getType().equals("ChocStrawBakeOven")){
+//				if(arg0.getX()==objectList.get(i).getX() && arg0.getY()==objectList.get(i).getY()) {
+//					objectList.get(i).fullBakeChange(); 
+//				}
+//			}
+//			
+//			if(objectList.get(i).getType().equals("ChocBlueBakeOven")){
+//				if(arg0.getX()==objectList.get(i).getX() && arg0.getY()==objectList.get(i).getY()) {
+//					objectList.get(i).fullBakeChange(); 
+//				}
+//			}
 //		}
-//		
-//		if(arg0.getX()>=505 && arg0.getX()<= 635 && arg0.getY() >= 620 && arg0.getY() <= 705){
-//			System.out.println("choc");
-//		}
-//		if(arg0.getX()>=chocBatter.getX() && arg0.getX()<= chocBatter.getX() + 135 && arg0.getY() >= chocBatter.getY() && arg0.getY() <= chocBatter.getY() + 105){
-//			System.out.println("yes");
-//		}*/
-		
 	}
 		
 	
 	//@Override
-	public void mouseEntered(MouseEvent arg0) {
+	public void mouseEntered(MouseEvent arg0) {		
 		
 	}
 
@@ -402,20 +316,8 @@ public void mouseClicked(MouseEvent arg0) {
 		Point mp = arg0.getPoint();
 		int px = arg0.getX();
 		int py = arg0.getY();
-		
 		for(int i = 0; i < objectList.size(); i++) {
-			if(timer.itemIsInside(px, py)) {
-				System.out.println("intimer");
-				for(int j = 0; j < timer.custOrder().length; j++) {
-					if(objectList.get(i).getType().equals(timer.custOrder()[j].getType())) {
-						/*if(timer.orderDoneArr()[i] && j != timer.custOrder().length-1) {
-							j++;
-						}*/
-						timer.setOrderDone(j, true);
-						j = timer.custOrder().length;
-					}
-				}
-			}else if (objectList.get(i).getBounds().contains(mp)) {
+			if (objectList.get(i).getBounds().contains(mp)) {
 				if(px>=500 && px<= 780 && py >= 390 && py <= 540 && (!spot1 || !spot2 || !spot3 || !spot4)) {
 					if(!spot1) {
 						objectList.get(i).setPosition(515, 370);
@@ -450,24 +352,32 @@ public void mouseClicked(MouseEvent arg0) {
 						objectList.get(i).ovenChange();
 						oven1 = true;
 						oven1Index = i;
+						objectList.get(i).setInside(true, 970, 375);
+						new OvenTimer(5);
 					}else if(!oven2) {
 						System.out.println("oven2");
 						objectList.get(i).ovenChange();
 						oven2 = true;
 						oven2Index = i; 
 						objectList.get(i).setPosition(950, 452);
+						objectList.get(i).setInside(true, 950, 452);
+						new OvenTimer(5);
 					}else if(!oven3) {
 						System.out.println("oven3");
 						objectList.get(i).ovenChange();
 						oven3 = true;
 						oven3Index = i; 
 						objectList.get(i).setPosition(933, 530);
+						objectList.get(i).setInside(true, 933, 530);
+						new OvenTimer(5);
 					}else if(!oven4) {
 						System.out.println("oven4");
 						objectList.get(i).ovenChange();
 						oven4 = true;
 						oven4Index = i; 
 						objectList.get(i).setPosition(920, 609);
+						objectList.get(i).setInside(true, 920, 609);
+						new OvenTimer(5);
 					}
 				}else if(px>=60 && px<= 190 && py >= 600 && py <= 720) {
 					objectList.remove(i);
@@ -478,98 +388,6 @@ public void mouseClicked(MouseEvent arg0) {
 				}
 			}
 		}
-		
-		/*boolean[] orderReceived = new boolean[timer.custOrder().length];
-		for(int i = 0; i < orderReceived.length; i++) {
-    		orderReceived[i] = false;
-    	}
-		int num = 0;
-		for(int j = 0; j < objectList.size(); j++) {
-			if (objectList.get(j).getBounds().contains(mp)) {
-				System.out.println(objectList.get(j).getType());
-				if(timer.itemIsInside(objectList.get(j).getX(), objectList.get(j).getY())) {
-					for(int i = 0; i < timer.custOrder().length; i++) {
-						if(objectList.get(j).equals(timer.custOrder()[i])) {
-							orderReceived[i] = true;
-							num++;
-							if(num == timer.custOrder().length) {
-								timer.setOrderDone(true);
-							}
-						}
-					}
-				}
-			}
-		}*/
-		/*int num = 0;
-		if(timer.itemIsInside(arg0.getX(), arg0.getY())) {
-			System.out.println("in box here");
-			for(int j = 0; j < objectList.size(); j++) {
-				if (objectList.get(j).getBounds().contains(mp)) {
-					for(int i = 0; i < timer.custOrder().length; i++) {
-						if(objectList.get(j).equals(timer.custOrder()[i])) {
-							orderReceived[i] = true;
-							num++;
-							if(num == timer.custOrder().length) {
-								timer.setOrderDone(true);
-							}
-						}
-					}
-				}
-			}
-		}*/
-		
-		/*for(int j = 0; j < objectList.size(); j++) {
-			if (objectList.get(j).getBounds().contains(mp)) {
-				System.out.println("object found");
-				if(timer.itemIsInside(arg0.getX(), arg0.getY())) {
-					for(int i = 0; i < timer.custOrder().length; i++) {
-						if(objectList.get(j).getType().equals(timer.custOrder()[i].getType())) {
-							timer.setOrderReceived(i, true);
-							i = timer.custOrder().length;
-						}
-					}
-				}
-			}
-		}*/
-		
-		/*for(int i = 0; i < objectList.size(); i++) {
-			if (objectList.get(i).getBounds().contains(mp)) {
-				if(px>=940 && px<= 1130 && py >= 375 && py <= 790) {
-					if(px>=940 && px<= 1130 && py >= 375 && py <= 450 && !oven1) {
-						objectList.get(i).setPosition(950, 375);
-						oven1 = true;
-						objectList.get(i).setInside(true, 950, 375);
-						objectList.get(i).ovenChange(); 
-					}
-					if(px>=940 && px<= 1130 && py >= 455 && py <= 530 && !oven2) {
-						objectList.get(i).setPosition(945, 455);
-						oven2 = true;
-						objectList.get(i).setInside(true, 945, 455);
-						objectList.get(i).ovenChange(); 
-					}
-					if(px>=915 && px<= 1105 && py >= 535 && py <= 710 && !oven3) {
-						objectList.get(i).setPosition(915, 535);
-						oven3 = true;
-						objectList.get(i).setInside(true, 915, 535);
-						objectList.get(i).ovenChange(); 
-					}
-					if(px>=915 && px<= 1105 && py >= 615 && py <= 790 && !oven4) {
-						objectList.get(i).setPosition(915, 615);
-						oven4 = true;
-						objectList.get(i).setInside(true, 915, 615);
-						objectList.get(i).ovenChange(); 
-					}
-				}else if(objectList.get(i).isInside()) {
-					objectList.get(i).setPosition(objectList.get(i).getInsideX(), objectList.get(i).getInsideY());
-				}else {
-					objectList.remove(i);
-				}
-			}
-		}*/
-//		g.drawRect(500, 390, 140, 70);
-//		g.drawRect(500, 460, 140, 80);
-//		g.drawRect(640, 390, 140, 70);
-//		g.drawRect(640, 460, 140, 80);
 	}
 
 	//@Override
@@ -625,5 +443,4 @@ public void mouseClicked(MouseEvent arg0) {
 			}
 		}
 	}
-
 }
