@@ -152,21 +152,48 @@ public class Object{
 	
 	public void bakeChange() {
 		if(type.equals("VanStrawBake")) {
-			changePicture("/imgs/VanStrawBake.png");
+			changePicture("/imgs/VanStrawBakeOven.png");
+			type = "VanStrawBakeOven"; 
 		}
 		
 		if(type.equals("VanBlueBake")) {
-			changePicture("/imgs/VanBlueBake.png");
+			changePicture("/imgs/VanBlueBakeOven.png");
+			type = "VanBlueBakeOven";
 		}
 		
-		if(type.equals("ChoocStrawBake")) {
-			changePicture("/imgs/ChocStrawBake.png");
+		if(type.equals("ChocStrawBake")) {
+			changePicture("/imgs/ChocStrawBakeOven.png");
+			type = "ChocStrawBakeOven";
 		}
 		
 		if(type.equals("ChocBlueBake")) {
-			changePicture("/imgs/ChocBlueBake.png");
+			changePicture("/imgs/ChocBlueBakeOven.png");
+			type = "ChocBlueBakeOven";
 		}
 	}
+	
+	public void fullBakeChange() {
+		if(type.equals("VanStrawBakeOven")) {
+			changePicture("/imgs/VanStrawBake.png");
+			type = "VanStrawBake"; 
+		}
+		
+		if(type.equals("VanBlueBakeOven")) {
+			changePicture("/imgs/VanBlueBake.png");
+			type = "VanBlueBakeOven";
+		}
+		
+		if(type.equals("ChocStrawBakeOven")) {
+			changePicture("/imgs/ChocStrawBake.png");
+			type = "ChocStrawBake";
+		}
+		
+		if(type.equals("ChocBlueBakeOven")) {
+			changePicture("/imgs/ChocBlueBake.png");
+			type = "ChocBlueBake";
+		}
+	}
+	
 	public void addFruitChange(String fruit) {
 		if(type.equals("ChocBatter")) {
 			if(fruit.equals("Strawberry")) {
