@@ -10,13 +10,11 @@ public class CoffeeTimer {
 
     class RemindTask extends TimerTask {
         public void run() {
-            System.out.println("You have a notification!");
+        	Runner.getObject(0).change();
+        	Runner.getObject(1).change();
+        	Runner.getObject(2).change();
             timer.cancel(); //Terminate the timer thread
         }
-    }
-
-    public static void main(String args[]) {
-        new CoffeeTimer(5);
     }
 
 }
