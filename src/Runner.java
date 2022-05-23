@@ -24,10 +24,11 @@ import java.util.TimerTask;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Timer;
 
 public class Runner extends JPanel implements ActionListener, MouseListener, KeyListener, MouseMotionListener {
 	
-	private ArrayList<Object> objectList;
+	private static ArrayList<Object> objectList;
 	private Object hitBox;
     private Point offset;
     
@@ -45,7 +46,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
     private boolean oven2 = false;
     private boolean oven3 = false;
     private boolean oven4 = false;
-
+    
     private int oven1Index;
     private int oven2Index;
     private int oven3Index;
@@ -62,9 +63,9 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	OrderTimer timer2 = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
 	OrderTimer timer3 = new OrderTimer(pos.getX(), 75, 1, posWait.getWait());
 	
-	Object coffee1 = new Object(195, 485, "Coffee", 1.0);
-	Object coffee2 = new Object(255, 490, "Coffee", 1.0);
-	Object coffee3 = new Object(315, 495, "Coffee", 1.0);
+	Object coffee1 = new Object(195, 485, "CoffeeEmpty", 1.0);
+	Object coffee2 = new Object(255, 490, "CoffeeEmpty", 1.0);
+	Object coffee3 = new Object(315, 495, "CoffeeEmpty", 1.0);
 	
 	//Person: (100, 130), (390, 130), (680,130), 970, 130)
 	//Order Form: (20, 70), (310, 70), (600, 70), 890, 70)
@@ -72,6 +73,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	
 	int mouseY = MouseInfo.getPointerInfo().getLocation().y; 
 	int mouseX = MouseInfo.getPointerInfo().getLocation().x;
+
 	private boolean b; 
 	int total = 0;
 	 
@@ -83,9 +85,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		timer2.paint(g);
 		timer3.paint(g);
 		
-		coffee1.paint(g);
-		coffee2.paint(g);
-		coffee3.paint(g);
 		for(Object obj: objectList) {
 			obj.paint(g);
 		}
@@ -112,10 +111,16 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		checkOven(); 
 		g.drawRect(60, 600, 130, 120);
 		
+		g.drawRect(10, 50, 280, 280);
+		g.drawRect(300, 50, 280, 280);
+		g.drawRect(590, 50, 280, 280);
+		g.drawRect(880, 50, 280, 280);
+		
 		//scoring
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
 		g.setColor(Color.WHITE);
 		g.drawString(total + "", 600, 47);
+		
 		
 	}
 	
@@ -145,48 +150,35 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		objectList.add(coffee3);
 	}
 	
-	
-	public Rectangle coffeeGetRect() {
-		return new Rectangle(170, 365, 220, 210);
+	public void checkOven() {
+		for(int i = 3; i< objectList.size(); i++) {
+			if(i==oven1Index) {
+				if(objectList.get(i).getX() != 970 && objectList.get(i).getY() != 375) {
+					oven1= false;
+				}else {
+					oven1 = true; 
+				}
+			}else if(i==oven1Index) {
+				if(objectList.get(i).getX() != 950 && objectList.get(i).getY() != 452) {
+					oven2= false;
+				}else {
+					oven2 = true; 
+				}
+			}else if(i==oven1Index) {
+				if(objectList.get(i).getX() != 933 && objectList.get(i).getY() !=530) {
+					oven3= false;
+				}else {
+					oven3 = true; 
+				}
+			}else if(i==oven1Index) {
+				if(objectList.get(i).getX() != 920 && objectList.get(i).getY() != 609) {
+					oven4= false;
+				}else {
+					oven4 = true; 
+				}
+			}
+		}	
 	}
-	
-	/*public void checkOven() {
-		for(Object obj: objectList) {
-			if(obj.getX()>=940 && obj.getX()<=1130 && obj.getY()>=375 && obj.getY()<=450) {
-				oven1 = true; 
-			}else {
-				oven1 = false;
-				break; 
-			}
-		}
-		
-		for(Object obj: objectList) {
-			if(obj.getX()>=940 && obj.getX()<=1130 && obj.getY()>=455 && obj.getY()<=530) {
-				oven2 = true;
-			}else {
-				oven2 = false;
-				break; 
-			}
-		}
-		
-		for(Object obj: objectList) {
-			if(obj.getX()>=915 && obj.getX()<=1105 && obj.getY()>=535 && obj.getY()<=710) {
-				oven3 = true;
-			}else {
-				oven3 = false; 
-				break; 
-			}
-		}
-		
-		for(Object obj: objectList) {
-			if(obj.getX()>=915 && obj.getX()<=1105 && obj.getY()>=615 && obj.getY()<=690) {
-				oven4 = true;
-			}else {
-				oven4 = false; 
-				break; 
-			}
-		}
-	}*/
 	
 	
 	public void checkSpots() {
@@ -219,7 +211,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		}
 	}
 	
-		public void fruitChange() {
+	public void fruitChange() {
 		for(int i = 0; i < objectList.size(); i++) {
 			if(hitBox.equals(objectList.get(i)) && (objectList.get(i).getType().equals("Blueberry") || objectList.get(i).getType().equals("Strawberry"))) {
 				for(Object batter:objectList) {
@@ -363,8 +355,119 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		Point mp = arg0.getPoint();
 		int px = arg0.getX();
 		int py = arg0.getY();
-		for(int i = 0; i < objectList.size(); i++) {
-			if (objectList.get(i).getBounds().contains(mp)) {
+		for(int c = 0; c < 3; c++) {
+			if(objectList.get(c).getBounds().contains(mp) && objectList.get(c).getType().equals("CoffeeFull")) {
+				if(timer.itemIsInside(px, py) || timer1.itemIsInside(px, py) || timer2.itemIsInside(px, py) || timer3.itemIsInside(px, py)) {
+					if(timer.itemIsInside(px, py)) {
+						for(int j = 0; j < timer.custOrder().length; j++) {
+							if(objectList.get(c).getType().equals(timer.custOrder()[j].getType())) {
+								if(c == 0) {
+									objectList.set(c, new Object(195, 485, "CoffeeEmpty", 1.0));
+									timer.setOrderDone(j, true);
+								}
+								if(c == 1) {
+									objectList.set(c, new Object(255, 490, "CoffeeEmpty", 1.0));
+									timer.setOrderDone(j, true);
+								}
+								if(c == 2) {
+									objectList.set(c, new Object(315, 495, "CoffeeEmpty", 1.0));
+									timer.setOrderDone(j, true);
+								}
+							}
+						}
+					}
+					if(timer1.itemIsInside(px, py)) {
+						for(int j = 0; j < timer1.custOrder().length; j++) {
+							if(objectList.get(c).getType().equals(timer1.custOrder()[j].getType())) {
+								if(c == 0) {
+									objectList.set(c, new Object(195, 485, "CoffeeEmpty", 1.0));
+									timer1.setOrderDone(j, true);
+								}
+								if(c == 1) {
+									objectList.set(c, new Object(255, 490, "CoffeeEmpty", 1.0));
+									timer1.setOrderDone(j, true);
+								}
+								if(c == 2) {
+									objectList.set(c, new Object(315, 495, "CoffeeEmpty", 1.0));
+									timer1.setOrderDone(j, true);
+								}
+							}
+						}
+					}
+					if(timer2.itemIsInside(px, py)) {
+						for(int j = 0; j < timer2.custOrder().length; j++) {
+							if(objectList.get(c).getType().equals(timer2.custOrder()[j].getType())) {
+								if(c == 0) {
+									objectList.set(c, new Object(195, 485, "CoffeeEmpty", 1.0));
+									timer2.setOrderDone(j, true);
+								}
+								if(c == 1) {
+									objectList.set(c, new Object(255, 490, "CoffeeEmpty", 1.0));
+									timer2.setOrderDone(j, true);
+								}
+								if(c == 2) {
+									objectList.set(c, new Object(315, 495, "CoffeeEmpty", 1.0));
+									timer2.setOrderDone(j, true);
+								}
+							}
+						}
+					}
+					if(timer3.itemIsInside(px, py)) {
+						for(int j = 0; j < timer3.custOrder().length; j++) {
+							if(objectList.get(c).getType().equals(timer3.custOrder()[j].getType())) {
+								if(c == 0) {
+									objectList.set(c, new Object(195, 485, "CoffeeEmpty", 1.0));
+									timer3.setOrderDone(j, true);
+								}
+								if(c == 1) {
+									objectList.set(c, new Object(255, 490, "CoffeeEmpty", 1.0));
+									timer3.setOrderDone(j, true);
+								}
+								if(c == 2) {
+									objectList.set(c, new Object(315, 495, "CoffeeEmpty", 1.0));
+									timer3.setOrderDone(j, true);
+								}
+							}
+						}
+					}
+				}else {
+					if(c == 0) {
+						objectList.get(c).setPosition(195, 485);
+					}
+					if(c == 1) {
+						objectList.get(c).setPosition(255, 490);
+					}
+					if(c == 2) {
+						objectList.get(c).setPosition(315, 495);
+					}
+				}
+			}
+			if(objectList.get(c).getBounds().contains(mp) && objectList.get(c).getType().equals("CoffeeEmpty")) {
+				if(c == 0 && objectList.get(c).getX() != 195 && objectList.get(c).getY() != 485) {
+					objectList.get(c).setPosition(195, 485);
+				}
+				if(c == 1 && objectList.get(c).getX() != 255 && objectList.get(c).getY() != 490) {
+					objectList.get(c).setPosition(255, 490);
+				}
+				if(c == 2 && objectList.get(c).getX() != 315 && objectList.get(c).getY() != 495) {
+					objectList.get(c).setPosition(315, 495);
+				}
+			}
+		}
+		
+		for(int i = 3; i < objectList.size(); i++) {
+			if(timer.itemIsInside(px, py)) {
+				System.out.println("intimer");
+				for(int j = 0; j < timer.custOrder().length; j++) {
+					if(objectList.get(i).getType().equals(timer.custOrder()[j].getType())) {
+						/*if(timer.orderDoneArr()[i] && j != timer.custOrder().length-1) {
+							j++;
+						}*/
+						timer.setOrderDone(j, true);
+						j = timer.custOrder().length;
+					}
+				}
+			}else if (objectList.get(i).getBounds().contains(mp)) {
 				if(px>=500 && px<= 780 && py >= 390 && py <= 540 && (!spot1 || !spot2 || !spot3 || !spot4)) {
 					if(!spot1) {
 						objectList.get(i).setPosition(515, 370);
@@ -399,24 +502,32 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 						objectList.get(i).ovenChange();
 						oven1 = true;
 						oven1Index = i;
+						objectList.get(i).setInside(true, 970, 375);
+						new OvenTimer(5);
 					}else if(!oven2) {
 						System.out.println("oven2");
 						objectList.get(i).ovenChange();
 						oven2 = true;
 						oven2Index = i; 
 						objectList.get(i).setPosition(950, 452);
+						objectList.get(i).setInside(true, 950, 452);
+						new OvenTimer(5);
 					}else if(!oven3) {
 						System.out.println("oven3");
 						objectList.get(i).ovenChange();
 						oven3 = true;
 						oven3Index = i; 
 						objectList.get(i).setPosition(933, 530);
+						objectList.get(i).setInside(true, 933, 530);
+						new OvenTimer(5);
 					}else if(!oven4) {
 						System.out.println("oven4");
 						objectList.get(i).ovenChange();
 						oven4 = true;
 						oven4Index = i; 
 						objectList.get(i).setPosition(920, 609);
+						objectList.get(i).setInside(true, 920, 609);
+						new OvenTimer(5);
 					}
 				}else if(px>=60 && px<= 190 && py >= 600 && py <= 720) {
 					objectList.remove(i);
