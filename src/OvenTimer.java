@@ -17,8 +17,4 @@ public class OvenTimer {
         }
     }
 
-    public static void main(String args[]) {
-     
-    }
-
 }
