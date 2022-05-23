@@ -219,7 +219,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		}
 	}
 	
-	public void fruitChange() {
+		public void fruitChange() {
 		for(int i = 0; i < objectList.size(); i++) {
 			if(hitBox.equals(objectList.get(i)) && (objectList.get(i).getType().equals("Blueberry") || objectList.get(i).getType().equals("Strawberry"))) {
 				for(Object batter:objectList) {
@@ -244,9 +244,15 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 			}
 		}
 	}
-	public Object getObject(int index) {
+	
+	public static ArrayList<Object> getObjectList(){
+		return objectList;
+	}
+	
+	public static Object getObject(int index) {
 		return objectList.get(index);
 	}
+	
 	//@Override
 	public void mouseClicked(MouseEvent arg0) {
 		
@@ -305,38 +311,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				}
 			}
 		}
-		
-//		if(arg0.getX()>=170 && arg0.getX()<= 390 && arg0.getY() >= 365 && arg0.getY() <= 600){
-//			System.out.print("hi");
-//			try {
-//				TimeUnit.SECONDS.sleep(3);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			//coffee1.change();
-//			//coffee2.change();
-//			//coffee3.change();
-//		}
-//		/*if(arg0.getX()>=170 && arg0.getX()<= 390 && arg0.getY() >= 365 && arg0.getY() <= 600){
-//			System.out.print("hi");
-//			try {
-//				TimeUnit.SECONDS.sleep(3);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			//coffee1.change();
-//			//coffee2.change();
-//			//coffee3.change();
-//		}
-//		
-//		if(arg0.getX()>=505 && arg0.getX()<= 635 && arg0.getY() >= 620 && arg0.getY() <= 705){
-//			System.out.println("choc");
-//		}
-//		if(arg0.getX()>=chocBatter.getX() && arg0.getX()<= chocBatter.getX() + 135 && arg0.getY() >= chocBatter.getY() && arg0.getY() <= chocBatter.getY() + 105){
-//			System.out.println("yes");
-//		}*/
+		new CoffeeTimer(5);
 		
 	}
 		
