@@ -241,6 +241,96 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	
 	//@Override
 	public void mouseClicked(MouseEvent arg0) {
+		public void mouseClicked(MouseEvent arg0) {
+		
+		if(timer.getCoin().getCollect()) {
+			int x = timer.getCoin().getX();
+			int y = timer.getCoin().getY();
+			int numCollect = 0;
+			while(numCollect < 1) {
+				if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
+					System.out.println("collect");
+					timer.getCoin().setCollect(false);
+					for(int i = 0; i < timer.orderDoneArr().length; i++) {
+						if(timer.orderDoneArr()[i]) {
+							if(timer.custOrder()[i].getType().equals("CoffeeOrder")) {
+								total += 4;
+							}else {
+								total += 15;
+							}
+						}
+					}
+					numCollect++;
+				}
+			}
+		}
+		
+		if(timer1.getCoin().getCollect()) {
+			int x = timer1.getCoin().getX();
+			int y = timer1.getCoin().getY();
+			int numCollect = 0;
+			while(numCollect < 1) {
+				if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
+					System.out.println("collect");
+					timer1.getCoin().setCollect(false);
+					for(int i = 0; i < timer1.orderDoneArr().length; i++) {
+						if(timer1.orderDoneArr()[i]) {
+							if(timer1.custOrder()[i].getType().equals("CoffeeOrder")) {
+								total += 4;
+							}else {
+								total += 15;
+							}
+						}
+					}
+					numCollect++;
+				}
+			}
+		}
+		
+		if(timer2.getCoin().getCollect()) {
+			int x = timer2.getCoin().getX();
+			int y = timer2.getCoin().getY();
+			int numCollect = 0;
+			while(numCollect < 1) {
+				if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
+					System.out.println("collect");
+					timer2.getCoin().setCollect(false);
+					for(int i = 0; i < timer2.orderDoneArr().length; i++) {
+						if(timer2.orderDoneArr()[i]) {
+							if(timer2.custOrder()[i].getType().equals("CoffeeOrder")) {
+								total += 4;
+							}else {
+								total += 15;
+							}
+						}
+					}
+					numCollect++;
+				}
+			}
+		}
+		
+		if(timer3.getCoin().getCollect()) {
+			int x = timer3.getCoin().getX();
+			int y = timer3.getCoin().getY();
+			int numCollect = 0;
+			while(numCollect < 1) {
+				if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
+					System.out.println("collect");
+					timer3.getCoin().setCollect(false);
+					for(int i = 0; i < timer3.orderDoneArr().length; i++) {
+						if(timer3.orderDoneArr()[i]) {
+							if(timer3.custOrder()[i].getType().equals("CoffeeOrder")) {
+								total += 4;
+							}else {
+								total += 15;
+							}
+						}
+					}
+					numCollect++;
+				}
+			}
+		}
+		
 //		for(int i = 3; i < objectList.size(); i++) {
 //			if(objectList.get(i).getType().equals("VanStrawBakeOven")){
 //				if(arg0.getX()==objectList.get(i).getX() && arg0.getY()==objectList.get(i).getY()) {
