@@ -244,9 +244,11 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 			}
 		}
 	}
-	
+	public Object getObject(int index) {
+		return objectList.get(index);
+	}
 	//@Override
-public void mouseClicked(MouseEvent arg0) {
+	public void mouseClicked(MouseEvent arg0) {
 		
 		if(timer.getCoin().getCollect()) {
 			int x = timer.getCoin().getX();
