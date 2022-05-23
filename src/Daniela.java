@@ -51,8 +51,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
     private int oven2Index;
     private int oven3Index;
     private int oven4Index;
-    
-    private int countTime; 
 	
 	Background cafeBg = new Background(0, 0, "/imgs/CafeBG.png");
 	Background cafeCounter = new Background(0, 0, "/imgs/CafeCounterv2.png");
