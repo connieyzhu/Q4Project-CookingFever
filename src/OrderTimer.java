@@ -145,12 +145,18 @@ public class OrderTimer {
 				}
 	    }
 	    
-	    public void itemGiven(int index) {
-	    	if(orders[index].getType().equals("CoffeeOrder")) {
-				totalMoney += 4;
-			}else {
-				totalMoney += 15;
-			}
+	    public void itemGiven(Object item) {
+	    	for(int i = 0; i < orders.length; i++) {
+	    		if(orders[i].getType().equals(item.getType())) {
+	    			if(orders[i].getType().equals("CoffeeOrder")) {
+						totalMoney += 4;
+					}else {
+						totalMoney += 15;
+					}
+	    			orders[i] = null;
+	    			i = orders.length;
+	    		}
+	    	}
 	    }
 	    
 	    public boolean orderDone() {
