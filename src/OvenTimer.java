@@ -10,12 +10,15 @@ public class OvenTimer {
 
     class RemindTask extends TimerTask {
         public void run() {
-            System.out.println("You have a notification!");
+            for(int i = 3; i < Runner.getObjectList().size(); i++) {
+            	Runner.getObject(i).bakeChange(); 
+            }
             timer.cancel(); //Terminate the timer thread
         }
     }
 
     public static void main(String args[]) {
-        new OvenTimer(5);
+     
     }
+
 }
