@@ -457,55 +457,57 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		
 		for(int i = 3; i < objectList.size(); i++) {
 			if(timer.itemIsInside(px, py)) {
-				System.out.println("intimer");
-				for(int j = 0; j < timer.custOrder().size(); j++) {
-					int count = 0;
-					if(objectList.get(i).getType().equals(timer.custOrder().get(j).getType())) {
-						if(count == 1) {
-							j = timer.custOrder().size();
+				if(timer.itemIsInside(px, py)) {
+					System.out.println("intimer");
+					for(int j = 0; j < timer.custOrder().size(); j++) {
+						int count = 0;
+						if(objectList.get(i).getType().equals(timer.custOrder().get(j).getType())) {
+							if(count == 1) {
+								j = timer.custOrder().size();
+							}
+							timer.custOrder().remove(j);
+							objectList.remove(i);
+							count++;
 						}
-						timer.custOrder().remove(j);
-						objectList.remove(i);
-						count++;
 					}
-				}
-			}else if(timer1.itemIsInside(px, py)) {
-				System.out.println("intimer");
-				for(int j = 0; j < timer1.custOrder().size(); j++) {
-					int count = 0;
-					if(objectList.get(i).getType().equals(timer1.custOrder().get(j).getType())) {
-						if(count == 1) {
-							j = timer1.custOrder().size();
+				}else if(timer1.itemIsInside(px, py)) {
+					System.out.println("intimer");
+					for(int j = 0; j < timer1.custOrder().size(); j++) {
+						int count = 0;
+						if(objectList.get(i).getType().equals(timer1.custOrder().get(j).getType())) {
+							if(count == 1) {
+								j = timer1.custOrder().size();
+							}
+							timer1.custOrder().remove(j);
+							objectList.remove(i);
+							count++;
 						}
-						timer1.custOrder().remove(j);
-						objectList.remove(i);
-						count++;
 					}
-				}
-			}else if(timer2.itemIsInside(px, py)) {
-				System.out.println("intimer");
-				for(int j = 0; j < timer2.custOrder().size(); j++) {
-					int count = 0;
-					if(objectList.get(i).getType().equals(timer2.custOrder().get(j).getType())) {
-						if(count == 1) {
-							j = timer2.custOrder().size();
+				}else if(timer2.itemIsInside(px, py)) {
+					System.out.println("intimer");
+					for(int j = 0; j < timer2.custOrder().size(); j++) {
+						int count = 0;
+						if(objectList.get(i).getType().equals(timer2.custOrder().get(j).getType())) {
+							if(count == 1) {
+								j = timer2.custOrder().size();
+							}
+							timer2.custOrder().remove(j);
+							objectList.remove(i);
+							count++;
 						}
-						timer2.custOrder().remove(j);
-						objectList.remove(i);
-						count++;
 					}
-				}
-			}else if(timer3.itemIsInside(px, py)) {
-				System.out.println("intimer");
-				for(int j = 0; j < timer3.custOrder().size(); j++) {
-					int count = 0;
-					if(objectList.get(i).getType().equals(timer3.custOrder().get(j).getType())) {
-						if(count == 1) {
-							j = timer3.custOrder().size();
+				}else if(timer3.itemIsInside(px, py)) {
+					System.out.println("intimer");
+					for(int j = 0; j < timer3.custOrder().size(); j++) {
+						int count = 0;
+						if(objectList.get(i).getType().equals(timer3.custOrder().get(j).getType())) {
+							if(count == 1) {
+								j = timer3.custOrder().size();
+							}
+							timer3.custOrder().remove(j);
+							objectList.remove(i);
+							count++;
 						}
-						timer3.custOrder().remove(j);
-						objectList.remove(i);
-						count++;
 					}
 				}
 			}else if (objectList.get(i).getBounds().contains(mp)) {
