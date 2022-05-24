@@ -30,7 +30,7 @@ public class OrderTimer {
 	Object item;
 	Coin coin;
 	private int totalMoney;
-	private int numX1, numX2, size;
+	private int numX1, numX2, size, oldAmt;
 		
 	    public OrderTimer(int x, int y, int seconds, int wait) {
 	    	personX = x-10;
@@ -47,6 +47,7 @@ public class OrderTimer {
 			orderItem = new Position("orderItem");
 			orders = new ArrayList<Object>();
 			totalMoney = 0;
+			oldAmt = 0;
 			size = ThreadLocalRandom.current().nextInt(1, 4);
 			
 			int itemX = x-75;
@@ -57,9 +58,9 @@ public class OrderTimer {
 				if(newOrderItem.equals("CoffeeOrder")) {
 					itemX = x-70;
 					scale = 0.75;
-					/*totalMoney += 4;
+					totalMoney += 4;
 				}else {
-					totalMoney += 15;*/
+					totalMoney += 15;
 				}
 				item = new Object(itemX, itemY, newOrderItem, scale);
 				orders.add(item);
@@ -141,20 +142,6 @@ public class OrderTimer {
 					coin.paint(g2);
 				}
 	    }
-	    
-	  /*  public void itemGiven(Object item) {
-	    	for(int i = 0; i < orders.size(); i++) {
-	    		if(orders.get(i).getType().equals(item.getType())) {
-	    			if(orders.get(i).getType().equals("CoffeeOrder")) {
-						totalMoney += 4;
-					}else {
-						totalMoney += 15;
-					}
-	    			orders[i] = null;
-	    			i = orders.length;
-	    		}
-	    	}
-	    }*/
 	 
 	    public void done(boolean x) {
 	    	cust.setDone(x);
@@ -164,15 +151,16 @@ public class OrderTimer {
 	    	int itemX = x-75;
 			int itemY = y+5;
 			totalMoney = 0;
+			size = ThreadLocalRandom.current().nextInt(1, 4);
 			for(int i = 0; i < size; i++) {
 				double scale = 0.5;
 				String newOrderItem = orderItem.getItem();
 				if(newOrderItem.equals("CoffeeOrder")) {
 					itemX = x-70;
 					scale = 0.75;
-					/*totalMoney += 4;
+					totalMoney += 4;
 				}else {
-					totalMoney += 15;*/
+					totalMoney += 15;
 				}
 				item = new Object(itemX, itemY, newOrderItem, scale);
 				orders.add(item);
@@ -186,7 +174,7 @@ public class OrderTimer {
 	    }
 	    
 	    public int getTotal() {
-	    	return totalMoney;
+	    	return oldAmt;
 	    }
 	    
 	    public int getPersonX() {
@@ -206,7 +194,7 @@ public class OrderTimer {
 	    public ArrayList<Object> custOrder() {
 	    	return orders;
 	    }
-	    
+	   
 	    class RemindTask extends TimerTask {
 	        public void run() {
 	        	if(orders.size() == 0) {
@@ -215,20 +203,18 @@ public class OrderTimer {
 	        		ty = ogTy;
 	        		count = 0;
 	        		coin.setCollect(true);
+	        		oldAmt = totalMoney;
 	        		generateNewOrder();
 	        	}else if(y == gy+165) {
 	        		done(true);
 	        		y = ogT;
 	        		ty = ogTy;
 	        		count = 0;
-	        		coin.setCollect(true);
+	        		coin.setCollect(false);
 	        		generateNewOrder();
 	        	}else {
 	    			y += 1;
 	    			ty -= 1;
-	    			/*if(orderIsDone) {
-	    				y = gy+165;
-	    			}*/
 	    			timer.schedule(new RemindTask(), sec*secondsAmt); //400
 	    		}
 	        }
