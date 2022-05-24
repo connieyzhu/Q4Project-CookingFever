@@ -359,73 +359,73 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 			if(objectList.get(c).getBounds().contains(mp) && objectList.get(c).getType().equals("CoffeeFull")) {
 				if(timer.itemIsInside(px, py) || timer1.itemIsInside(px, py) || timer2.itemIsInside(px, py) || timer3.itemIsInside(px, py)) {
 					if(timer.itemIsInside(px, py)) {
-						for(int j = 0; j < timer.custOrder().length; j++) {
-							if(objectList.get(c).getType().equals(timer.custOrder()[j].getType())) {
+						for(int j = 0; j < timer.custOrder().size(); j++) {
+							if(objectList.get(c).getType().equals(timer.custOrder().get(j).getType())) {
 								if(c == 0) {
 									objectList.set(c, new Object(195, 485, "CoffeeEmpty", 1.0));
-									timer.setOrderDone(j, true);
+									timer.custOrder().remove(j);
 								}
 								if(c == 1) {
 									objectList.set(c, new Object(255, 490, "CoffeeEmpty", 1.0));
-									timer.setOrderDone(j, true);
+									timer.custOrder().remove(j);
 								}
 								if(c == 2) {
 									objectList.set(c, new Object(315, 495, "CoffeeEmpty", 1.0));
-									timer.setOrderDone(j, true);
+									timer.custOrder().remove(j);
 								}
 							}
 						}
 					}
 					if(timer1.itemIsInside(px, py)) {
-						for(int j = 0; j < timer1.custOrder().length; j++) {
-							if(objectList.get(c).getType().equals(timer1.custOrder()[j].getType())) {
+						for(int j = 0; j < timer1.custOrder().size(); j++) {
+							if(objectList.get(c).getType().equals(timer1.custOrder().get(j).getType())) {
 								if(c == 0) {
 									objectList.set(c, new Object(195, 485, "CoffeeEmpty", 1.0));
-									timer1.setOrderDone(j, true);
+									timer1.custOrder().remove(j);
 								}
 								if(c == 1) {
 									objectList.set(c, new Object(255, 490, "CoffeeEmpty", 1.0));
-									timer1.setOrderDone(j, true);
+									timer1.custOrder().remove(j);
 								}
 								if(c == 2) {
 									objectList.set(c, new Object(315, 495, "CoffeeEmpty", 1.0));
-									timer1.setOrderDone(j, true);
+									timer1.custOrder().remove(j);
 								}
 							}
 						}
 					}
 					if(timer2.itemIsInside(px, py)) {
-						for(int j = 0; j < timer2.custOrder().length; j++) {
-							if(objectList.get(c).getType().equals(timer2.custOrder()[j].getType())) {
+						for(int j = 0; j < timer2.custOrder().size(); j++) {
+							if(objectList.get(c).getType().equals(timer2.custOrder().get(j).getType())) {
 								if(c == 0) {
 									objectList.set(c, new Object(195, 485, "CoffeeEmpty", 1.0));
-									timer2.setOrderDone(j, true);
+									timer2.custOrder().remove(j);
 								}
 								if(c == 1) {
 									objectList.set(c, new Object(255, 490, "CoffeeEmpty", 1.0));
-									timer2.setOrderDone(j, true);
+									timer2.custOrder().remove(j);
 								}
 								if(c == 2) {
 									objectList.set(c, new Object(315, 495, "CoffeeEmpty", 1.0));
-									timer2.setOrderDone(j, true);
+									timer2.custOrder().remove(j);
 								}
 							}
 						}
 					}
 					if(timer3.itemIsInside(px, py)) {
-						for(int j = 0; j < timer3.custOrder().length; j++) {
-							if(objectList.get(c).getType().equals(timer3.custOrder()[j].getType())) {
+						for(int j = 0; j < timer3.custOrder().size(); j++) {
+							if(objectList.get(c).getType().equals(timer3.custOrder().get(j).getType())) {
 								if(c == 0) {
 									objectList.set(c, new Object(195, 485, "CoffeeEmpty", 1.0));
-									timer3.setOrderDone(j, true);
+									timer3.custOrder().remove(j);
 								}
 								if(c == 1) {
 									objectList.set(c, new Object(255, 490, "CoffeeEmpty", 1.0));
-									timer3.setOrderDone(j, true);
+									timer3.custOrder().remove(j);
 								}
 								if(c == 2) {
 									objectList.set(c, new Object(315, 495, "CoffeeEmpty", 1.0));
-									timer3.setOrderDone(j, true);
+									timer3.custOrder().remove(j);
 								}
 							}
 						}
