@@ -455,7 +455,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 			}
 		}
 		
-		for(int i = 0; i < objectList.size(); i++) {
+		for(int i = 3; i < objectList.size(); i++) {
 			if(timer.itemIsInside(px, py)) {
 				System.out.println("intimer");
 				for(int j = 0; j < timer.custOrder().size(); j++) {
