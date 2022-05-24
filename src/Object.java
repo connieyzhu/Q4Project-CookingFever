@@ -133,20 +133,24 @@ public class Object{
 	}
 	
 	public void ovenChange() {
-		if(type.equals("VanStrawBake")) {
+		if(type.equals("VanStrawBatter")) {
 			changePicture("/imgs/VanStrawOven.png");
+			type = "VanStrawBake";
 		}
 		
-		if(type.equals("VanBlueBake")) {
+		if(type.equals("VanBlueBatter")) {
 			changePicture("/imgs/VanBlueOven.png");
+			type = "VanBlueBake";
 		}
 		
-		if(type.equals("ChoocStrawBake")) {
+		if(type.equals("ChocStrawBatter")) {
 			changePicture("/imgs/ChocStrawOven.png");
+			type = "ChocStrawBake";
 		}
 		
-		if(type.equals("ChocBlueBake")) {
+		if(type.equals("ChocBlueBatter")) {
 			changePicture("/imgs/ChocBlueOven.png");
+			type = "ChocBlueBake";
 		}
 	}
 	
@@ -180,7 +184,7 @@ public class Object{
 		
 		if(type.equals("VanBlueBakeOven")) {
 			changePicture("/imgs/VanBlueBake.png");
-			type = "VanBlueBakeOven";
+			type = "VanBlueBake";
 		}
 		
 		if(type.equals("ChocStrawBakeOven")) {
