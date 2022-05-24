@@ -344,6 +344,29 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				System.out.println("press");
 			}
 		}
+		
+		for(int i = 3; i < objectList.size(); i++) {
+			if(arg0.getX()>=915 && arg0.getX()<=1130 && arg0.getY()>=375 && arg0.getY()<=700){
+				if(objectList.get(i).getType().equals("VanStrawBakeOven")) {
+					System.out.println("ya");
+					objectList.get(i).fullBakeChange();
+				}
+				if(objectList.get(i).getType().equals("VanBlueBakeOven")) {
+					System.out.println("ya");
+					objectList.get(i).fullBakeChange(); 
+				}
+				
+				if(objectList.get(i).getType().equals("ChocStrawBakeOven")) {
+					System.out.println("ya");
+					objectList.get(i).fullBakeChange(); 
+				}
+				
+				if(objectList.get(i).getType().equals("ChocBlueBakeOven")) {
+					System.out.println("ya");
+					objectList.get(i).fullBakeChange(); 
+				}
+			}
+		}
 
 	}
 
