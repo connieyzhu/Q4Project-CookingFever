@@ -140,26 +140,26 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	}
 	
 	public void checkOven() {
-		for(int i = 2; i< objectList.size(); i++) {
+		for(int i = 3; i< objectList.size(); i++) {
 			if(i==oven1Index) {
 				if(objectList.get(i).getX() != 970 && objectList.get(i).getY() != 375) {
 					oven1 = false;
 				}else {
 					oven1 = true; 
 				}
-			}else if(i==oven1Index) {
+			}else if(i==oven2Index) {
 				if(objectList.get(i).getX() != 950 && objectList.get(i).getY() != 452) {
 					oven2 = false;
 				}else {
 					oven2 = true; 
 				}
-			}else if(i==oven1Index) {
+			}else if(i==oven3Index) {
 				if(objectList.get(i).getX() != 933 && objectList.get(i).getY() !=530) {
 					oven3 = false;
 				}else {
 					oven3 = true; 
 				}
-			}else if(i==oven1Index) {
+			}else if(i==oven4Index) {
 				if(objectList.get(i).getX() != 920 && objectList.get(i).getY() != 609) {
 					oven4 = false;
 				}else {
