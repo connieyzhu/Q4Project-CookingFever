@@ -129,7 +129,7 @@ public class Object{
 	
 	public void change() {
 		changePicture("/imgs/CoffeeFull.png");
-		filled = true; 
+		type = "CoffeeFull"; 
 	}
 	
 	public void ovenChange() {
