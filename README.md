@@ -48,7 +48,7 @@ The position class is able to track the position of each customer at all times, 
 
 The paint method is an important part of the game, as it allows all the objects to show up on the screen with the specified positions and any other parameters that the constructors entail.
 
-(img) 
+![paintMethod](https://user-images.githubusercontent.com/78383220/170363903-113d1495-26fc-4893-b2d0-2fa614b52582.PNG)
 
 ### Change Picture Method
 
