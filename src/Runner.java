@@ -116,6 +116,8 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		g.drawRect(590, 50, 280, 280);
 		g.drawRect(880, 50, 280, 280);
 		
+		g.drawRect(170, 360, 210, 200);
+		
 		//scoring
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
 		g.setColor(Color.WHITE);
@@ -158,19 +160,19 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				}else {
 					oven1 = true; 
 				}
-			}else if(i==oven1Index) {
+			}else if(i==oven2Index) {
 				if(objectList.get(i).getX() != 950 && objectList.get(i).getY() != 452) {
 					oven2= false;
 				}else {
 					oven2 = true; 
 				}
-			}else if(i==oven1Index) {
+			}else if(i==oven3Index) {
 				if(objectList.get(i).getX() != 933 && objectList.get(i).getY() !=530) {
 					oven3= false;
 				}else {
 					oven3 = true; 
 				}
-			}else if(i==oven1Index) {
+			}else if(i==oven4Index) {
 				if(objectList.get(i).getX() != 920 && objectList.get(i).getY() != 609) {
 					oven4= false;
 				}else {
@@ -212,6 +214,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	}
 	
 	public void fruitChange() {
+		if(hitBox==null) return;
 		for(int i = 0; i < objectList.size(); i++) {
 			if(hitBox.equals(objectList.get(i)) && (objectList.get(i).getType().equals("Blueberry") || objectList.get(i).getType().equals("Strawberry"))) {
 				for(Object batter:objectList) {
@@ -364,6 +367,8 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		Point mp = arg0.getPoint();
 		int px = arg0.getX();
 		int py = arg0.getY();
+		System.out.println("MouseLocation: " + px + " " + py);
+		
 		for(int i = 0; i < objectList.size(); i++) {
 			if(timer.itemIsInside(px, py)) {
 				System.out.println("intimer");
