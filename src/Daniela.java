@@ -104,6 +104,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		
 		checkSpots();
 		
+		//oven
 		g.drawRect(940, 375, 190, 75);
 		g.drawRect(940, 455, 190, 75);
 		g.drawRect(915, 535, 190, 75);
