@@ -251,59 +251,45 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		if(timer.getCoin().getCollect()) {
 			int x = timer.getCoin().getX();
 			int y = timer.getCoin().getY();
-			int numCollect = 0;
-			while(numCollect < 1) {
-				if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
-					System.out.println("collect");
-					timer.getCoin().setCollect(false);
-					total += timer.getTotal();
-					numCollect++;
-				}
+			if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
+				System.out.println("collect");
+				timer.getCoin().setCollect(false);
+				total += timer.getTotal();
 			}
 		}
 		
 		if(timer1.getCoin().getCollect()) {
 			int x = timer1.getCoin().getX();
 			int y = timer1.getCoin().getY();
-			int numCollect = 0;
-			while(numCollect < 1) {
-				if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
-					System.out.println("collect");
-					timer1.getCoin().setCollect(false);
-					total += timer1.getTotal();
-					numCollect++;
-				}
+			if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
+				System.out.println("collect");
+				timer1.getCoin().setCollect(false);
+				total += timer1.getTotal();
 			}
 		}
 		
 		if(timer2.getCoin().getCollect()) {
 			int x = timer2.getCoin().getX();
 			int y = timer2.getCoin().getY();
-			int numCollect = 0;
-			while(numCollect < 1) {
-				if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
-					System.out.println("collect");
-					timer2.getCoin().setCollect(false);
-					total += timer2.getTotal();
-					numCollect++;
-				}
+			if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
+				System.out.println("collect");
+				timer2.getCoin().setCollect(false);
+				total += timer2.getTotal();
 			}
 		}
 		
 		if(timer3.getCoin().getCollect()) {
 			int x = timer3.getCoin().getX();
 			int y = timer3.getCoin().getY();
-			int numCollect = 0;
-			while(numCollect < 1) {
-				if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
-					System.out.println("collect");
-					timer3.getCoin().setCollect(false);
-					total += timer3.getTotal();
-					numCollect++;
-				}
+			if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
+				System.out.println("collect");
+				timer3.getCoin().setCollect(false);
+				total += timer3.getTotal();
 			}
 		}
-		new CoffeeTimer(5);
+		if(arg0.getX() >= 170 && arg0.getX() <= 170+210 && arg0.getY() >= 360 && arg0.getY() <= 360 + 200) {
+			new CoffeeTimer(5);
+		}
 		
 	}
 		
@@ -378,160 +364,130 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		Point mp = arg0.getPoint();
 		int px = arg0.getX();
 		int py = arg0.getY();
-		for(int c = 0; c < 3; c++) {
-			if(objectList.get(c).getBounds().contains(mp) && objectList.get(c).getType().equals("CoffeeFull")) {
-				if(timer.itemIsInside(px, py) || timer1.itemIsInside(px, py) || timer2.itemIsInside(px, py) || timer3.itemIsInside(px, py)) {
-					if(timer.itemIsInside(px, py)) {
-						for(int j = 0; j < timer.custOrder().size(); j++) {
-							if(objectList.get(c).getType().equals(timer.custOrder().get(j).getType())) {
-								if(c == 0) {
-									objectList.set(c, new Object(195, 485, "CoffeeEmpty", 1.0));
-									timer.custOrder().remove(j);
-								}
-								if(c == 1) {
-									objectList.set(c, new Object(255, 490, "CoffeeEmpty", 1.0));
-									timer.custOrder().remove(j);
-								}
-								if(c == 2) {
-									objectList.set(c, new Object(315, 495, "CoffeeEmpty", 1.0));
-									timer.custOrder().remove(j);
-								}
-							}
-						}
-					}
-					if(timer1.itemIsInside(px, py)) {
-						for(int j = 0; j < timer1.custOrder().size(); j++) {
-							if(objectList.get(c).getType().equals(timer1.custOrder().get(j).getType())) {
-								if(c == 0) {
-									objectList.set(c, new Object(195, 485, "CoffeeEmpty", 1.0));
-									timer1.custOrder().remove(j);
-								}
-								if(c == 1) {
-									objectList.set(c, new Object(255, 490, "CoffeeEmpty", 1.0));
-									timer1.custOrder().remove(j);
-								}
-								if(c == 2) {
-									objectList.set(c, new Object(315, 495, "CoffeeEmpty", 1.0));
-									timer1.custOrder().remove(j);
-								}
-							}
-						}
-					}
-					if(timer2.itemIsInside(px, py)) {
-						for(int j = 0; j < timer2.custOrder().size(); j++) {
-							if(objectList.get(c).getType().equals(timer2.custOrder().get(j).getType())) {
-								if(c == 0) {
-									objectList.set(c, new Object(195, 485, "CoffeeEmpty", 1.0));
-									timer2.custOrder().remove(j);
-								}
-								if(c == 1) {
-									objectList.set(c, new Object(255, 490, "CoffeeEmpty", 1.0));
-									timer2.custOrder().remove(j);
-								}
-								if(c == 2) {
-									objectList.set(c, new Object(315, 495, "CoffeeEmpty", 1.0));
-									timer2.custOrder().remove(j);
-								}
-							}
-						}
-					}
-					if(timer3.itemIsInside(px, py)) {
-						for(int j = 0; j < timer3.custOrder().size(); j++) {
-							if(objectList.get(c).getType().equals(timer3.custOrder().get(j).getType())) {
-								if(c == 0) {
-									objectList.set(c, new Object(195, 485, "CoffeeEmpty", 1.0));
-									timer3.custOrder().remove(j);
-								}
-								if(c == 1) {
-									objectList.set(c, new Object(255, 490, "CoffeeEmpty", 1.0));
-									timer3.custOrder().remove(j);
-								}
-								if(c == 2) {
-									objectList.set(c, new Object(315, 495, "CoffeeEmpty", 1.0));
-									timer3.custOrder().remove(j);
-								}
-							}
-						}
-					}
-				}else {
-					if(c == 0) {
-						objectList.get(c).setPosition(195, 485);
-					}
-					if(c == 1) {
-						objectList.get(c).setPosition(255, 490);
-					}
-					if(c == 2) {
-						objectList.get(c).setPosition(315, 495);
-					}
-				}
-			}
-			if(objectList.get(c).getBounds().contains(mp) && objectList.get(c).getType().equals("CoffeeEmpty")) {
-				if(c == 0 && objectList.get(c).getX() != 195 && objectList.get(c).getY() != 485) {
-					objectList.get(c).setPosition(195, 485);
-				}
-				if(c == 1 && objectList.get(c).getX() != 255 && objectList.get(c).getY() != 490) {
-					objectList.get(c).setPosition(255, 490);
-				}
-				if(c == 2 && objectList.get(c).getX() != 315 && objectList.get(c).getY() != 495) {
-					objectList.get(c).setPosition(315, 495);
-				}
-			}
-		}
-		
-		for(int i = 3; i < objectList.size(); i++) {
+		for(int i = 0; i < objectList.size(); i++) {
 			if(timer.itemIsInside(px, py)) {
-				if(timer.itemIsInside(px, py)) {
-					System.out.println("intimer");
-					for(int j = 0; j < timer.custOrder().size(); j++) {
-						int count = 0;
-						if(objectList.get(i).getType().equals(timer.custOrder().get(j).getType())) {
-							if(count == 1) {
-								j = timer.custOrder().size();
-							}
+				System.out.println("intimer");
+				for(int j = 0; j < timer.custOrder().size(); j++) {
+					if(objectList.get(i).getType().equals("CoffeeFull") && timer.custOrder().get(j).getType().equals("CoffeeOrder")) {
+						if(i == 0) {
+							objectList.remove(0);
+							objectList.add(0, new Object(195, 485, "CoffeeEmpty", 1.0));
 							timer.custOrder().remove(j);
-							objectList.remove(i);
-							count++;
+							System.out.println("removed");
+						}else if(i == 1) {
+							objectList.remove(1);
+							objectList.add(1, new Object(255, 490, "CoffeeEmpty", 1.0));
+							timer.custOrder().remove(j);
+						}else if(i == 2) {
+							objectList.remove(2);
+							objectList.add(2, new Object(315, 495, "CoffeeEmpty", 1.0));
+							timer.custOrder().remove(j);
 						}
+						break;
 					}
-				}else if(timer1.itemIsInside(px, py)) {
-					System.out.println("intimer");
-					for(int j = 0; j < timer1.custOrder().size(); j++) {
-						int count = 0;
-						if(objectList.get(i).getType().equals(timer1.custOrder().get(j).getType())) {
-							if(count == 1) {
-								j = timer1.custOrder().size();
-							}
+					if(objectList.get(i).getType().equals(timer.custOrder().get(j).getType())) {
+						timer.custOrder().remove(j);
+						objectList.remove(i);
+						break;
+					}
+				}
+			}else if(timer1.itemIsInside(px, py)) {
+				System.out.println("intimer");
+				for(int j = 0; j < timer1.custOrder().size(); j++) {
+					if(objectList.get(i).getType().equals("CoffeeFull") && timer1.custOrder().get(j).getType().equals("CoffeeOrder")) {
+						if(i == 0) {
+							objectList.remove(0);
+							objectList.add(0, new Object(195, 485, "CoffeeEmpty", 1.0));
 							timer1.custOrder().remove(j);
-							objectList.remove(i);
-							count++;
+							System.out.println("removed");
+						}else if(i == 1) {
+							objectList.remove(1);
+							objectList.add(1, new Object(255, 490, "CoffeeEmpty", 1.0));
+							timer1.custOrder().remove(j);
+						}else if(i == 2) {
+							objectList.remove(2);
+							objectList.add(2, new Object(315, 495, "CoffeeEmpty", 1.0));
+							timer1.custOrder().remove(j);
 						}
+						break;
 					}
-				}else if(timer2.itemIsInside(px, py)) {
-					System.out.println("intimer");
-					for(int j = 0; j < timer2.custOrder().size(); j++) {
-						int count = 0;
-						if(objectList.get(i).getType().equals(timer2.custOrder().get(j).getType())) {
-							if(count == 1) {
-								j = timer2.custOrder().size();
-							}
+					if(objectList.get(i).getType().equals(timer1.custOrder().get(j).getType())) {
+						timer1.custOrder().remove(j);
+						objectList.remove(i);
+						break;
+					}
+				}
+			}else if(timer2.itemIsInside(px, py)) {
+				System.out.println("intimer");
+				for(int j = 0; j < timer2.custOrder().size(); j++) {
+					if(objectList.get(i).getType().equals("CoffeeFull") && timer2.custOrder().get(j).getType().equals("CoffeeOrder")) {
+						if(i == 0) {
+							objectList.remove(0);
+							objectList.add(0, new Object(195, 485, "CoffeeEmpty", 1.0));
 							timer2.custOrder().remove(j);
-							objectList.remove(i);
-							count++;
+							System.out.println("removed");
+						}else if(i == 1) {
+							objectList.remove(1);
+							objectList.add(1, new Object(255, 490, "CoffeeEmpty", 1.0));
+							timer2.custOrder().remove(j);
+						}else if(i == 2) {
+							objectList.remove(2);
+							objectList.add(2, new Object(315, 495, "CoffeeEmpty", 1.0));
+							timer2.custOrder().remove(j);
 						}
+						break;
 					}
-				}else if(timer3.itemIsInside(px, py)) {
-					System.out.println("intimer");
-					for(int j = 0; j < timer3.custOrder().size(); j++) {
-						int count = 0;
-						if(objectList.get(i).getType().equals(timer3.custOrder().get(j).getType())) {
-							if(count == 1) {
-								j = timer3.custOrder().size();
-							}
+					if(objectList.get(i).getType().equals(timer2.custOrder().get(j).getType())) {
+						timer2.custOrder().remove(j);
+						objectList.remove(i);
+						break;
+					}
+				}
+			}else if(timer3.itemIsInside(px, py)) {
+				System.out.println("intimer");
+				for(int j = 0; j < timer3.custOrder().size(); j++) {
+					if(objectList.get(i).getType().equals("CoffeeFull") && timer3.custOrder().get(j).getType().equals("CoffeeOrder")) {
+						if(i == 0) {
+							objectList.remove(0);
+							objectList.add(0, new Object(195, 485, "CoffeeEmpty", 1.0));
 							timer3.custOrder().remove(j);
-							objectList.remove(i);
-							count++;
+							System.out.println("removed");
+						}else if(i == 1) {
+							objectList.remove(1);
+							objectList.add(1, new Object(255, 490, "CoffeeEmpty", 1.0));
+							timer3.custOrder().remove(j);
+						}else if(i == 2) {
+							objectList.remove(2);
+							objectList.add(2, new Object(315, 495, "CoffeeEmpty", 1.0));
+							timer3.custOrder().remove(j);
 						}
+						break;
 					}
+					if(objectList.get(i).getType().equals(timer3.custOrder().get(j).getType())) {
+						timer3.custOrder().remove(j);
+						objectList.remove(i);
+						break;
+					}
+				}
+			}else if(objectList.get(i).getType().equals("CoffeeFull")) {
+				if(i == 0) {
+					objectList.get(i).setPosition(195, 485);
+				}
+				if(i == 1) {
+					objectList.get(i).setPosition(255, 490);
+				}
+				if(i == 2) {
+					objectList.get(i).setPosition(315, 495);
+				}
+			}else if(objectList.get(i).getType().equals("CoffeeEmpty")) {
+				if(i == 0 && objectList.get(i).getX() != 195 && objectList.get(i).getY() != 485) {
+					objectList.get(i).setPosition(195, 485);
+				}
+				if(i == 1 && objectList.get(i).getX() != 255 && objectList.get(i).getY() != 490) {
+					objectList.get(i).setPosition(255, 490);
+				}
+				if(i == 2 && objectList.get(i).getX() != 315 && objectList.get(i).getY() != 495) {
+					objectList.get(i).setPosition(315, 495);
 				}
 			}else if (objectList.get(i).getBounds().contains(mp)) {
 				if(px>=500 && px<= 780 && py >= 390 && py <= 540 && (!spot1 || !spot2 || !spot3 || !spot4)) {
