@@ -32,10 +32,10 @@ public class Position {
 	String[] names = {"Daphne", "Linda", "Francis", "Kyle"};
 	boolean[] available = {true, true, true, true};
 	boolean[] availableWait = {true, true, true, true};
-	/*String[] orderItems = {"ChocBlueBake", "ChocStrawBake", "VanBlueBake",
-							"VanStrawBake", "CoffeeOrder"};*/
-	String[] orderItems = {"ChocBlueBatter", "ChocStrawBatter", "VanBlueBatter",
-			"VanStrawBatter", "CoffeeOrder"};
+	String[] orderItems = {"ChocBlueBake", "ChocStrawBake", "VanBlueBake",
+							"VanStrawBake", "CoffeeOrder"};
+	/*String[] orderItems = {"ChocBlueBatter", "ChocStrawBatter", "VanBlueBatter",
+			"VanStrawBatter", "CoffeeOrder"};*/
 	String item;
 	
 	
