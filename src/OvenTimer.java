@@ -16,5 +16,9 @@ public class OvenTimer {
             timer.cancel(); //Terminate the timer thread
         }
     }
+	
+	public static void main(String args[]) {
+     
+    }
 
 }
