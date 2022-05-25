@@ -54,7 +54,7 @@ The paint method is an important part of the game, as it allows all the objects 
 
 The change picture method is located in every class, and it allows the images of the objects to change when a certain action has been completed, usually when a timer runs out, such as on the coffee machine or oven. 
 
-(img)
+![changePictureMethod](https://user-images.githubusercontent.com/78383220/170356743-baf2526e-8fe3-4b62-b31f-6903e8f27346.PNG)
 
 ## Help
 
