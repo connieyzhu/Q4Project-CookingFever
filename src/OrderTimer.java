@@ -147,6 +147,33 @@ public class OrderTimer {
 	    	cust.setDone(x);
 	    }
 	    
+	    public boolean custDone() {
+	    	return cust.getReturnDone();
+	    }
+	    
+	    public void restartCount(int num) {
+	    	cust.setCount(num);
+	    }
+	    
+	    public void setCustVx(int num) {
+	    	cust.setVx(num);
+	    }
+	    
+	    public void setSec() {
+	    	if(orders.size() == 1) {
+				if(orders.get(0).getType().equals("CoffeeOrder")) {
+					secondsAmt = 200;
+				}
+				secondsAmt = 350;
+			}
+			if(orders.size() == 2) {
+				secondsAmt = 600;
+			}
+			if(orders.size() == 3) {
+				secondsAmt = 900;
+			}
+	    }
+	    
 	    public void generateNewOrder() {
 	    	int itemX = x-75;
 			int itemY = y+5;
@@ -167,6 +194,7 @@ public class OrderTimer {
 				itemX = x-75;
 				itemY += 50;
 			}
+			setSec();
 	    }
 	    
 	    public Coin getCoin() {
