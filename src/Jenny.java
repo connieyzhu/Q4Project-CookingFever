@@ -73,7 +73,9 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	
 	int mouseY = MouseInfo.getPointerInfo().getLocation().y; 
 	int mouseX = MouseInfo.getPointerInfo().getLocation().x;
-	private boolean b; 
+	private boolean b;
+	private boolean restart = true; 
+	private boolean playAgain = false;
 	int total = 0;
 	 
 	public void paint(Graphics g) {
@@ -122,6 +124,43 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		g.setFont(new Font("Serif", Font.PLAIN, 30));
 		g.setColor(Color.WHITE);
 		g.drawString(total + "", 600, 47);
+		
+		if(timer.custDone() && timer1.custDone() && timer2.custDone() && timer3.custDone()) {
+			playAgain = true;
+		}
+		//start button
+			if(restart) {
+				playAgain = false;
+				g.fillRect(1165, 20, 100, 40);
+				g.setFont(new Font("Serif", Font.PLAIN, 30));
+				g.setColor(Color.black);
+				g.drawString("Start", 1185, 50);
+					
+				g.setColor(Color.WHITE);
+				g.fillRect(1165, 80, 100, 40);
+				g.setFont(new Font("Serif", Font.PLAIN, 30));
+				g.setColor(Color.black);
+				g.drawString("Tutorial", 1167, 110);
+				
+				total = 0;
+				timer.restartCount(0);
+				timer1.restartCount(0);
+				timer2.restartCount(0);
+				timer3.restartCount(0);
+					
+			}
+			else if(playAgain) {
+				g.setColor(Color.PINK);
+				g.fillRect(0, 0, 1280, 750);
+				
+				g.setColor(Color.WHITE);
+				g.setFont(new Font("Serif", Font.PLAIN, 100));
+				g.drawString("Game Over", 430, 300);
+				
+				g.setColor(Color.black);
+				g.setFont(new Font("Serif", Font.PLAIN, 40));
+				g.drawString("Press Space to Play Again", 460, 370);
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -217,6 +256,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	}
 	
 	public void fruitChange() {
+		if(hitBox == null) return;
 		for(int i = 0; i < objectList.size(); i++) {
 			if(hitBox.equals(objectList.get(i)) && (objectList.get(i).getType().equals("Blueberry") || objectList.get(i).getType().equals("Strawberry"))) {
 				for(Object batter:objectList) {
@@ -252,7 +292,18 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	
 	//@Override
 public void mouseClicked(MouseEvent arg0) {
-		
+		//click start button - g.fillRect(1165, 20, 100, 40);
+		if(restart) {
+			if(arg0.getX() >= 1165 && arg0.getX() <= 1268 && arg0.getY() >= 20 && arg0.getY() <= 85) {
+				System.out.println("game starting");
+				timer.setCustVx(1);
+				timer1.setCustVx(1);
+				timer2.setCustVx(1);
+				timer3.setCustVx(1);
+				restart = false;
+			}
+		}
+	
 		if(timer.getCoin().getCollect()) {
 			int x = timer.getCoin().getX();
 			int y = timer.getCoin().getY();
@@ -656,7 +707,10 @@ public void mouseClicked(MouseEvent arg0) {
 	//@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		if(arg0.getKeyCode() == 32 && playAgain) {
+			playAgain = false;
+			restart = true;
+		}
 	}
 
 	//@Override
