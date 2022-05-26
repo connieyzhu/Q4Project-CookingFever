@@ -12,15 +12,17 @@ import java.net.URL;
 import java.awt.Image;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ThreadLocalRandom;
  
 
 public class Customer {
 	private double x1, x, y, originalX1; //position
 	private final int sec = 1600;
-	private double vx = 1;
+	private double vx;
 	private double leavingVx = 0.5;
+	private int count, numReturns;
 	private String name;
-	private boolean ready, done;
+	private boolean ready, done, returnDone;
 	private Image img; 	
 	private AffineTransform tx; 
 	Position names;
@@ -31,9 +33,13 @@ public class Customer {
 		System.out.println("Pos " + x1);
 		this.x = x; 
 		this.y = y;
+		vx = 0;
+		count = 0;
+		numReturns = ThreadLocalRandom.current().nextInt(4, 7);//4, 7
 		originalX1 = x1;
 		ready = false;
 		done = false;
+		returnDone = false;
 		name = custName;
 		names = new Position("name");
 		if(name == "Daphne") {
@@ -94,6 +100,18 @@ public class Customer {
 	public void setDone(boolean x) {
 		done = x;
 	}
+	
+	public void setCount(int num) {
+		count = num;
+	}
+	
+	public void setVx(int num) {
+		vx = num;
+	}
+	
+	public boolean getReturnDone() {
+		return returnDone;
+	}
 
 	/* update the picture variable location */
 	private void update() {
@@ -127,10 +145,15 @@ public class Customer {
 	
 	class RemindTask extends TimerTask {
 	    public void run() {
-	    	if(x1 >= 2000){
+	    	if(count == numReturns) {
+	    		x1 = originalX1;
+	    		vx = 0;
+	    		returnDone = true;
+	    	}else if(x1 >= 2500){
 	    		 done = false;
 	    		 setName(names.getName());
 	    		 x1 = originalX1;
+	    		 count++;
 	    		 timer.schedule(new RemindTask(), sec);
 	    	}else if(done){ 
 	    		x1 += leavingVx;
@@ -143,6 +166,7 @@ public class Customer {
 	    	}else if(x1 < x){
 	    		x1 += vx;
 				update();
+				returnDone = false;
 				timer.schedule(new RemindTask(), sec);
 			}
 	    }
