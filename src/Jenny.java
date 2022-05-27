@@ -147,6 +147,8 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		}
 		//start button
 			if(restart) {
+				System.out.println("list size " + objectList.size());
+				
 				playAgain = false;
 				timer.reset(false);
 				timer1.reset(false);
@@ -222,6 +224,13 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 					
 			}
 			else if(playAgain) {
+				objectList = new ArrayList<Object>();
+				/*objectList.add(new Object(195, 485, "CoffeeEmpty", 1.0));
+				objectList.add(new Object(255, 490, "CoffeeEmpty", 1.0));
+				objectList.add(new Object(315, 495, "CoffeeEmpty", 1.0));*/
+				
+				System.out.println("list size " + objectList.size());
+				
 				g.setColor(Color.PINK);
 				g.fillRect(0, 0, 1280, 750);
 				
@@ -230,12 +239,12 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				g.drawString("Press Space to Play Again", 460, 370);
 				if(count == 3) {
 					g.setColor(Color.WHITE);
-					g.setFont(new Font("Serif", Font.PLAIN, 100));
-					g.drawString("Nice Try: Game Over", 430, 300);
+					g.setFont(new Font("Serif", Font.PLAIN, 90));
+					g.drawString("Nice Try: Game Over", 250, 300);
 				}else {
 					g.setColor(Color.WHITE);
-					g.setFont(new Font("Serif", Font.PLAIN, 100));
-					g.drawString("Success! Earned " + total + " coins!", 430, 300);
+					g.setFont(new Font("Serif", Font.PLAIN, 90));
+					g.drawString("Success! Earned " + total + " coins!", 250, 300);
 				}
 		}
 	}
