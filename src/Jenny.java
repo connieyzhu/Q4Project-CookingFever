@@ -76,7 +76,13 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	private boolean b;
 	private boolean restart = true; 
 	private boolean playAgain = false;
+	private boolean tutorial = false;
 	int total = 0;
+	public static int count = 0; 
+	
+	public static void addCount(int num) {
+		count += num;
+	}
 	 
 	public void paint(Graphics g) {
 		cafeBg.paint(g);
@@ -121,28 +127,90 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		g.drawRect(880, 50, 280, 280);
 		
 		//scoring
+		g.setColor(Color.black);
 		g.setFont(new Font("Serif", Font.PLAIN, 30));
+		g.drawString(count + "/3 customers lost", 10, 47);
 		g.setColor(Color.WHITE);
 		g.drawString(total + "", 600, 47);
 		
-		if(timer.custDone() && timer1.custDone() && timer2.custDone() && timer3.custDone()) {
+		if((timer.custDone() && timer1.custDone() && timer2.custDone() && timer3.custDone()) || count == 3) {
+			timer.reset(true);
+			timer1.reset(true);
+			timer2.reset(true);
+			timer3.reset(true);
+			OrderTimer.timerReset(true);
 			playAgain = true;
 		}
 		//start button
 			if(restart) {
 				playAgain = false;
+				timer.reset(false);
+				timer1.reset(false);
+				timer2.reset(false);
+				timer3.reset(false);
+				timer.setReturnDoneCust(false);
+				timer1.setReturnDoneCust(false);
+				timer2.setReturnDoneCust(false);
+				timer3.setReturnDoneCust(false);
+				OrderTimer.timerReset(false);
 				g.fillRect(1165, 20, 100, 40);
 				g.setFont(new Font("Serif", Font.PLAIN, 30));
 				g.setColor(Color.black);
 				g.drawString("Start", 1185, 50);
+				
+				if(!tutorial) {
+					g.setColor(Color.WHITE);
+					g.fillRect(1165, 80, 100, 40);
+					g.setFont(new Font("Serif", Font.PLAIN, 30));
+					g.setColor(Color.black);
+					g.drawString("Tutorial", 1167, 110);
+				}
+				
+				if(tutorial) {
+					g.setColor(Color.WHITE);
+					g.fillRect(10, 350, 140, 70); //coffee
+					g.fillRect(360, 555, 140, 70); //cake batter
+					g.fillRect(1150, 350, 120, 90); //bake cake
+					g.fillRect(200, 620, 110, 70); // trash
+					g.fillRect(400, 240, 220, 130); // customers
+					g.fillRect(300, 15, 180, 90); //lost customer count
 					
-				g.setColor(Color.WHITE);
-				g.fillRect(1165, 80, 100, 40);
-				g.setFont(new Font("Serif", Font.PLAIN, 30));
-				g.setColor(Color.black);
-				g.drawString("Tutorial", 1167, 110);
+					g.setFont(new Font("Serif", Font.PLAIN, 15));
+					
+					g.setColor(Color.black);
+					g.drawString("1: Customers ", 410, 260);
+					g.drawString("complete requested order ", 410, 280);
+					g.drawString("within the time frame", 410, 300);
+					g.drawString("by dragging items to them", 410, 320);
+					g.drawString("and click on earned money", 410, 340);
+					g.drawString("from completing their orders", 410, 360);
+					
+					g.drawString("2: Coffee ", 20, 370);
+					g.drawString("click on machine", 20, 390);
+					g.drawString("wait 5 seconds", 20, 410);
+					
+					g.drawString("3: Cake Batter ", 365, 575);
+					g.drawString("drag batter & fruit", 365, 595);
+					g.drawString("onto tray", 365, 615);
+					
+					g.drawString("4: Bake Cake ", 1155, 370);
+					g.drawString("drag batter to ", 1155, 390);
+					g.drawString("available oven ", 1155, 410);
+					g.drawString("wait 5 seconds", 1155, 430);
+					
+					g.drawString("5: Trash Can ", 210, 640);
+					g.drawString("drag items ", 210, 660);
+					g.drawString("to dispose", 210, 680);
+					
+					g.drawString("6: Satisfied Customers ", 310, 35);
+					g.drawString("If 3 customers leave", 310, 55);
+					g.drawString("when time runs out, ", 310, 75);
+					g.drawString("the game is over", 310, 95);
+					
+				}
 				
 				total = 0;
+				count = 0;
 				timer.restartCount(0);
 				timer1.restartCount(0);
 				timer2.restartCount(0);
@@ -153,13 +221,18 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				g.setColor(Color.PINK);
 				g.fillRect(0, 0, 1280, 750);
 				
-				g.setColor(Color.WHITE);
-				g.setFont(new Font("Serif", Font.PLAIN, 100));
-				g.drawString("Game Over", 430, 300);
-				
 				g.setColor(Color.black);
 				g.setFont(new Font("Serif", Font.PLAIN, 40));
 				g.drawString("Press Space to Play Again", 460, 370);
+				if(count == 3) {
+					g.setColor(Color.WHITE);
+					g.setFont(new Font("Serif", Font.PLAIN, 100));
+					g.drawString("Nice Try: Game Over", 430, 300);
+				}else {
+					g.setColor(Color.WHITE);
+					g.setFont(new Font("Serif", Font.PLAIN, 100));
+					g.drawString("Success! Earned " + total + " coins!", 430, 300);
+				}
 		}
 	}
 	
@@ -300,7 +373,11 @@ public void mouseClicked(MouseEvent arg0) {
 				timer1.setCustVx(1);
 				timer2.setCustVx(1);
 				timer3.setCustVx(1);
+				tutorial = false;
 				restart = false;
+			}else if(arg0.getX() >= 1165 && arg0.getX() <= 1268 && arg0.getY() >= 80 && arg0.getY() <= 145) { 
+				//	g.fillRect(1165, 80, 100, 40);
+				tutorial = true;
 			}
 		}
 	
@@ -344,39 +421,7 @@ public void mouseClicked(MouseEvent arg0) {
 			}
 		}
 		new CoffeeTimer(5);
-		
-//		if(arg0.getX()>=170 && arg0.getX()<= 390 && arg0.getY() >= 365 && arg0.getY() <= 600){
-//			System.out.print("hi");
-//			try {
-//				TimeUnit.SECONDS.sleep(3);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			//coffee1.change();
-//			//coffee2.change();
-//			//coffee3.change();
-//		}
-//		/*if(arg0.getX()>=170 && arg0.getX()<= 390 && arg0.getY() >= 365 && arg0.getY() <= 600){
-//			System.out.print("hi");
-//			try {
-//				TimeUnit.SECONDS.sleep(3);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			//coffee1.change();
-//			//coffee2.change();
-//			//coffee3.change();
-//		}
-//		
-//		if(arg0.getX()>=505 && arg0.getX()<= 635 && arg0.getY() >= 620 && arg0.getY() <= 705){
-//			System.out.println("choc");
-//		}
-//		if(arg0.getX()>=chocBatter.getX() && arg0.getX()<= chocBatter.getX() + 135 && arg0.getY() >= chocBatter.getY() && arg0.getY() <= chocBatter.getY() + 105){
-//			System.out.println("yes");
-//		}
-		
+	
 	}
 		
 	
@@ -490,42 +535,6 @@ public void mouseClicked(MouseEvent arg0) {
 			}else if (objectList.get(i).getBounds().contains(mp)) {
 				if(px>=500 && px<= 780 && py >= 390 && py <= 540 && (!spot1 || !spot2 || !spot3 || !spot4)) {
 					System.out.println("mous " + px + " " + py);
-					/*if(px>500 && px< 640 && py > 390 && py < 460) {
-						if(!spot1) {
-							objectList.get(i).setPosition(515, 370);
-							spot1 = true;
-							spot1Index = i;
-							objectList.get(i).setInside(true, 515, 370);
-							System.out.println("spot1 filled");
-						}
-					}
-					else if(px>500 && px< 640 && py >460 && py < 540) {
-						if(!spot2) {
-							objectList.get(i).setPosition(505, 440);
-							spot2 = true;
-							spot2Index = i;
-							objectList.get(i).setInside(true, 505, 440);
-							System.out.println("spot2 filled");
-						}
-					}
-					else if(px>640 && px<780 && py > 390 && py < 460) {
-						if(!spot3) {
-							System.out.println("spot3 filled");
-							objectList.get(i).setPosition(641, 370);
-							spot3 = true;
-							spot3Index = i;
-							objectList.get(i).setInside(true, 641, 370);
-						}
-					}
-					else if(px>640 && px<780 && py > 460 && py < 540) {
-						if(!spot4) {
-							objectList.get(i).setPosition(645, 440);
-							spot4 = true;
-							spot4Index = i;
-							objectList.get(i).setInside(true, 645, 440);
-							System.out.println("spot4 filled");
-						}
-					}*/
 					if(!spot1) {
 						objectList.get(i).setPosition(515, 370);
 						spot1 = true;
@@ -550,7 +559,7 @@ public void mouseClicked(MouseEvent arg0) {
 						spot4Index = i;
 						objectList.get(i).setInside(true, 645, 440);
 						System.out.println("spot4 filled");
-					}
+					} 
 				}else if(px>=915 && px<= 1130 && py >= 375 && py <= 700 && (!oven1||!oven2||!oven3||!oven4)) {
 					System.out.println("gotoven");
 					if(!oven1) {
@@ -595,98 +604,6 @@ public void mouseClicked(MouseEvent arg0) {
 				}
 			}
 		}
-		
-		/*boolean[] orderReceived = new boolean[timer.custOrder().length];
-		for(int i = 0; i < orderReceived.length; i++) {
-    		orderReceived[i] = false;
-    	}
-		int num = 0;
-		for(int j = 0; j < objectList.size(); j++) {
-			if (objectList.get(j).getBounds().contains(mp)) {
-				System.out.println(objectList.get(j).getType());
-				if(timer.itemIsInside(objectList.get(j).getX(), objectList.get(j).getY())) {
-					for(int i = 0; i < timer.custOrder().length; i++) {
-						if(objectList.get(j).equals(timer.custOrder()[i])) {
-							orderReceived[i] = true;
-							num++;
-							if(num == timer.custOrder().length) {
-								timer.setOrderDone(true);
-							}
-						}
-					}
-				}
-			}
-		}*/
-		/*int num = 0;
-		if(timer.itemIsInside(arg0.getX(), arg0.getY())) {
-			System.out.println("in box here");
-			for(int j = 0; j < objectList.size(); j++) {
-				if (objectList.get(j).getBounds().contains(mp)) {
-					for(int i = 0; i < timer.custOrder().length; i++) {
-						if(objectList.get(j).equals(timer.custOrder()[i])) {
-							orderReceived[i] = true;
-							num++;
-							if(num == timer.custOrder().length) {
-								timer.setOrderDone(true);
-							}
-						}
-					}
-				}
-			}
-		}*/
-		
-		/*for(int j = 0; j < objectList.size(); j++) {
-			if (objectList.get(j).getBounds().contains(mp)) {
-				System.out.println("object found");
-				if(timer.itemIsInside(arg0.getX(), arg0.getY())) {
-					for(int i = 0; i < timer.custOrder().length; i++) {
-						if(objectList.get(j).getType().equals(timer.custOrder()[i].getType())) {
-							timer.setOrderReceived(i, true);
-							i = timer.custOrder().length;
-						}
-					}
-				}
-			}
-		}*/
-		
-		/*for(int i = 0; i < objectList.size(); i++) {
-			if (objectList.get(i).getBounds().contains(mp)) {
-				if(px>=940 && px<= 1130 && py >= 375 && py <= 790) {
-					if(px>=940 && px<= 1130 && py >= 375 && py <= 450 && !oven1) {
-						objectList.get(i).setPosition(950, 375);
-						oven1 = true;
-						objectList.get(i).setInside(true, 950, 375);
-						objectList.get(i).ovenChange(); 
-					}
-					if(px>=940 && px<= 1130 && py >= 455 && py <= 530 && !oven2) {
-						objectList.get(i).setPosition(945, 455);
-						oven2 = true;
-						objectList.get(i).setInside(true, 945, 455);
-						objectList.get(i).ovenChange(); 
-					}
-					if(px>=915 && px<= 1105 && py >= 535 && py <= 710 && !oven3) {
-						objectList.get(i).setPosition(915, 535);
-						oven3 = true;
-						objectList.get(i).setInside(true, 915, 535);
-						objectList.get(i).ovenChange(); 
-					}
-					if(px>=915 && px<= 1105 && py >= 615 && py <= 790 && !oven4) {
-						objectList.get(i).setPosition(915, 615);
-						oven4 = true;
-						objectList.get(i).setInside(true, 915, 615);
-						objectList.get(i).ovenChange(); 
-					}
-				}else if(objectList.get(i).isInside()) {
-					objectList.get(i).setPosition(objectList.get(i).getInsideX(), objectList.get(i).getInsideY());
-				}else {
-					objectList.remove(i);
-				}
-			}
-		}*/
-//		g.drawRect(500, 390, 140, 70);
-//		g.drawRect(500, 460, 140, 80);
-//		g.drawRect(640, 390, 140, 70);
-//		g.drawRect(640, 460, 140, 80);
 	}
 
 	//@Override
