@@ -31,6 +31,7 @@ public class OrderTimer {
 	Coin coin;
 	private int totalMoney;
 	private int numX1, numX2, size, oldAmt;
+	private static boolean timerReset = false;
 		
 	    public OrderTimer(int x, int y, int seconds, int wait) {
 	    	personX = x-10;
@@ -115,7 +116,7 @@ public class OrderTimer {
 			//these are the 2 lines of code needed draw an image on the screen
 			Graphics2D g2 = (Graphics2D) g;
 			
-			if(cust.getReady() && orders.size() != 0) {
+			if(cust.getReady() && orders.size() != 0 && !timerReset) {
 				g.setColor(Color.gray);
 				g.fillRect(gx, gy, tx, gy+90);
 				
@@ -159,6 +160,18 @@ public class OrderTimer {
 	    	cust.setVx(num);
 	    }
 	    
+	    public void reset(boolean num) {
+	    	cust.setReset(num);
+	    }
+	    
+	    public void setReturnDoneCust(boolean x) {
+	    	cust.setReturnDone(x);
+	    }
+	    
+	    public static void timerReset(boolean x) {
+	    	timerReset = x;
+	    }
+	    
 	    public void setSec() {
 	    	if(orders.size() == 1) {
 				if(orders.get(0).getType().equals("CoffeeOrder")) {
@@ -175,6 +188,7 @@ public class OrderTimer {
 	    }
 	    
 	    public void generateNewOrder() {
+	    	orders = new ArrayList <Object>();
 	    	int itemX = x-75;
 			int itemY = y+5;
 			totalMoney = 0;
@@ -222,22 +236,25 @@ public class OrderTimer {
 	    public ArrayList<Object> custOrder() {
 	    	return orders;
 	    }
-	   
+	    
 	    class RemindTask extends TimerTask {
 	        public void run() {
-	        	if(orders.size() == 0) {
+	        	if(orders.size() == 0 || timerReset) {
 	        		done(true);
 	        		y = ogT;
 	        		ty = ogTy;
 	        		count = 0;
-	        		coin.setCollect(true);
-	        		oldAmt = totalMoney;
+	        		if(!timerReset) {
+	        			coin.setCollect(true);
+		        		oldAmt = totalMoney;
+	        		}
 	        		generateNewOrder();
 	        	}else if(y == gy+165) {
 	        		done(true);
 	        		y = ogT;
 	        		ty = ogTy;
 	        		count = 0;
+	        		Runner.addCount(1);
 	        		coin.setCollect(false);
 	        		generateNewOrder();
 	        	}else {
