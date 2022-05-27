@@ -140,8 +140,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		}
 		//start button
 			if(restart) {
-				System.out.println("list size " + objectList.size());
-				
 				playAgain = false;
 				timer.reset(false);
 				timer1.reset(false);
