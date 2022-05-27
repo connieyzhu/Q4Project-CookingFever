@@ -172,12 +172,12 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				
 				if(tutorial) {
 					g.setColor(Color.WHITE);
-					g.fillRect(10, 350, 140, 70); //coffee
-					g.fillRect(360, 555, 140, 70); //cake batter
-					g.fillRect(1150, 350, 120, 90); //bake cake
-					g.fillRect(200, 620, 110, 70); // trash
-					g.fillRect(400, 240, 220, 130); // customers
-					g.fillRect(300, 15, 180, 90); //lost customer count
+					g.fillRect(10, 350, 110, 70); //coffee
+					g.fillRect(360, 555, 115, 70); //cake batter
+					g.fillRect(1150, 350, 100, 90); //bake cake
+					g.fillRect(200, 620, 90, 70); // trash
+					g.fillRect(400, 240, 180, 130); // customers
+					g.fillRect(300, 15, 150, 90); //lost customer count
 					
 					g.setFont(new Font("Serif", Font.PLAIN, 15));
 					
