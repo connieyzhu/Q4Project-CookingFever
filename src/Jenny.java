@@ -676,3 +676,883 @@ public void mouseClicked(MouseEvent arg0) {
 	}
 
 }
+
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.geom.AffineTransform;
+import java.net.URL;
+import java.util.Random;
+
+public class Object{
+	private int x,y; 
+	private Image img;
+	private String type;
+	private AffineTransform tx;
+	boolean filled = false; 
+	private Rectangle rectangle;
+	private boolean insideSquares;
+	private int insideX, insideY;
+	private double scale;
+	
+
+	public Object(int x, int y, String s, double setScale){
+		this.x = x;
+		this.y = y; 
+		type = s;
+		scale = setScale;
+		if(type.equals("Blueberry")) {
+			img = getImage("/imgs/Blueberry.png");
+			rectangle = new Rectangle(x, y, 100, 55);
+		}
+		if(type.equals("ChocBlueBake")) {
+			img = getImage("/imgs/ChocBlueBake.png");
+			rectangle = new Rectangle(x, y, 125, 85);
+		}
+		if(type.equals("ChocBlueBatter")) {
+			img = getImage("/imgs/ChocBlueUnbake.png");
+			rectangle = new Rectangle(x, y, 125, 85);
+		}
+		if(type.equals("ChocStrawBake")) {
+			img = getImage("/imgs/ChocStrawBake.png");
+			rectangle = new Rectangle(x, y, 125, 85);
+		}
+		if(type.equals("ChocStrawBatter")) {
+			img = getImage("/imgs/ChocStrawUnbake.png");
+			rectangle = new Rectangle(x, y, 125, 85);
+		}
+		if(type.equals("ChocBatter")) {
+			img = getImage("/imgs/ChocUnbake.png");
+			rectangle = new Rectangle(x, y, 125, 85);
+		}
+		if(type.equals("Coffee")) {
+			img = getImage("/imgs/CoffeeEmpty.png");
+			rectangle = new Rectangle(x, y, 58, 60);
+		}
+		if(type.equals("Strawberry")) {
+			img = getImage("/imgs/Strawberry.png");
+			rectangle = new Rectangle(x, y, 105, 60);
+		}
+		if(type.equals("VanBlueBake")) {
+			img = getImage("/imgs/VanBlueBake.png");
+			rectangle = new Rectangle(x, y, 125, 85);
+		}
+		if(type.equals("VanBlueBatter")) {
+			img = getImage("/imgs/VanBlueUnbake.png");
+			rectangle = new Rectangle(x, y, 125, 85);
+		}
+		if(type.equals("VanStrawBake")) {
+			img = getImage("/imgs/VanStrawBake.png");
+			rectangle = new Rectangle(x, y, 125, 85);
+		}
+		if(type.equals("VanStrawBatter")) {
+			img = getImage("/imgs/VanStrawUnbake.png");
+			rectangle = new Rectangle(x, y, 125, 85);
+		}
+		if(type.equals("VanBatter")) {
+			img = getImage("/imgs/VanUnbake.png");
+			rectangle = new Rectangle(x, y, 125, 85);
+		}
+		if(type.equals("CoffeeOrder")) {
+			img = getImage("/imgs/CoffeeFull.png");
+			rectangle = new Rectangle(x + 32, y, 125, 95);
+		}
+		
+		tx = AffineTransform.getTranslateInstance(x, y );
+		init(x, y);
+	}
+	
+	public void paint(Graphics g) {
+		//these are the 2 lines of code needed draw an image on the screen
+		Graphics2D g2 = (Graphics2D) g;
+		
+		//call update to update the actually picture location
+		update();
+		
+		g2.drawImage(img, tx, null);
+	
+	}
+
+	private void update() {
+		tx.setToTranslation(x, y);
+
+		//to scale it up or down to change size, .5 means 50% of original file
+		tx.scale(scale, scale); //previously 1.0
+	}
+	
+	private void init(double a, double b) {
+		tx.setToTranslation(a, b);
+		tx.scale(scale, scale); //previously 0.04
+	}
+	
+	private Image getImage(String path) {
+		Image tempImage = null;
+		try {
+			URL imageURL = Background.class.getResource(path);
+			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return tempImage;
+	}
+	
+	public void changePicture(String newFileName) {
+		img = getImage(newFileName);
+		init(x, y);
+		
+	}
+	
+	public void change() {
+		changePicture("/imgs/CoffeeFull.png");
+		filled = true; 
+	}
+	
+	public void ovenChange() {
+		if(type.equals("VanStrawBatter")) {
+			changePicture("/imgs/VanStrawOven.png");
+			type = "VanStrawBake";
+		}
+		
+		if(type.equals("VanBlueBatter")) {
+			changePicture("/imgs/VanBlueOven.png");
+			type = "VanBlueBake";
+		}
+		
+		if(type.equals("ChocStrawBatter")) {
+			changePicture("/imgs/ChocStrawOven.png");
+			type = "ChocStrawBake";
+		}
+		
+		if(type.equals("ChocBlueBatter")) {
+			changePicture("/imgs/ChocBlueOven.png");
+			type = "ChocBlueBake";
+		}
+	}
+	
+	public void bakeChange() {
+		if(type.equals("VanStrawBake")) {
+			changePicture("/imgs/VanStrawBakeOven.png");
+			type = "VanStrawBakeOven"; 
+		}
+		
+		if(type.equals("VanBlueBake")) {
+			changePicture("/imgs/VanBlueBakeOven.png");
+			type = "VanBlueBakeOven";
+		}
+		
+		if(type.equals("ChocStrawBake")) {
+			changePicture("/imgs/ChocStrawBakeOven.png");
+			type = "ChocStrawBakeOven";
+		}
+		
+		if(type.equals("ChocBlueBake")) {
+			changePicture("/imgs/ChocBlueBakeOven.png");
+			type = "ChocBlueBakeOven";
+		}
+	}
+	
+	public void fullBakeChange() {
+		if(type.equals("VanStrawBakeOven")) {
+			changePicture("/imgs/VanStrawBake.png");
+			type = "VanStrawBake"; 
+		}
+		
+		if(type.equals("VanBlueBakeOven")) {
+			changePicture("/imgs/VanBlueBake.png");
+			type = "VanBlueBake";
+		}
+		
+		if(type.equals("ChocStrawBakeOven")) {
+			changePicture("/imgs/ChocStrawBake.png");
+			type = "ChocStrawBake";
+		}
+		
+		if(type.equals("ChocBlueBakeOven")) {
+			changePicture("/imgs/ChocBlueBake.png");
+			type = "ChocBlueBake";
+		}
+	}
+	
+	public void addFruitChange(String fruit) {
+		if(type.equals("ChocBatter")) {
+			if(fruit.equals("Strawberry")) {
+				changePicture("/imgs/ChocStrawUnbake.png");
+				type = "ChocStrawBatter";
+			}
+			if(fruit.equals("Blueberry")) {
+				changePicture("/imgs/ChocBlueUnbake.png");
+				type = "ChocBlueBatter";
+			}
+		}
+		if(type.equals("VanBatter")) {
+			if(fruit.equals("Strawberry")) {
+				changePicture("/imgs/VanStrawUnbake.png");
+				type = "VanStrawBatter";
+			}
+			if(fruit.equals("Blueberry")) {
+				changePicture("/imgs/VanBlueUnbake.png");
+				type = "VanBlueBatter";
+			}
+		}
+	}
+	
+	public Rectangle getBounds() {
+        return rectangle;
+    }
+	
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	
+	public boolean isInside() {
+		return insideSquares;
+	}
+	
+	public void setInside(boolean b, int ix, int iy) {
+		insideSquares = b;
+		insideX = ix;
+		insideY = iy;
+	}
+	
+	public int getInsideX() {
+		return insideX;
+	}
+	
+	public int getInsideY() {
+		return insideY;
+	}
+
+	public void setPosition(int x2, int y2) {
+		// TODO Auto-generated method stub
+		this.x = x2;
+		this.y = y2; 
+		rectangle.setLocation(x2, y2);
+		tx.setToTranslation(x, y);
+		tx.scale(scale, scale); //previously 1
+	}
+	
+	public boolean objectExit() {
+		//g.drawRect(500, 390, 280, 150);
+		if(x < 500 || x > 780 || y < 390 || y > 540) {
+			return true;
+		}
+		return false;
+	}
+}
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.MouseInfo;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.geom.AffineTransform;
+import java.net.URL;
+import java.awt.Image;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ThreadLocalRandom;
+ 
+
+public class Customer {
+	private double x1, x, y, originalX1; //position
+	private final int sec = 1600;
+	private double vx;
+	private double leavingVx = 0.5;
+	private int count, numReturns;
+	private String name;
+	private boolean ready, done, returnDone, gameRestart;
+	private Image img; 	
+	private AffineTransform tx; 
+	Position names;
+	Timer timer;
+	
+	public Customer(int x, int x1, int y, String custName) {
+		this.x1 = x1;
+		System.out.println("Pos " + x1);
+		this.x = x; 
+		this.y = y;
+		vx = 0;
+		count = 0;
+		numReturns = ThreadLocalRandom.current().nextInt(4, 7);//4, 7
+		originalX1 = x1;
+		ready = false;
+		done = false;
+		returnDone = false;
+		gameRestart = false;
+		name = custName;
+		names = new Position("name");
+		if(name == "Daphne") {
+			img = getImage("/imgs/D1.png"); 
+		}
+		if(name == "Kyle") {
+			img = getImage("/imgs/K1.png"); 
+		}
+		if(name == "Francis") {
+			img = getImage("/imgs/F1.png"); 
+		}
+		if(name == "Linda") {
+			img = getImage("/imgs/L1.png"); 
+		}
+		
+		tx = AffineTransform.getTranslateInstance(x1, y);
+		init(x1, y); 				//initialize the location of the image
+									//use your variables
+		timer = new Timer();
+	}
+	
+	public void changePicture(String newFileName) {
+		img = getImage(newFileName);
+		init(x1, y);
+	}
+	
+	public void paint(Graphics g) {
+		//these are the 2 lines of code needed draw an image on the screen
+		Graphics2D g2 = (Graphics2D) g;
+		timer.schedule(new RemindTask(), sec);
+		//call update to update the actually picture location
+		g2.drawImage(img, tx, null);
+		update();
+
+	}
+	
+	public boolean getReady() {
+		return ready;
+	}
+
+	public void setName(String newName) {
+		name = newName;
+		if(name == "Daphne") {
+			img = getImage("/imgs/D1.png"); 
+		}
+		if(name == "Kyle") {
+			img = getImage("/imgs/K1.png"); 
+		}
+		if(name == "Francis") {
+			img = getImage("/imgs/F1.png"); 
+		}
+		if(name == "Linda") {
+			img = getImage("/imgs/L1.png"); 
+		}
+	}
+	
+	
+	public void setDone(boolean x) {
+		done = x;
+	}
+	
+	public void setCount(int num) {
+		count = num;
+	}
+	
+	public void setVx(int num) {
+		vx = num;
+	}
+	
+	public boolean getReturnDone() {
+		return returnDone;
+	}
+	
+	public void setReturnDone(boolean x) {
+		returnDone = x;
+	}
+	
+	public void setReset(boolean x) {
+		gameRestart = x;
+	}
+
+	/* update the picture variable location */
+	private void update() {
+		
+	 
+		tx.setToTranslation(x1, y);
+
+		//to scale it up or down to change size, .5 means 50% of original file
+		tx.scale(0.4, 0.4);
+		
+	}
+
+	
+	private void init(double a, double b) {
+		tx.setToTranslation(a, b);
+		
+		//to scale it up or down to change size, .5 means 50% of original file
+		tx.scale(0.4, 0.4);
+	}
+
+	private Image getImage(String path) {
+		Image tempImage = null;
+		try {
+			URL imageURL = Background.class.getResource(path);
+			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return tempImage;
+	}
+	
+	class RemindTask extends TimerTask {
+	    public void run() {
+	    	if(count == numReturns || gameRestart) {
+	    		x1 = originalX1;
+	    		vx = 0;
+	    		leavingVx = 0;
+	    		returnDone = true;
+	    	}else if(x1 >= 2500){
+	    		 done = false;
+	    		 setName(names.getName());
+	    		 x1 = originalX1;
+	    		 count++;
+	    		 timer.schedule(new RemindTask(), sec);
+	    	}else if(done){ 
+	    		x1 += leavingVx;
+	    		ready = false;
+				update();
+				timer.schedule(new RemindTask(), sec);
+	    	}else if(x1 == x) {
+	    		ready = true;
+	    		timer.schedule(new RemindTask(), sec);
+	    	}else if(x1 < x){
+	    		x1 += vx;
+	    		leavingVx = 0.5;
+				update();
+				timer.schedule(new RemindTask(), sec);
+			}
+	    }
+	}
+}
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.MouseInfo;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.geom.AffineTransform;
+import java.net.URL;
+import java.awt.Image;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.ArrayList;
+
+public class OrderTimer {
+	private int x, y, gx, gy, tx, ty, sec, personX, ogT, ogTy, secondsAmt; 
+	Timer timer;
+	Customer cust;
+	Position name;
+	Background order;
+	Position waiting;
+	Position orderItem;
+	private int count = 0;
+	private String custName;
+	Customer cust1;
+	ArrayList <Object> orders;
+	Object item;
+	Coin coin;
+	private int totalMoney;
+	private int numX1, numX2, size, oldAmt;
+	private static boolean timerReset = false;
+		
+	    public OrderTimer(int x, int y, int seconds, int wait) {
+	    	personX = x-10;
+	    	System.out.println("person " + personX);
+	    	this.x = x; 
+	    	this.y = y;
+			gx = x;
+			gy = y;
+			tx = x-(x-10);
+			ty = y + 100;
+			sec = seconds;
+			ogT = y;
+			ogTy = y + 100;
+			orderItem = new Position("orderItem");
+			orders = new ArrayList<Object>();
+			totalMoney = 0;
+			oldAmt = 0;
+			size = ThreadLocalRandom.current().nextInt(1, 4);
+			
+			int itemX = x-75;
+			int itemY = y+5;
+			for(int i = 0; i < size; i++) {
+				double scale = 0.5;
+				String newOrderItem = orderItem.getItem();
+				if(newOrderItem.equals("CoffeeOrder")) {
+					itemX = x-70;
+					scale = 0.75;
+					totalMoney += 4;
+				}else {
+					totalMoney += 15;
+				}
+				item = new Object(itemX, itemY, newOrderItem, scale);
+				orders.add(item);
+				itemX = x-75;
+				itemY += 50;
+			}
+			
+			if(orders.size() == 1) {
+				if(orders.get(0).getType().equals("CoffeeOrder")) {
+					secondsAmt = 50;
+				}
+				secondsAmt = 100;
+			}
+			if(orders.size() == 2) {
+				secondsAmt = 150;
+			}
+			if(orders.size() == 3) {
+				secondsAmt = 200;
+			}
+	    	 
+			waiting = new Position("wait");
+			name = new Position("name");
+			custName = name.getName();
+			order = new Background(x-90, 70, "/imgs/Order Bubble.png");
+			cust = new Customer(personX, wait, 130, custName);
+	    	timer = new Timer();
+	    	coin = new Coin(personX+70, 290);
+	    	
+	    	if(x == 110) {
+	    		numX1 = 10;
+		    	numX2 = 290;
+	    	}else if(x == 400){
+	    		numX1 = 300;
+		    	numX2 = 580;
+	    	}else if(x == 690) {
+	    		numX1 = 590;
+		    	numX2 = 870;
+	    	}else {
+	    		numX1 = 880;
+		    	numX2 = 1160;
+	    	}
+		}
+	    
+	    public void runner() {
+	    	if(count < 1) {
+	    		timer.schedule(new RemindTask(), sec*secondsAmt);
+	    		count++;
+	    	}
+	    }
+	    
+	    public void paint(Graphics g) {
+			//these are the 2 lines of code needed draw an image on the screen
+			Graphics2D g2 = (Graphics2D) g;
+			
+			if(cust.getReady() && orders.size() != 0 && !timerReset) {
+				g.setColor(Color.gray);
+				g.fillRect(gx, gy, tx, gy+90);
+				
+				g.setColor(Color.green);
+				if(y >= 180 && y < 210) {
+					g.setColor(Color.yellow);
+					//cust.changePicture("/imgs/" + custName.substring(0,1) + "2.png");
+				}else if(y >= 200) {
+					g.setColor(Color.red);
+					//cust.changePicture("/imgs/" + custName.substring(0,1) + "3.png");
+				}
+				g.fillRect(x, y, tx, ty);
+				order.paint(g);
+				
+				for(int i = 0; i < orders.size(); i++) {
+					orders.get(i).paint(g2);
+				}
+				
+				runner();
+			}
+				cust.paint(g2);
+				
+				if(coin.getCollect()) {
+					coin.paint(g2);
+				}
+	    }
+	 
+	    public void done(boolean x) {
+	    	cust.setDone(x);
+	    }
+	    
+	    public boolean custDone() {
+	    	return cust.getReturnDone();
+	    }
+	    
+	    public void restartCount(int num) {
+	    	cust.setCount(num);
+	    }
+	    
+	    public void setCustVx(int num) {
+	    	cust.setVx(num);
+	    }
+	    
+	    public void reset(boolean num) {
+	    	cust.setReset(num);
+	    }
+	    
+	    public void setReturnDoneCust(boolean x) {
+	    	cust.setReturnDone(x);
+	    }
+	    
+	    public static void timerReset(boolean x) {
+	    	timerReset = x;
+	    }
+	    
+	    public void setSec() {
+	    	if(orders.size() == 1) {
+				if(orders.get(0).getType().equals("CoffeeOrder")) {
+					secondsAmt = 50;
+				}
+				secondsAmt = 100;
+			}
+			if(orders.size() == 2) {
+				secondsAmt = 150;
+			}
+			if(orders.size() == 3) {
+				secondsAmt = 200;
+			}
+	    }
+	    
+	    public void generateNewOrder() {
+	    	orders = new ArrayList <Object>();
+	    	int itemX = x-75;
+			int itemY = y+5;
+			totalMoney = 0;
+			size = ThreadLocalRandom.current().nextInt(1, 4);
+			for(int i = 0; i < size; i++) {
+				double scale = 0.5;
+				String newOrderItem = orderItem.getItem();
+				if(newOrderItem.equals("CoffeeOrder")) {
+					itemX = x-70;
+					scale = 0.75;
+					totalMoney += 4;
+				}else {
+					totalMoney += 15;
+				}
+				item = new Object(itemX, itemY, newOrderItem, scale);
+				orders.add(item);
+				itemX = x-75;
+				itemY += 50;
+			}
+			setSec();
+	    }
+	    
+	    public Coin getCoin() {
+	    	return coin;
+	    }
+	    
+	    public int getTotal() {
+	    	return oldAmt;
+	    }
+	    
+	    public int getPersonX() {
+	    	return personX;
+	    }
+	    
+	   public boolean itemIsInside(int xVal, int yVal) {
+		   System.out.println("location: " + numX1 + " " + numX2);
+		   if(xVal >= numX1 && xVal <= numX2 && yVal >= 50 && yVal <= 330) {
+	    		System.out.println(xVal + " " + yVal);  
+			   return true;
+	    	}
+	    	System.out.println("itemfalse");
+		   return false;
+	    }
+	   
+	    public ArrayList<Object> custOrder() {
+	    	return orders;
+	    }
+	    
+	    class RemindTask extends TimerTask {
+	        public void run() {
+	        	if(orders.size() == 0 || timerReset) {
+	        		done(true);
+	        		y = ogT;
+	        		ty = ogTy;
+	        		count = 0;
+	        		if(!timerReset) {
+	        			coin.setCollect(true);
+		        		oldAmt = totalMoney;
+	        		}
+	        		generateNewOrder();
+	        	}else if(y == gy+165) {
+	        		done(true);
+	        		y = ogT;
+	        		ty = ogTy;
+	        		count = 0;
+	        		Runner.addCount(1);
+	        		coin.setCollect(false);
+	        		generateNewOrder();
+	        	}else {
+	    			y += 1;
+	    			ty -= 1;
+	    			timer.schedule(new RemindTask(), sec*secondsAmt); //400
+	    		}
+	        }
+	    }
+	  
+}
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.MouseInfo;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
+public class Position {
+	int num;
+	static int count = 0;
+	static int posCount = 0;
+	int[] arr = new int[4];
+	int[] person = {100, 390, 680, 970};
+	int[] order = {20, 310, 600, 890};
+	int[] timer = {110, 400, 690, 980};
+	int[] wait = {-800, -3500, -7500, -11500}; //-1800, -4000, -8000, -12000
+	String[] names = {"Daphne", "Linda", "Francis", "Kyle"};
+	boolean[] available = {true, true, true, true};
+	boolean[] availableWait = {true, true, true, true};
+	String[] orderItems = {"ChocBlueBake", "ChocStrawBake", "VanBlueBake",
+							"VanStrawBake", "CoffeeOrder"};
+	/*String[] orderItems = {"ChocBlueBatter", "ChocStrawBatter", "VanBlueBatter",
+			"VanStrawBatter", "CoffeeOrder"};*/
+	String item;
+	
+	
+	public Position(String purpose) {
+		if(purpose == "Person") {
+			for(int i = 0; i < arr.length; i++) {
+				arr[i] = person[i];
+			}
+		}
+		if(purpose == "Order") {
+			for(int i = 0; i < arr.length; i++) {
+				arr[i] = order[i];
+			}
+		}
+		if(purpose == "timer") {
+			for(int i = 0; i < arr.length; i++) {
+				arr[i] = timer[i];
+			}
+		}
+		if(purpose == "name") {
+			getName();
+		}
+		
+		if(purpose == "wait") {
+			getWait();
+		}
+		
+		if(purpose == "orderItem") {
+			getItem();
+		}
+	}
+	
+	public String getName() {
+		return names[ThreadLocalRandom.current().nextInt(0, 4)];
+	}
+	
+	public void updateWaitAvail() {
+		int count = 0;
+		for(int i = 0; i < availableWait.length; i++) {
+			if(!availableWait[i]) {
+				count++;
+			}
+		}
+		if(count == 4) {
+			for(int i = 0; i < availableWait.length; i++) {
+				availableWait[i] = true;
+			}
+		}
+		count = 0;
+	}
+	public void updateXAvail() {
+		/*for(int i = 0; i < available.length; i++) {
+			available[i] = true;
+		}*/
+		
+		int posCount = 0;
+		for(int i = 0; i < available.length; i++) {
+			if(!available[i]) {
+				posCount++;
+			}
+		}
+		if(posCount == 4) {
+			for(int i = 0; i < available.length; i++) {
+				available[i] = true;
+			}
+		}
+		posCount = 0;
+	}
+	
+	public int newNum() {
+		num = ThreadLocalRandom.current().nextInt(0, 4);
+		return num;
+	}
+	
+	public int getWait() {
+		int num = 0;
+		int i = 0;
+		while(i < availableWait.length) {
+			if(availableWait[i]) {
+				num = i;
+				i = availableWait.length;
+			}else {
+				i++;
+			}
+		}
+		
+		availableWait[num] = false;
+		return wait[num];
+	}
+	
+	public int getX() {
+		newNum();
+		//updateXAvail();
+		if(!available[num]) {
+			newNum();
+			getX();
+		}
+		available[num] = false;
+		posCount++;
+		
+		if(posCount%4 == 0) {
+			updateXAvail();
+		}
+		return arr[num];
+	}
+	
+	public String getItem() {
+		item = orderItems[ThreadLocalRandom.current().nextInt(0, 5)];
+		return item;
+	} 
+}
+
+
