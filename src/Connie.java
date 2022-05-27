@@ -74,7 +74,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	int mouseY = MouseInfo.getPointerInfo().getLocation().y; 
 	int mouseX = MouseInfo.getPointerInfo().getLocation().x;
 
-	private boolean b; 
 	int total = 0;
 	 
 	public void paint(Graphics g) {
