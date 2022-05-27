@@ -71,15 +71,15 @@ public class OrderTimer {
 			
 			if(orders.size() == 1) {
 				if(orders.get(0).getType().equals("CoffeeOrder")) {
-					secondsAmt = 200;
+					secondsAmt = 50;
 				}
-				secondsAmt = 350;
+				secondsAmt = 100;
 			}
 			if(orders.size() == 2) {
-				secondsAmt = 600;
+				secondsAmt = 150;
 			}
 			if(orders.size() == 3) {
-				secondsAmt = 900;
+				secondsAmt = 200;
 			}
 	    	 
 			waiting = new Position("wait");
@@ -175,15 +175,15 @@ public class OrderTimer {
 	    public void setSec() {
 	    	if(orders.size() == 1) {
 				if(orders.get(0).getType().equals("CoffeeOrder")) {
-					secondsAmt = 200;
+					secondsAmt = 50;
 				}
-				secondsAmt = 350;
+				secondsAmt = 100;
 			}
 			if(orders.size() == 2) {
-				secondsAmt = 600;
+				secondsAmt = 150;
 			}
 			if(orders.size() == 3) {
-				secondsAmt = 900;
+				secondsAmt = 200;
 			}
 	    }
 	    
