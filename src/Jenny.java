@@ -67,6 +67,8 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	Object coffee2 = new Object(255, 490, "Coffee", 1.0);
 	Object coffee3 = new Object(315, 495, "Coffee", 1.0);
 	
+	Music music = new Music();
+	
 	//Person: (100, 130), (390, 130), (680,130), 970, 130)
 	//Order Form: (20, 70), (310, 70), (600, 70), 890, 70)
 	//Timer: (110, 75), (400, 75), (690, 75), (980, 75)
@@ -91,6 +93,8 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		timer1.paint(g);
 		timer2.paint(g);
 		timer3.paint(g);
+		
+		music.play();
 		
 		coffee1.paint(g);
 		coffee2.paint(g);
