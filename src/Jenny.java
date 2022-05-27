@@ -96,13 +96,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		
 		Music.play();
 		
-		coffee1.paint(g);
-		coffee2.paint(g);
-		coffee3.paint(g);
-		for(Object obj: objectList) {
-			obj.paint(g);
-		}
-		
 		g.drawRect(505, 620, 130, 85);
 		g.drawRect(645, 620, 130, 85);
 		g.drawRect(550, 550, 80, 50);
@@ -224,11 +217,13 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 					
 			}
 			else if(playAgain) {
-				objectList = new ArrayList<Object>();
-				/*objectList.add(new Object(195, 485, "CoffeeEmpty", 1.0));
-				objectList.add(new Object(255, 490, "CoffeeEmpty", 1.0));
-				objectList.add(new Object(315, 495, "CoffeeEmpty", 1.0));*/
-				
+				for(int i = 0; i < objectList.size(); i++) {
+					objectList.remove(i);
+				}
+				objectList.add(coffee1);
+				objectList.add(coffee2);
+				objectList.add(coffee3);
+			
 				System.out.println("list size " + objectList.size());
 				
 				g.setColor(Color.PINK);
@@ -247,6 +242,12 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 					g.drawString("Success! Earned " + total + " coins!", 250, 300);
 				}
 		}
+			if(!playAgain) {
+				for(Object obj:objectList) {
+					obj.paint(g);
+				}
+			}
+			
 	}
 	
 	public static void main(String[] args) {
