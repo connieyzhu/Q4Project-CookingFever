@@ -109,6 +109,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		g.drawRect(915, 615, 190, 75);
 		
 		checkOven(); 
+		setOvenDrag();
 		g.drawRect(60, 600, 130, 120);
 		
 		g.drawRect(10, 50, 280, 280);
@@ -188,7 +189,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 			if(i == spot1Index) {
 				if(objectList.get(i).getX() == 515 && objectList.get(i).getY() == 370) {
 					spot1 = true;
-					System.out.println(objectList.get(i).getType());
 				}else {
 					spot1 = false;
 				}
@@ -211,63 +211,9 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 					spot4 = false;
 				}
 			}
-//			if(i == spot1Index && spot1) {
-//				System.out.println(objectList.get(i).getType());
-//			}else if(spot1){
-//				System.out.println("confusion" + objectList.get(i).getType());
-//			}else {
-//				System.out.println("spot1 is false?");
-//			}
-//			if(i == spot1Index) {
-//				if(objectList.get(i).getX() != 515 && objectList.get(i).getY() != 370) {
-//					spot1 = false;
-//				}else {
-//					spot1 = true;
-//					//System.out.println(objectList.get(i).getType());
-//				}
-//			}else if(i == spot2Index) {
-//				if(objectList.get(i).getX() != 505 && objectList.get(i).getY() != 440) {
-//					spot2 = false;
-//				}else {
-//					spot2 = true;
-//					//System.out.println(objectList.get(i).getType());
-//				}
-//			}else if(i == spot3Index) {
-//				if(objectList.get(i).getX() != 641 && objectList.get(i).getY() != 370) {
-//					spot3 = false;
-//				}else {
-//					spot3 = true;
-//					//System.out.println(objectList.get(i).getType());
-//				}
-//			}else if(i == spot4Index) {
-//				if(objectList.get(i).getX() != 645 && objectList.get(i).getY() != 440) {
-//					spot4 = false;
-//				}else {
-//					spot4 = true;
-//					//System.out.println(objectList.get(i).getType());
-//				}
-//			}
 		}
 	}
 	
-	public void fruitChange() {
-		if(hitBox==null) return;
-		for(int i = 0; i < objectList.size(); i++) {
-			if(hitBox.equals(objectList.get(i)) && (objectList.get(i).getType().equals("Blueberry") || objectList.get(i).getType().equals("Strawberry"))) {
-				for(Object batter:objectList) {
-					if(objectList.get(i).getX() >= batter.getX() && objectList.get(i).getX() <= batter.getX() + batter.getBounds().getWidth() && 
-							objectList.get(i).getY() >= batter.getY() && objectList.get(i).getY() <= batter.getY() + batter.getBounds().getHeight()) {
-						if(objectList.get(i).getType().equals("Blueberry")) {
-							batter.addFruitChange("Blueberry");
-						}else if(objectList.get(i).getType().equals("Strawberry")) {
-							batter.addFruitChange("Strawberry");
-						}
-					}
-				}
-				objectList.remove(i);
-			}
-		}
-	}
 	
 	public static ArrayList<Object> getObjectList(){
 		return objectList;
@@ -275,6 +221,17 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	
 	public static Object getObject(int index) {
 		return objectList.get(index);
+	}
+	
+	public void setOvenDrag() {
+		for(Object obj: objectList) {
+			if(obj.getType().equals("ChocBlueOven")||obj.getType().equals("ChocStrawOven")
+					||obj.getType().equals("VanBlueOven")||obj.getType().equals("VanStrawOven")) {
+				obj.setDrag(false);
+			}else {
+				obj.setDrag(true);
+			}
+		}
 	}
 	
 	//@Override
@@ -354,72 +311,56 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		
 		Point mp = arg0.getPoint();
 		for (Object box : objectList) {
-			if (box.getBounds().contains(mp)) {
+			if (box.getBounds().contains(mp) && box.getDrag()) {
 				hitBox = box;
 				offset = new Point();
 				offset.x = mp.x - box.getBounds().x;
 				offset.y = mp.y - box.getBounds().y;
 			}
 		}
-		
-		for(int i = 3; i < objectList.size(); i++) {
-			if(arg0.getX()>=915 && arg0.getX()<=1130 && arg0.getY()>=375 && arg0.getY()<=700){
-				if(objectList.get(i).getType().equals("VanStrawBakeOven")) {
-					objectList.get(i).fullBakeChange();
-				}
-				if(objectList.get(i).getType().equals("VanBlueBakeOven")) {
-					objectList.get(i).fullBakeChange(); 
-				}
-				
-				if(objectList.get(i).getType().equals("ChocStrawBakeOven")) {
-					objectList.get(i).fullBakeChange(); 
-				}
-				
-				if(objectList.get(i).getType().equals("ChocBlueBakeOven")) {
-					objectList.get(i).fullBakeChange(); 
-				}
+		if(hitBox == null) {
+			return;
+		}
+		if(arg0.getX()>=915 && arg0.getX()<=1130 && arg0.getY()>=375 && arg0.getY()<=700){
+			if(hitBox.getType().equals("VanStrawBakeOven")) {
+				objectList.get(hitBox.getIndex()).fullBakeChange();
+			}else if(hitBox.getType().equals("VanBlueBakeOven")) {
+				objectList.get(hitBox.getIndex()).fullBakeChange(); 
+			}else if(hitBox.getType().equals("ChocStrawBakeOven")) {
+				objectList.get(hitBox.getIndex()).fullBakeChange(); 
+			}else if(hitBox.getType().equals("ChocBlueBakeOven")) {
+				objectList.get(hitBox.getIndex()).fullBakeChange(); 
 			}
 		}
-
 	}
 
 	//@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		//fruitChange();
 		if(hitBox == null) {
 			return;
 		}
-		hitBox = null;
 		Point mp = arg0.getPoint();
 		int px = arg0.getX();
 		int py = arg0.getY();
 		//System.out.println("MouseLocation: " + px + " " + py);
-		
 		for(int i = 0; i < objectList.size(); i++) {
-			if(objectList.get(i).getBounds().contains(mp) && (objectList.get(i).getType().equals("Blueberry") || objectList.get(i).getType().equals("Strawberry"))) {
-				System.out.println("start fruit change");
+			if(hitBox.getType().equals("Blueberry") || hitBox.getType().equals("Strawberry")) {
 				for(Object batter:objectList) {
 					if(batter.getType().equals("VanBatter")||batter.getType().equals("ChocBatter")){
-						System.out.println("batter good");
-						System.out.println(batter.getY());
-						System.out.println(batter.getX() + " " + objectList.get(i).getX() + " " + batter.getBounds().getWidth());
-						System.out.println(batter.getY() + " " + objectList.get(i).getY() + " " + batter.getBounds().getHeight());
-						if(objectList.get(i).getX() >= batter.getX() && objectList.get(i).getX() <= batter.getX() + batter.getBounds().getWidth() && 
-								objectList.get(i).getY() >= batter.getY() && objectList.get(i).getY() <= batter.getY() + batter.getBounds().getHeight()) {
-							System.out.println("fruit inside");
-							if(objectList.get(i).getType().equals("Blueberry")) {
+						if(batter.getBounds().contains(mp)) {
+							if(hitBox.getType().equals("Blueberry")) {
 								batter.addFruitChange("Blueberry");
 								System.out.println("changed");
-							}else if(objectList.get(i).getType().equals("Strawberry")) {
+							}else if(hitBox.getType().equals("Strawberry")) {
 								batter.addFruitChange("Strawberry");
-								System.out.println("changed");
 							}
 						}
 					}
 				}
-				objectList.remove(i);
-			}else if(timer.itemIsInside(px, py)) {
+				objectList.remove(hitBox.getIndex());
+			}
+			if(timer.itemIsInside(px, py)) {
 				for(int j = 0; j < timer.custOrder().size(); j++) {
 					if(objectList.get(i).getType().equals("CoffeeFull") && timer.custOrder().get(j).getType().equals("CoffeeOrder")) {
 						if(i == 0) {
@@ -535,7 +476,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				if(i == 2 && objectList.get(i).getX() != 315 && objectList.get(i).getY() != 495) {
 					objectList.get(i).setPosition(315, 495);
 				}
-			}else if (objectList.get(i).isCake() && objectList.get(i).getBounds().contains(mp) && !objectList.get(i).isFruit()) {
+			}else if (objectList.get(i).isCake() && objectList.get(i).getBounds().contains(mp) && !hitBox.getType().equals("Blueberry") && !hitBox.getType().equals("Strawberry")) {
 				if(px>=500 && px<= 780 && py >= 390 && py <= 540 && (!spot1 || !spot2 || !spot3 || !spot4)) {
 					if(!spot1) {
 						objectList.get(i).setPosition(515, 370);
@@ -569,28 +510,36 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 						oven1 = true;
 						oven1Index = i;
 						objectList.get(i).setInside(true, 970, 375);
-						new OvenTimer(5);
 					}else if(!oven2) {
+						objectList.get(i).setPosition(950, 452);
 						objectList.get(i).ovenChange();
 						oven2 = true;
 						oven2Index = i; 
-						objectList.get(i).setPosition(950, 452);
 						objectList.get(i).setInside(true, 950, 452);
-						new OvenTimer(5);
 					}else if(!oven3) {
+						objectList.get(i).setPosition(933, 530);
 						objectList.get(i).ovenChange();
 						oven3 = true;
 						oven3Index = i; 
-						objectList.get(i).setPosition(933, 530);
 						objectList.get(i).setInside(true, 933, 530);
-						new OvenTimer(5);
 					}else if(!oven4) {
+						objectList.get(i).setPosition(920, 609);
 						objectList.get(i).ovenChange();
 						oven4 = true;
 						oven4Index = i; 
-						objectList.get(i).setPosition(920, 609);
 						objectList.get(i).setInside(true, 920, 609);
-						new OvenTimer(5);
+					}
+					if(oven1) {
+						new OvenTimer(5, oven1Index);
+					}
+					if(oven2) {
+						new OvenTimer(5, oven2Index);
+					}
+					if(oven3) {
+						new OvenTimer(5, oven3Index);
+					}
+					if(oven4) {
+						new OvenTimer(5, oven4Index);
 					}
 				}else if(px>=60 && px<= 190 && py >= 600 && py <= 720) {
 					objectList.remove(i);
@@ -601,7 +550,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				}
 			}
 		}
-		System.out.println(spot1 + " " + spot2 + " " + spot3 + " " + spot4);
+		hitBox = null;
 	}
 
 	//@Override
@@ -640,6 +589,9 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
+		if(hitBox == null) {
+			return;
+		}
 		if (hitBox != null) {
 			Point mp = e.getPoint();
 			if(mp.getX() >= 500 && mp.getX() <= 780 && mp.getY() >= 390 && mp.getY() <= 540) {
@@ -651,7 +603,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 			bounds.x = mp.x - offset.x;
 			bounds.y = mp.y - offset.y;
 			for(Object box: objectList) {
-				if(box.equals(hitBox)) {
+				if(box.equals(hitBox) && box.getDrag()) {
 					box.setPosition(bounds.x, bounds.y);
 				}
 			}
@@ -679,6 +631,7 @@ public class Object{
 	private boolean insideSquares;
 	private int insideX, insideY;
 	private double scale;
+	private boolean draggable = true;
 	
 
 	public Object(int x, int y, String s, double setScale){
@@ -798,42 +751,42 @@ public class Object{
 	public void ovenChange() {
 		if(type.equals("VanStrawBatter")) {
 			changePicture("/imgs/VanStrawOven.png");
-			type = "VanStrawBake";
+			type = "VanStrawOven";
 		}
 		
 		if(type.equals("VanBlueBatter")) {
 			changePicture("/imgs/VanBlueOven.png");
-			type = "VanBlueBake";
+			type = "VanBlueOven";
 		}
 		
 		if(type.equals("ChocStrawBatter")) {
 			changePicture("/imgs/ChocStrawOven.png");
-			type = "ChocStrawBake";
+			type = "ChocStrawOven";
 		}
 		
 		if(type.equals("ChocBlueBatter")) {
 			changePicture("/imgs/ChocBlueOven.png");
-			type = "ChocBlueBake";
+			type = "ChocBlueOven";
 		}
 	}
 	
 	public void bakeChange() {
-		if(type.equals("VanStrawBake")) {
+		if(type.equals("VanStrawOven")) {
 			changePicture("/imgs/VanStrawBakeOven.png");
 			type = "VanStrawBakeOven"; 
 		}
 		
-		if(type.equals("VanBlueBake")) {
+		if(type.equals("VanBlueOven")) {
 			changePicture("/imgs/VanBlueBakeOven.png");
 			type = "VanBlueBakeOven";
 		}
 		
-		if(type.equals("ChocStrawBake")) {
+		if(type.equals("ChocStrawOven")) {
 			changePicture("/imgs/ChocStrawBakeOven.png");
 			type = "ChocStrawBakeOven";
 		}
 		
-		if(type.equals("ChocBlueBake")) {
+		if(type.equals("ChocBlueOven")) {
 			changePicture("/imgs/ChocBlueBakeOven.png");
 			type = "ChocBlueBakeOven";
 		}
@@ -933,556 +886,28 @@ public class Object{
 		}
 		return false;
 	}
-	public boolean isFruit() {
-		if(type.equals("Blueberry")||type.equals("Strawberry")) {
+	
+	public boolean isOven() {
+		if(type.equals("ChocBlueOven")||type.equals("ChocStrawOven")||type.equals("VanBlueOven")||type.equals("VanStrawOven")) {
 			return true;
 		}
 		return false;
 	}
 	
-	public boolean objectExit() {
-		//g.drawRect(500, 390, 280, 150);
-		if(x < 500 || x > 780 || y < 390 || y > 540) {
-			return true;
+	public int getIndex() {
+		for(int i = 0; i < Runner.getObjectList().size(); i++) {
+			if(type.equals(Runner.getObjectList().get(i).getType()) && x == Runner.getObjectList().get(i).getX()) {
+				return i;
+			}
 		}
-		return false;
+		return -1;
+	}
+	
+	public boolean getDrag() {
+		return draggable;
+	}
+	
+	public void setDrag(boolean b) {
+		draggable = b;
 	}
 }
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.MouseInfo;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.geom.AffineTransform;
-import java.net.URL;
-import java.awt.Image;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.ArrayList;
-
-public class OrderTimer {
-	private int x, y, gx, gy, tx, ty, sec, personX, ogT, ogTy, secondsAmt; 
-	Timer timer;
-	Customer cust;
-	Position name;
-	Background order;
-	Position waiting;
-	Position orderItem;
-	private int count = 0;
-	private String custName;
-	Customer cust1;
-	ArrayList <Object> orders;
-	Object item;
-	Coin coin;
-	private int totalMoney;
-	private int numX1, numX2, size;
-		
-	    public OrderTimer(int x, int y, int seconds, int wait) {
-	    	personX = x-10;
-	    	//System.out.println("person " + personX);
-	    	this.x = x; 
-	    	this.y = y;
-			gx = x;
-			gy = y;
-			tx = x-(x-10);
-			ty = y + 100;
-			sec = seconds;
-			ogT = y;
-			ogTy = y + 100;
-			orderItem = new Position("orderItem");
-			orders = new ArrayList<Object>();
-			totalMoney = 0;
-			size = ThreadLocalRandom.current().nextInt(1, 4);
-			
-			int itemX = x-75;
-			int itemY = y+5;
-			for(int i = 0; i < size; i++) {
-				double scale = 0.5;
-				String newOrderItem = orderItem.getItem();
-				if(newOrderItem.equals("CoffeeOrder")) {
-					itemX = x-70;
-					scale = 0.75;
-					/*totalMoney += 4;
-				}else {
-					totalMoney += 15;*/
-				}
-				item = new Object(itemX, itemY, newOrderItem, scale);
-				orders.add(item);
-				itemX = x-75;
-				itemY += 50;
-			}
-			
-			if(orders.size() == 1) {
-				if(orders.get(0).getType().equals("CoffeeOrder")) {
-					secondsAmt = 200;
-				}
-				secondsAmt = 350;
-			}
-			if(orders.size() == 2) {
-				secondsAmt = 600;
-			}
-			if(orders.size() == 3) {
-				secondsAmt = 900;
-			}
-	    	 
-			waiting = new Position("wait");
-			name = new Position("name");
-			custName = name.getName();
-			order = new Background(x-90, 70, "/imgs/Order Bubble.png");
-			cust = new Customer(personX, wait, 130, custName);
-	    	timer = new Timer();
-	    	coin = new Coin(personX+70, 290);
-	    	
-	    	if(x == 110) {
-	    		numX1 = 10;
-		    	numX2 = 290;
-	    	}else if(x == 400){
-	    		numX1 = 300;
-		    	numX2 = 580;
-	    	}else if(x == 690) {
-	    		numX1 = 590;
-		    	numX2 = 870;
-	    	}else {
-	    		numX1 = 880;
-		    	numX2 = 1160;
-	    	}
-		}
-	    
-	    public void runner() {
-	    	if(count < 1) {
-	    		timer.schedule(new RemindTask(), sec*secondsAmt);
-	    		count++;
-	    	}
-	    }
-	    
-	    public void paint(Graphics g) {
-			//these are the 2 lines of code needed draw an image on the screen
-			Graphics2D g2 = (Graphics2D) g;
-			
-			if(cust.getReady() && orders.size() != 0) {
-				g.setColor(Color.gray);
-				g.fillRect(gx, gy, tx, gy+90);
-				
-				g.setColor(Color.green);
-				if(y >= 180 && y < 210) {
-					g.setColor(Color.yellow);
-					//cust.changePicture("/imgs/" + custName.substring(0,1) + "2.png");
-				}else if(y >= 200) {
-					g.setColor(Color.red);
-					//cust.changePicture("/imgs/" + custName.substring(0,1) + "3.png");
-				}
-				g.fillRect(x, y, tx, ty);
-				order.paint(g);
-				
-				for(int i = 0; i < orders.size(); i++) {
-					orders.get(i).paint(g2);
-				}
-				
-				runner();
-			}
-				cust.paint(g2);
-				
-				if(coin.getCollect()) {
-					coin.paint(g2);
-				}
-	    }
-	    
-	  /*  public void itemGiven(Object item) {
-	    	for(int i = 0; i < orders.size(); i++) {
-	    		if(orders.get(i).getType().equals(item.getType())) {
-	    			if(orders.get(i).getType().equals("CoffeeOrder")) {
-						totalMoney += 4;
-					}else {
-						totalMoney += 15;
-					}
-	    			orders[i] = null;
-	    			i = orders.length;
-	    		}
-	    	}
-	    }*/
-	 
-	    public void done(boolean x) {
-	    	cust.setDone(x);
-	    }
-	    
-	    public void generateNewOrder() {
-	    	int itemX = x-75;
-			int itemY = y+5;
-			totalMoney = 0;
-			for(int i = 0; i < size; i++) {
-				double scale = 0.5;
-				String newOrderItem = orderItem.getItem();
-				if(newOrderItem.equals("CoffeeOrder")) {
-					itemX = x-70;
-					scale = 0.75;
-					/*totalMoney += 4;
-				}else {
-					totalMoney += 15;*/
-				}
-				item = new Object(itemX, itemY, newOrderItem, scale);
-				orders.add(item);
-				itemX = x-75;
-				itemY += 50;
-			}
-	    }
-	    
-	    public Coin getCoin() {
-	    	return coin;
-	    }
-	    
-	    public int getTotal() {
-	    	return totalMoney;
-	    }
-	    
-	    public int getPersonX() {
-	    	return personX;
-	    }
-	    
-	   public boolean itemIsInside(int xVal, int yVal) {
-		   //System.out.println("location: " + numX1 + " " + numX2);
-		   if(xVal >= numX1 && xVal <= numX2 && yVal >= 50 && yVal <= 330) {
-			   System.out.println("yay");
-			   System.out.println(xVal + " " + yVal); 
-			   return true;
-	    	}
-	    	return false;
-	    }
-	   
-	    public ArrayList<Object> custOrder() {
-	    	return orders;
-	    }
-	    
-	    class RemindTask extends TimerTask {
-	        public void run() {
-	        	if(orders.size() == 0) {
-	        		done(true);
-	        		y = ogT;
-	        		ty = ogTy;
-	        		count = 0;
-	        		coin.setCollect(true);
-	        		generateNewOrder();
-	        	}else if(y == gy+165) {
-	        		done(true);
-	        		y = ogT;
-	        		ty = ogTy;
-	        		count = 0;
-	        		coin.setCollect(true);
-	        		generateNewOrder();
-	        	}else {
-	    			y += 1;
-	    			ty -= 1;
-	    			/*if(orderIsDone) {
-	    				y = gy+165;
-	    			}*/
-	    			timer.schedule(new RemindTask(), sec*secondsAmt); //400
-	    		}
-	        }
-	    }
-	  
-}
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.Timer;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.MouseInfo;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
-
-public class Position {
-	int num;
-	static int count = 0;
-	static int posCount = 0;
-	int[] arr = new int[4];
-	int[] person = {100, 390, 680, 970};
-	int[] order = {20, 310, 600, 890};
-	int[] timer = {110, 400, 690, 980};
-	int[] wait = {-20, -40, -80, -120}; //-1800, -4000, -8000, -12000
-	String[] names = {"Daphne", "Linda", "Francis", "Kyle"};
-	boolean[] available = {true, true, true, true};
-	boolean[] availableWait = {true, true, true, true};
-	String[] orderItems = {"ChocBlueBake", "ChocStrawBake", "VanBlueBake",
-							"VanStrawBake", "CoffeeOrder"};
-	/*String[] orderItems = {"ChocBlueBatter", "ChocStrawBatter", "VanBlueBatter",
-			"VanStrawBatter", "CoffeeOrder"};*/
-	String item;
-	
-	
-	public Position(String purpose) {
-		if(purpose == "Person") {
-			for(int i = 0; i < arr.length; i++) {
-				arr[i] = person[i];
-			}
-		}
-		if(purpose == "Order") {
-			for(int i = 0; i < arr.length; i++) {
-				arr[i] = order[i];
-			}
-		}
-		if(purpose == "timer") {
-			for(int i = 0; i < arr.length; i++) {
-				arr[i] = timer[i];
-			}
-		}
-		if(purpose == "name") {
-			getName();
-		}
-		
-		if(purpose == "wait") {
-			getWait();
-		}
-		
-		if(purpose == "orderItem") {
-			getItem();
-		}
-	}
-	
-	public String getName() {
-		return names[ThreadLocalRandom.current().nextInt(0, 4)];
-	}
-	
-	public void updateWaitAvail() {
-		int count = 0;
-		for(int i = 0; i < availableWait.length; i++) {
-			if(!availableWait[i]) {
-				count++;
-			}
-		}
-		if(count == 4) {
-			for(int i = 0; i < availableWait.length; i++) {
-				availableWait[i] = true;
-			}
-		}
-		count = 0;
-	}
-	public void updateXAvail() {
-		/*for(int i = 0; i < available.length; i++) {
-			available[i] = true;
-		}*/
-		
-		int posCount = 0;
-		for(int i = 0; i < available.length; i++) {
-			if(!available[i]) {
-				posCount++;
-			}
-		}
-		if(posCount == 4) {
-			for(int i = 0; i < available.length; i++) {
-				available[i] = true;
-			}
-		}
-		posCount = 0;
-	}
-	
-	public int newNum() {
-		num = ThreadLocalRandom.current().nextInt(0, 4);
-		return num;
-	}
-	
-	public int getWait() {
-		int num = 0;
-		int i = 0;
-		while(i < availableWait.length) {
-			if(availableWait[i]) {
-				num = i;
-				i = availableWait.length;
-			}else {
-				i++;
-			}
-		}
-		
-		availableWait[num] = false;
-		return wait[num];
-	}
-	
-	public int getX() {
-		newNum();
-		//updateXAvail();
-		if(!available[num]) {
-			newNum();
-			getX();
-		}
-		available[num] = false;
-		posCount++;
-		
-		if(posCount%4 == 0) {
-			updateXAvail();
-		}
-		return arr[num];
-	}
-	
-	public String getItem() {
-		item = orderItems[ThreadLocalRandom.current().nextInt(0, 5)];
-		return item;
-	} 
-}
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.MouseInfo;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.geom.AffineTransform;
-import java.net.URL;
-import java.awt.Image;
-import java.util.Timer;
-import java.util.TimerTask;
- 
-
-public class Customer {
-	private double x1, x, y, originalX1; //position
-	private final int sec = 1600;
-	private double vx = 1;
-	private double leavingVx = 0.5;
-	private String name;
-	private boolean ready, done;
-	private Image img; 	
-	private AffineTransform tx; 
-	Position names;
-	Timer timer;
-	
-	public Customer(int x, int x1, int y, String custName) {
-		this.x1 = x1;
-		//System.out.println("Pos " + x1);
-		this.x = x; 
-		this.y = y;
-		originalX1 = x1;
-		ready = false;
-		done = false;
-		name = custName;
-		names = new Position("name");
-		if(name == "Daphne") {
-			img = getImage("/imgs/D1.png"); 
-		}
-		if(name == "Kyle") {
-			img = getImage("/imgs/K1.png"); 
-		}
-		if(name == "Francis") {
-			img = getImage("/imgs/F1.png"); 
-		}
-		if(name == "Linda") {
-			img = getImage("/imgs/L1.png"); 
-		}
-		
-		tx = AffineTransform.getTranslateInstance(x1, y);
-		init(x1, y); 				//initialize the location of the image
-									//use your variables
-		timer = new Timer();
-	}
-	
-	public void changePicture(String newFileName) {
-		img = getImage(newFileName);
-		init(x1, y);
-	}
-	
-	public void paint(Graphics g) {
-		//these are the 2 lines of code needed draw an image on the screen
-		Graphics2D g2 = (Graphics2D) g;
-		timer.schedule(new RemindTask(), sec);
-		//call update to update the actually picture location
-		g2.drawImage(img, tx, null);
-		update();
-
-	}
-	
-	public boolean getReady() {
-		return ready;
-	}
-
-	public void setName(String newName) {
-		name = newName;
-		if(name == "Daphne") {
-			img = getImage("/imgs/D1.png"); 
-		}
-		if(name == "Kyle") {
-			img = getImage("/imgs/K1.png"); 
-		}
-		if(name == "Francis") {
-			img = getImage("/imgs/F1.png"); 
-		}
-		if(name == "Linda") {
-			img = getImage("/imgs/L1.png"); 
-		}
-	}
-	
-	
-	public void setDone(boolean x) {
-		done = x;
-	}
-
-	/* update the picture variable location */
-	private void update() {
-		
-	 
-		tx.setToTranslation(x1, y);
-
-		//to scale it up or down to change size, .5 means 50% of original file
-		tx.scale(0.4, 0.4);
-		
-	}
-
-	
-	private void init(double a, double b) {
-		tx.setToTranslation(a, b);
-		
-		//to scale it up or down to change size, .5 means 50% of original file
-		tx.scale(0.4, 0.4);
-	}
-
-	private Image getImage(String path) {
-		Image tempImage = null;
-		try {
-			URL imageURL = Background.class.getResource(path);
-			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return tempImage;
-	}
-	
-	class RemindTask extends TimerTask {
-	    public void run() {
-	    	if(x1 >= 2000){
-	    		 done = false;
-	    		 setName(names.getName());
-	    		 x1 = originalX1;
-	    		 timer.schedule(new RemindTask(), sec);
-	    	}else if(done){ 
-	    		x1 += leavingVx;
-	    		ready = false;
-				update();
-				timer.schedule(new RemindTask(), sec);
-	    	}else if(x1 == x) {
-	    		ready = true;
-	    		timer.schedule(new RemindTask(), sec);
-	    	}else if(x1 < x){
-	    		x1 += vx;
-				update();
-				timer.schedule(new RemindTask(), sec);
-			}
-	    }
-	}
-}
-
-
