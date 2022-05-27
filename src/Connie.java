@@ -37,6 +37,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
     private boolean spot3 = false;
     private boolean spot4 = false;
     private boolean inside = false;
+    
     private int spot1Index;
     private int spot2Index;
     private int spot3Index;
@@ -67,14 +68,26 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	Object coffee2 = new Object(255, 490, "CoffeeEmpty", 1.0);
 	Object coffee3 = new Object(315, 495, "CoffeeEmpty", 1.0);
 	
+	Music music = new Music();
+	
 	//Person: (100, 130), (390, 130), (680,130), 970, 130)
 	//Order Form: (20, 70), (310, 70), (600, 70), 890, 70)
 	//Timer: (110, 75), (400, 75), (690, 75), (980, 75)
 	
 	int mouseY = MouseInfo.getPointerInfo().getLocation().y; 
 	int mouseX = MouseInfo.getPointerInfo().getLocation().x;
+	
+	private boolean restart = true; 
+	private boolean playAgain = false;
+	private boolean tutorial = false;
 
 	int total = 0;
+	
+	public static int count = 0; 
+	
+	public static void addCount(int num) {
+		count += num;
+	}
 	 
 	public void paint(Graphics g) {
 		cafeBg.paint(g);
@@ -84,9 +97,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		timer2.paint(g);
 		timer3.paint(g);
 		
-		for(Object obj: objectList) {
-			obj.paint(g);
-		}
+		Music.play();
 		
 		g.drawRect(505, 620, 130, 85);
 		g.drawRect(645, 620, 130, 85);
@@ -119,11 +130,128 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		g.drawRect(170, 360, 210, 200);
 		
 		//scoring
-		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+		g.setColor(Color.black);
+		g.setFont(new Font("Serif", Font.PLAIN, 30));
+		g.drawString(count + "/3 customers lost", 10, 47);
 		g.setColor(Color.WHITE);
 		g.drawString(total + "", 600, 47);
-		
-		
+				
+		if((timer.custDone() && timer1.custDone() && timer2.custDone() && timer3.custDone()) || count == 3) {
+			timer.reset(true);
+			timer1.reset(true);
+			timer2.reset(true);
+			timer3.reset(true);
+			OrderTimer.timerReset(true);
+			playAgain = true;
+		}
+		//start button
+		if(restart) {
+			System.out.println("list size " + objectList.size());
+						
+			playAgain = false;
+			timer.reset(false);
+			timer1.reset(false);
+			timer2.reset(false);
+			timer3.reset(false);
+			timer.setReturnDoneCust(false);
+			timer1.setReturnDoneCust(false);
+			timer2.setReturnDoneCust(false);
+			timer3.setReturnDoneCust(false);
+			OrderTimer.timerReset(false);
+			g.fillRect(1165, 20, 100, 40);
+			g.setFont(new Font("Serif", Font.PLAIN, 30));
+			g.setColor(Color.black);
+			g.drawString("Start", 1185, 50);
+						
+			if(!tutorial) {
+				g.setColor(Color.WHITE);
+				g.fillRect(1165, 80, 100, 40);
+				g.setFont(new Font("Serif", Font.PLAIN, 30));
+				g.setColor(Color.black);
+				g.drawString("Tutorial", 1167, 110);
+			}
+						
+			if(tutorial) {
+				g.setColor(Color.WHITE);
+				g.fillRect(10, 350, 110, 70); //coffee
+				g.fillRect(360, 555, 115, 70); //cake batter
+				g.fillRect(1150, 350, 100, 90); //bake cake
+				g.fillRect(200, 620, 90, 70); // trash
+				g.fillRect(400, 240, 180, 130); // customers
+				g.fillRect(300, 15, 150, 90); //lost customer count
+							
+				g.setFont(new Font("Serif", Font.PLAIN, 15));
+							
+				g.setColor(Color.black);
+				g.drawString("1: Customers ", 410, 260);
+				g.drawString("complete requested order ", 410, 280);
+				g.drawString("within the time frame", 410, 300);
+				g.drawString("by dragging items to them", 410, 320);
+				g.drawString("and click on earned money", 410, 340);
+				g.drawString("from completing their orders", 410, 360);
+							
+				g.drawString("2: Coffee ", 20, 370);
+				g.drawString("click on machine", 20, 390);
+				g.drawString("wait 5 seconds", 20, 410);
+							
+				g.drawString("3: Cake Batter ", 365, 575);
+				g.drawString("drag batter & fruit", 365, 595);
+				g.drawString("onto tray", 365, 615);
+							
+				g.drawString("4: Bake Cake ", 1155, 370);
+				g.drawString("drag batter to ", 1155, 390);
+				g.drawString("available oven ", 1155, 410);
+				g.drawString("wait 5 seconds", 1155, 430);
+							
+				g.drawString("5: Trash Can ", 210, 640);
+				g.drawString("drag items ", 210, 660);
+				g.drawString("to dispose", 210, 680);
+							
+				g.drawString("6: Satisfied Customers ", 310, 35);
+				g.drawString("If 3 customers leave", 310, 55);
+				g.drawString("when time runs out, ", 310, 75);
+				g.drawString("the game is over", 310, 95);
+							
+			}
+						
+			total = 0;
+			count = 0;
+			timer.restartCount(0);
+			timer1.restartCount(0);
+			timer2.restartCount(0);
+			timer3.restartCount(0);
+							
+		}else if(playAgain) {
+			for(int i = 0; i < objectList.size(); i++) {
+				objectList.remove(i);
+			}
+			objectList.add(coffee1);
+			objectList.add(coffee2);
+			objectList.add(coffee3);
+					
+			System.out.println("list size " + objectList.size());
+						
+			g.setColor(Color.PINK);
+			g.fillRect(0, 0, 1280, 750);
+						
+			g.setColor(Color.black);
+			g.setFont(new Font("Serif", Font.PLAIN, 40));
+			g.drawString("Press Space to Play Again", 460, 370);
+			if(count == 3) {
+				g.setColor(Color.WHITE);
+				g.setFont(new Font("Serif", Font.PLAIN, 90));
+				g.drawString("Nice Try: Game Over", 250, 300);
+			}else {
+				g.setColor(Color.WHITE);
+				g.setFont(new Font("Serif", Font.PLAIN, 90));
+				g.drawString("Success! Earned " + total + " coins!", 250, 300);
+			}
+		}
+		if(!playAgain) {
+			for(Object obj:objectList) {
+				obj.paint(g);
+			}
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -235,7 +363,20 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	
 	//@Override
 	public void mouseClicked(MouseEvent arg0) {
-		
+		if(restart) {
+			if(arg0.getX() >= 1165 && arg0.getX() <= 1268 && arg0.getY() >= 20 && arg0.getY() <= 85) {
+				System.out.println("game starting");
+				timer.setCustVx(1);
+				timer1.setCustVx(1);
+				timer2.setCustVx(1);
+				timer3.setCustVx(1);
+				tutorial = false;
+				restart = false;
+			}else if(arg0.getX() >= 1165 && arg0.getX() <= 1268 && arg0.getY() >= 80 && arg0.getY() <= 145) { 
+				//	g.fillRect(1165, 80, 100, 40);
+				tutorial = true;
+			}
+		}
 		if(timer.getCoin().getCollect()) {
 			int x = timer.getCoin().getX();
 			int y = timer.getCoin().getY();
@@ -570,7 +711,10 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	//@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		if(arg0.getKeyCode() == 32 && playAgain) {
+			playAgain = false;
+			restart = true;
+		}
 	}
 
 	//@Override
