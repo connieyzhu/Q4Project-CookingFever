@@ -94,7 +94,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		timer2.paint(g);
 		timer3.paint(g);
 		
-		music.play();
+		Music.play();
 		
 		coffee1.paint(g);
 		coffee2.paint(g);
