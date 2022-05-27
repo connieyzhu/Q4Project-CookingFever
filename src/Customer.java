@@ -22,7 +22,7 @@ public class Customer {
 	private double leavingVx = 0.5;
 	private int count, numReturns;
 	private String name;
-	private boolean ready, done, returnDone;
+	private boolean ready, done, returnDone, gameRestart;
 	private Image img; 	
 	private AffineTransform tx; 
 	Position names;
@@ -40,6 +40,7 @@ public class Customer {
 		ready = false;
 		done = false;
 		returnDone = false;
+		gameRestart = false;
 		name = custName;
 		names = new Position("name");
 		if(name == "Daphne") {
@@ -112,6 +113,14 @@ public class Customer {
 	public boolean getReturnDone() {
 		return returnDone;
 	}
+	
+	public void setReturnDone(boolean x) {
+		returnDone = x;
+	}
+	
+	public void setReset(boolean x) {
+		gameRestart = x;
+	}
 
 	/* update the picture variable location */
 	private void update() {
@@ -145,9 +154,10 @@ public class Customer {
 	
 	class RemindTask extends TimerTask {
 	    public void run() {
-	    	if(count == numReturns) {
+	    	if(count == numReturns || gameRestart) {
 	    		x1 = originalX1;
 	    		vx = 0;
+	    		leavingVx = 0;
 	    		returnDone = true;
 	    	}else if(x1 >= 2500){
 	    		 done = false;
@@ -165,8 +175,8 @@ public class Customer {
 	    		timer.schedule(new RemindTask(), sec);
 	    	}else if(x1 < x){
 	    		x1 += vx;
+	    		leavingVx = 0.5;
 				update();
-				returnDone = false;
 				timer.schedule(new RemindTask(), sec);
 			}
 	    }
