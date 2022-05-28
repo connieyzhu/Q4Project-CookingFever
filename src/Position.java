@@ -28,14 +28,12 @@ public class Position {
 	int[] person = {100, 390, 680, 970};
 	int[] order = {20, 310, 600, 890};
 	int[] timer = {110, 400, 690, 980};
-	int[] wait = {-1800, -4000, -8000, -12000}; //-1800, -4000, -8000, -12000
+	int[] wait = {-800, -3500, -7500, -11500}; //-1800, -4000, -8000, -12000
 	String[] names = {"Daphne", "Linda", "Francis", "Kyle"};
 	boolean[] available = {true, true, true, true};
 	boolean[] availableWait = {true, true, true, true};
 	String[] orderItems = {"ChocBlueBake", "ChocStrawBake", "VanBlueBake",
 							"VanStrawBake", "CoffeeOrder"};
-	/*String[] orderItems = {"ChocBlueBatter", "ChocStrawBatter", "VanBlueBatter",
-			"VanStrawBatter", "CoffeeOrder"};*/
 	String item;
 	
 	
