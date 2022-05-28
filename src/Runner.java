@@ -96,7 +96,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		
 		Music.play();
 		
-		g.drawRect(505, 620, 130, 85);
+		/*g.drawRect(505, 620, 130, 85);
 		g.drawRect(645, 620, 130, 85);
 		g.drawRect(550, 550, 80, 50);
 		g.drawRect(660, 550, 80, 50);
@@ -106,23 +106,23 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		g.drawRect(500, 390, 140, 70);
 		g.drawRect(500, 460, 140, 80);
 		g.drawRect(640, 390, 140, 70);
-		g.drawRect(640, 460, 140, 80);
+		g.drawRect(640, 460, 140, 80);*/
 		
 		checkSpots();
 		
-		g.drawRect(940, 375, 190, 75);
+		/*g.drawRect(940, 375, 190, 75);
 		g.drawRect(940, 455, 190, 75);
 		g.drawRect(915, 535, 190, 75);
-		g.drawRect(915, 615, 190, 75);
+		g.drawRect(915, 615, 190, 75);*/
 		
 		checkOven();
 		setOvenDrag();
-		g.drawRect(60, 600, 130, 120);
+		/*g.drawRect(60, 600, 130, 120);
 		
 		g.drawRect(10, 50, 280, 280);
 		g.drawRect(300, 50, 280, 280);
 		g.drawRect(590, 50, 280, 280);
-		g.drawRect(880, 50, 280, 280);
+		g.drawRect(880, 50, 280, 280);*/
 		
 		//scoring
 		g.setColor(Color.black);
