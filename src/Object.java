@@ -14,11 +14,11 @@ public class Object{
 	private Image img;
 	private String type;
 	private AffineTransform tx;
-	boolean filled = false; 
 	private Rectangle rectangle;
 	private boolean insideSquares;
 	private int insideX, insideY;
 	private double scale;
+	private boolean draggable = true;
 	
 
 	public Object(int x, int y, String s, double setScale){
@@ -50,8 +50,12 @@ public class Object{
 			img = getImage("/imgs/ChocUnbake.png");
 			rectangle = new Rectangle(x, y, 125, 85);
 		}
-		if(type.equals("Coffee")) {
+		if(type.equals("CoffeeEmpty")) {
 			img = getImage("/imgs/CoffeeEmpty.png");
+			rectangle = new Rectangle(x, y, 58, 60);
+		}
+		if(type.equals("CoffeeFull")) {
+			img = getImage("/imgs/CoffeeFull.png");
 			rectangle = new Rectangle(x, y, 58, 60);
 		}
 		if(type.equals("Strawberry")) {
@@ -80,7 +84,6 @@ public class Object{
 		}
 		if(type.equals("CoffeeOrder")) {
 			img = getImage("/imgs/CoffeeFull.png");
-			rectangle = new Rectangle(x + 32, y, 125, 95);
 		}
 		
 		tx = AffineTransform.getTranslateInstance(x, y );
@@ -129,48 +132,48 @@ public class Object{
 	
 	public void change() {
 		changePicture("/imgs/CoffeeFull.png");
-		type = "CoffeeFull"; 
+		type = "CoffeeFull";
 	}
 	
 	public void ovenChange() {
 		if(type.equals("VanStrawBatter")) {
 			changePicture("/imgs/VanStrawOven.png");
-			type = "VanStrawBake";
+			type = "VanStrawOven";
 		}
 		
 		if(type.equals("VanBlueBatter")) {
 			changePicture("/imgs/VanBlueOven.png");
-			type = "VanBlueBake";
+			type = "VanBlueOven";
 		}
 		
 		if(type.equals("ChocStrawBatter")) {
 			changePicture("/imgs/ChocStrawOven.png");
-			type = "ChocStrawBake";
+			type = "ChocStrawOven";
 		}
 		
 		if(type.equals("ChocBlueBatter")) {
 			changePicture("/imgs/ChocBlueOven.png");
-			type = "ChocBlueBake";
+			type = "ChocBlueOven";
 		}
 	}
 	
 	public void bakeChange() {
-		if(type.equals("VanStrawBake")) {
+		if(type.equals("VanStrawOven")) {
 			changePicture("/imgs/VanStrawBakeOven.png");
 			type = "VanStrawBakeOven"; 
 		}
 		
-		if(type.equals("VanBlueBake")) {
+		if(type.equals("VanBlueOven")) {
 			changePicture("/imgs/VanBlueBakeOven.png");
 			type = "VanBlueBakeOven";
 		}
 		
-		if(type.equals("ChocStrawBake")) {
+		if(type.equals("ChocStrawOven")) {
 			changePicture("/imgs/ChocStrawBakeOven.png");
 			type = "ChocStrawBakeOven";
 		}
 		
-		if(type.equals("ChocBlueBake")) {
+		if(type.equals("ChocBlueOven")) {
 			changePicture("/imgs/ChocBlueBakeOven.png");
 			type = "ChocBlueBakeOven";
 		}
@@ -197,7 +200,6 @@ public class Object{
 			type = "ChocBlueBake";
 		}
 	}
-	
 	public void addFruitChange(String fruit) {
 		if(type.equals("ChocBatter")) {
 			if(fruit.equals("Strawberry")) {
@@ -209,7 +211,7 @@ public class Object{
 				type = "ChocBlueBatter";
 			}
 		}
-		if(type.equals("VanBatter")) {
+		else if(type.equals("VanBatter")) {
 			if(fruit.equals("Strawberry")) {
 				changePicture("/imgs/VanStrawUnbake.png");
 				type = "VanStrawBatter";
@@ -263,11 +265,36 @@ public class Object{
 		tx.scale(scale, scale); //previously 1
 	}
 	
-	public boolean objectExit() {
-		//g.drawRect(500, 390, 280, 150);
-		if(x < 500 || x > 780 || y < 390 || y > 540) {
+	public boolean isCake() {
+		if(type.equals("ChocBatter")||type.equals("VanBatter")||type.equals("ChocBlueBatter")||type.equals("ChocStrawBatter")
+				||type.equals("VanBlueBatter")||type.equals("VanStrawBatter")||type.equals("ChocBlueBake")||type.equals("ChocStrawBake")
+				||type.equals("VanBlueBake")||type.equals("VanStrawBake")) {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean isOven() {
+		if(type.equals("ChocBlueOven")||type.equals("ChocStrawOven")||type.equals("VanBlueOven")||type.equals("VanStrawOven")) {
+			return true;
+		}
+		return false;
+	}
+	
+	public int getIndex() {
+		for(int i = 0; i < Runner.getObjectList().size(); i++) {
+			if(type.equals(Runner.getObjectList().get(i).getType()) && x == Runner.getObjectList().get(i).getX()) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	public boolean getDrag() {
+		return draggable;
+	}
+	
+	public void setDrag(boolean b) {
+		draggable = b;
 	}
 }
