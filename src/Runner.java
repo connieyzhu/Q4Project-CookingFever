@@ -36,22 +36,11 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
     private boolean spot2 = false;
     private boolean spot3 = false;
     private boolean spot4 = false;
-    private boolean inside = false;
-    
-    private int spot1Index;
-    private int spot2Index;
-    private int spot3Index;
-    private int spot4Index;
     
     private boolean oven1 = false;
     private boolean oven2 = false;
     private boolean oven3 = false;
     private boolean oven4 = false;
-    
-    private int oven1Index;
-    private int oven2Index;
-    private int oven3Index;
-    private int oven4Index;
 	
 	Background cafeBg = new Background(0, 0, "/imgs/CafeBG.png");
 	Background cafeCounter = new Background(0, 0, "/imgs/CafeCounter.png");
@@ -134,7 +123,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		}
 		//start button
 		if(restart) {
-			System.out.println("list size " + objectList.size());
+			//System.out.println("list size " + objectList.size());
 						
 			playAgain = false;
 			timer.reset(false);
@@ -275,61 +264,72 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		//g.drawRect(915, 535, 190, 75);
 		//g.drawRect(915, 615, 190, 75);
 		for(int i = 3; i< objectList.size(); i++) {
-			if(i==oven1Index) {
-				if(objectList.get(i).getX() != 970 && objectList.get(i).getY() != 375) {
-					oven1= false;
-				}else {
-					oven1 = true;
-				}
-			}else if(i==oven2Index) {
-				if(objectList.get(i).getX() != 950 && objectList.get(i).getY() != 452) {
-					oven2= false;
-				}else {
-					oven2 = true; 
-				}
-			}else if(i==oven3Index) {
-				if(objectList.get(i).getX() != 933 && objectList.get(i).getY() !=530) {
-					oven3= false;
-				}else {
-					oven3 = true; 
-				}
-			}else if(i==oven4Index) {
-				if(objectList.get(i).getX() != 920 && objectList.get(i).getY() != 609) {
-					oven4= false;
-				}else {
-					oven4 = true; 
-				}
+			if(objectList.get(i).getX() == 970 && objectList.get(i).getY() == 375) {
+				oven1 = true;
+				break;
+			}else {
+				oven1 = false;
 			}
-		}	
+		}
+		for(int i = 3; i< objectList.size(); i++) {
+			if(objectList.get(i).getX() == 950 && objectList.get(i).getY() == 452) {
+				oven2= true;
+				break;
+			}else {
+				oven2 = false;
+			}
+		}
+		for(int i = 3; i< objectList.size(); i++) {
+			if(objectList.get(i).getX() == 933 && objectList.get(i).getY() == 530) {
+				oven3= true;
+				break;
+			}else {
+				oven3 = false;
+			}
+		}
+		
+		for(int i = 3; i< objectList.size(); i++) {
+			if(objectList.get(i).getX() == 920 && objectList.get(i).getY() == 609) {
+				oven4= true;
+				break;
+			}else {
+				oven4 = false;
+			}
+		}
 	}
 	
 	
 	public void checkSpots() {
 		for(int i = 0; i < objectList.size(); i++) {
-			if(i == spot1Index) {
-				if(objectList.get(i).getX() == 515 && objectList.get(i).getY() == 370) {
-					spot1 = true;
-				}else {
-					spot1 = false;
-				}
-			}else if(i == spot2Index) {
-				if(objectList.get(i).getX() == 505 && objectList.get(i).getY() == 440) {
-					spot2 = true;
-				}else {
-					spot2 = false;
-				}
-			}else if(i == spot3Index) {
-				if(objectList.get(i).getX() == 641 && objectList.get(i).getY() == 370) {
-					spot3 = true;
-				}else {
-					spot3 = false;
-				}
-			}else if(i == spot4Index) {
-				if(objectList.get(i).getX() == 645 && objectList.get(i).getY() == 440) {
-					spot4 = true;
-				}else {
-					spot4 = false;
-				}
+			if(objectList.get(i).getX() == 515 && objectList.get(i).getY() == 370) {
+				spot1 = true;
+				break;
+			}else {
+				spot1 = false;
+			}
+		}
+		for(int i = 0; i < objectList.size(); i++) {
+			if(objectList.get(i).getX() == 505 && objectList.get(i).getY() == 440) {
+				spot2= true;
+				break;
+			}else {
+				spot2 = false;
+			}
+		}
+		for(int i = 0; i < objectList.size(); i++) {
+			if(objectList.get(i).getX() == 641 && objectList.get(i).getY() == 370) {
+				spot3= true;
+				break;
+			}else {
+				spot3 = false;
+			}
+		}
+		for(int i = 0; i < objectList.size(); i++) {
+			if(objectList.get(i).getX() == 645 && objectList.get(i).getY() == 440) {
+				spot4= true;
+				break;
+			}else {
+				spot4 = false;
 			}
 		}
 	}
@@ -478,6 +478,14 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		}else if(arg0.getX() >= 315 && arg0.getX() <= 315+60 && arg0.getY() >= 495 && arg0.getY() <= 495+60) {
 			coffee3Selected = true;
 		}
+		
+		for(int i = 3; i < objectList.size(); i++) {
+			System.out.println(Runner.getObjectList().get(i).getType() + " " + 
+					Runner.getObjectList().get(i).getX()+Runner.getObjectList().get(i).getY());
+		}
+		
+		System.out.println("Spot " + spot1 + " " + spot2 + " " + spot3 + " " + spot4);
+		System.out.println("Oven " + oven1 + " " + oven2 + " " + oven3 + " " + oven4);
 	}
 
 	//@Override
@@ -497,7 +505,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 						if(batter.getBounds().contains(mp)) {
 							if(hitBox.getType().equals("Blueberry")) {
 								batter.addFruitChange("Blueberry");
-								System.out.println("changed");
 							}else if(hitBox.getType().equals("Strawberry")) {
 								batter.addFruitChange("Strawberry");
 							}
@@ -639,69 +646,45 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 					if(!spot1) {
 						objectList.get(i).setPosition(515, 370);
 						spot1 = true;
-						spot1Index = i;
 						objectList.get(i).setInside(true, 515, 370);
-						System.out.println("spot1 filled");
 					}else if(!spot2) {
 						objectList.get(i).setPosition(505, 440);
 						spot2 = true;
-						spot2Index = i;
 						objectList.get(i).setInside(true, 505, 440);
-						System.out.println("spot2 filled");
 					}else if(!spot3) {
 						objectList.get(i).setPosition(641, 370);
 						spot3 = true;
-						spot3Index = i;
 						objectList.get(i).setInside(true, 641, 370);
-						System.out.println("spot3 filled");
 					}else if(!spot4) {
 						objectList.get(i).setPosition(645, 440);
 						spot4 = true;
-						spot4Index = i;
 						objectList.get(i).setInside(true, 645, 440);
-						System.out.println("spot4 filled");
 					}
 				}else if(px>=915 && px<= 1130 && py >= 375 && py <= 700 && (!oven1||!oven2||!oven3||!oven4)) {
 					if(!oven1) {
 						objectList.get(i).setPosition(970, 375);
-						objectList.get(i).ovenChange();
+						objectList.get(i).ovenChange(1);
 						oven1 = true;
-						oven1Index = i;
+						new OvenTimer(5, objectList.get(i).getIndex());
 						objectList.get(i).setInsideOven(true, 970, 375);
 					}else if(!oven2) {
 						objectList.get(i).setPosition(950, 452);
-						objectList.get(i).ovenChange();
+						objectList.get(i).ovenChange(2);
 						oven2 = true;
-						oven2Index = i; 
+						new OvenTimer(5, objectList.get(i).getIndex());
 						objectList.get(i).setInsideOven(true, 950, 452);
 					}else if(!oven3) {
 						objectList.get(i).setPosition(933, 530);
-						objectList.get(i).ovenChange();
+						objectList.get(i).ovenChange(3);
 						oven3 = true;
-						oven3Index = i; 
+						new OvenTimer(5, objectList.get(i).getIndex());
 						objectList.get(i).setInsideOven(true, 933, 530);
 					}else if(!oven4) {
 						objectList.get(i).setPosition(920, 609);
-						objectList.get(i).ovenChange();
+						objectList.get(i).ovenChange(4);
 						oven4 = true;
-						oven4Index = i; 
+						new OvenTimer(5, objectList.get(i).getIndex());
 						objectList.get(i).setInsideOven(true, 920, 609);
-					}
-					if(oven1) {
-						new OvenTimer(5, oven1Index);
-						System.out.println("Oven 1 Starting: Done in 5 seconds");	
-					}
-					if(oven2) {
-						new OvenTimer(5, oven2Index);
-						System.out.println("Oven 2 Starting: Done in 5 seconds");
-					}
-					if(oven3) {
-						new OvenTimer(5, oven3Index);
-						System.out.println("Oven 3 Starting: Done in 5 seconds");
-					}
-					if(oven4) {
-						new OvenTimer(5, oven4Index);
-						System.out.println("Oven 4 Starting: Done in 5 seconds");
 					}
 				}else if(px>=60 && px<= 190 && py >= 600 && py <= 720) {
 					objectList.remove(i);
@@ -757,11 +740,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		}
 		if (hitBox != null) {
 			Point mp = e.getPoint();
-			if(mp.getX() >= 500 && mp.getX() <= 780 && mp.getY() >= 390 && mp.getY() <= 540) {
-				inside = true;
-			}else {
-				inside = false;
-			}
 			Rectangle bounds = hitBox.getBounds();
 			bounds.x = mp.x - offset.x;
 			bounds.y = mp.y - offset.y;
