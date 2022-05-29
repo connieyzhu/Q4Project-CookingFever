@@ -80,6 +80,10 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	private boolean restart = true; 
 	private boolean playAgain = false;
 	private boolean tutorial = false;
+	
+	private boolean coffee1Selected = false;
+	private boolean coffee2Selected = false;
+	private boolean coffee3Selected = false;
 
 	int total = 0;
 	
@@ -96,6 +100,17 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		timer1.paint(g);
 		timer2.paint(g);
 		timer3.paint(g);
+		
+		g.drawRect(195, 485, 60, 60);
+		g.drawRect(255, 490, 60, 60);
+		g.drawRect(315, 495, 60, 60);
+		
+		
+		g.drawRect(940, 375, 190, 75);
+		g.drawRect(940, 455, 190, 75);
+		g.drawRect(915, 535, 190, 75);
+		g.drawRect(915, 615, 190, 75);
+		
 		
 		Music.play();
 		checkSpots();
@@ -254,6 +269,11 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	}
 	
 	public void checkOven() {
+		
+		//g.drawRect(940, 375, 190, 75);
+		//g.drawRect(940, 455, 190, 75);
+		//g.drawRect(915, 535, 190, 75);
+		//g.drawRect(915, 615, 190, 75);
 		for(int i = 3; i< objectList.size(); i++) {
 			if(i==oven1Index) {
 				if(objectList.get(i).getX() != 970 && objectList.get(i).getY() != 375) {
@@ -446,6 +466,18 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				objectList.get(hitBox.getIndex()).fullBakeChange(); 
 			}
 		}
+		/*
+		 * g.drawRect(195, 485, 60, 60);
+		 * g.drawRect(255, 490, 60, 60);
+		 * g.drawRect(315, 495, 60, 60);
+		 */
+		if(arg0.getX() >= 195 && arg0.getX() <= 195+60 && arg0.getY() >= 485 && arg0.getY() <= 485+60) {
+			coffee1Selected = true;
+		}else if(arg0.getX() >= 255 && arg0.getX() <= 255+60 && arg0.getY() >= 490 && arg0.getY() <= 490+60) {
+			coffee2Selected = true;
+		}else if(arg0.getX() >= 315 && arg0.getX() <= 315+60 && arg0.getY() >= 495 && arg0.getY() <= 495+60) {
+			coffee3Selected = true;
+		}
 	}
 
 	//@Override
@@ -476,19 +508,22 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 			}
 			if(timer.itemIsInside(px, py)) {
 				for(int j = 0; j < timer.custOrder().size(); j++) {
-					if(objectList.get(i).getType().equals("CoffeeFull") && timer.custOrder().get(j).getType().equals("CoffeeOrder")) {
-						if(i == 0) {
+					if(objectList.get(i).getType().equals("CoffeeFull") && timer.custOrder().get(j).getType().equals("CoffeeOrder") && hitBox.getType().equals("CoffeeFull")) {
+						if(i == 0 && coffee1Selected) {
 							objectList.remove(0);
 							objectList.add(0, new Object(195, 485, "CoffeeEmpty", 1.0));
 							timer.custOrder().remove(j);
-						}else if(i == 1) {
+							coffee1Selected = false;
+						}else if(i == 1 && coffee2Selected) {
 							objectList.remove(1);
 							objectList.add(1, new Object(255, 490, "CoffeeEmpty", 1.0));
 							timer.custOrder().remove(j);
-						}else if(i == 2) {
+							coffee2Selected = false;
+						}else if(i == 2 && coffee3Selected) {
 							objectList.remove(2);
 							objectList.add(2, new Object(315, 495, "CoffeeEmpty", 1.0));
 							timer.custOrder().remove(j);
+							coffee3Selected = false;
 						}
 						break;
 					}
@@ -500,19 +535,22 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				}
 			}else if(timer1.itemIsInside(px, py)) {
 				for(int j = 0; j < timer1.custOrder().size(); j++) {
-					if(objectList.get(i).getType().equals("CoffeeFull") && timer1.custOrder().get(j).getType().equals("CoffeeOrder")) {
-						if(i == 0) {
+					if(objectList.get(i).getType().equals("CoffeeFull") && timer1.custOrder().get(j).getType().equals("CoffeeOrder") && hitBox.getType().equals("CoffeeFull")) {
+						if(i == 0 && coffee1Selected) {
 							objectList.remove(0);
 							objectList.add(0, new Object(195, 485, "CoffeeEmpty", 1.0));
 							timer1.custOrder().remove(j);
-						}else if(i == 1) {
+							coffee1Selected = false;
+						}else if(i == 1 && coffee2Selected) {
 							objectList.remove(1);
 							objectList.add(1, new Object(255, 490, "CoffeeEmpty", 1.0));
 							timer1.custOrder().remove(j);
-						}else if(i == 2) {
+							coffee2Selected = false;
+						}else if(i == 2 && coffee3Selected) {
 							objectList.remove(2);
 							objectList.add(2, new Object(315, 495, "CoffeeEmpty", 1.0));
 							timer1.custOrder().remove(j);
+							coffee3Selected = false;
 						}
 						break;
 					}
@@ -524,19 +562,22 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				}
 			}else if(timer2.itemIsInside(px, py)) {
 				for(int j = 0; j < timer2.custOrder().size(); j++) {
-					if(objectList.get(i).getType().equals("CoffeeFull") && timer2.custOrder().get(j).getType().equals("CoffeeOrder")) {
-						if(i == 0) {
+					if(objectList.get(i).getType().equals("CoffeeFull") && timer2.custOrder().get(j).getType().equals("CoffeeOrder") && hitBox.getType().equals("CoffeeFull")) {
+						if(i == 0 && coffee1Selected) {
 							objectList.remove(0);
 							objectList.add(0, new Object(195, 485, "CoffeeEmpty", 1.0));
 							timer2.custOrder().remove(j);
-						}else if(i == 1) {
+							coffee1Selected = false;
+						}else if(i == 1 && coffee2Selected) {
 							objectList.remove(1);
 							objectList.add(1, new Object(255, 490, "CoffeeEmpty", 1.0));
 							timer2.custOrder().remove(j);
-						}else if(i == 2) {
+							coffee2Selected = false;
+						}else if(i == 2 && coffee3Selected) {
 							objectList.remove(2);
 							objectList.add(2, new Object(315, 495, "CoffeeEmpty", 1.0));
 							timer2.custOrder().remove(j);
+							coffee3Selected = false;
 						}
 						break;
 					}
@@ -548,19 +589,22 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				}
 			}else if(timer3.itemIsInside(px, py)) {
 				for(int j = 0; j < timer3.custOrder().size(); j++) {
-					if(objectList.get(i).getType().equals("CoffeeFull") && timer3.custOrder().get(j).getType().equals("CoffeeOrder")) {
-						if(i == 0) {
+					if(objectList.get(i).getType().equals("CoffeeFull") && timer3.custOrder().get(j).getType().equals("CoffeeOrder") && hitBox.getType().equals("CoffeeFull")) {
+						if(i == 0 && coffee1Selected) {
 							objectList.remove(0);
 							objectList.add(0, new Object(195, 485, "CoffeeEmpty", 1.0));
 							timer3.custOrder().remove(j);
-						}else if(i == 1) {
+							coffee1Selected = false;
+						}else if(i == 1 && coffee2Selected) {
 							objectList.remove(1);
 							objectList.add(1, new Object(255, 490, "CoffeeEmpty", 1.0));
 							timer3.custOrder().remove(j);
-						}else if(i == 2) {
+							coffee2Selected = false;
+						}else if(i == 2 && coffee3Selected) {
 							objectList.remove(2);
 							objectList.add(2, new Object(315, 495, "CoffeeEmpty", 1.0));
 							timer3.custOrder().remove(j);
+							coffee3Selected = false;
 						}
 						break;
 					}
@@ -623,25 +667,25 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 						objectList.get(i).ovenChange();
 						oven1 = true;
 						oven1Index = i;
-						objectList.get(i).setInside(true, 970, 375);
+						objectList.get(i).setInsideOven(true, 970, 375);
 					}else if(!oven2) {
 						objectList.get(i).setPosition(950, 452);
 						objectList.get(i).ovenChange();
 						oven2 = true;
 						oven2Index = i; 
-						objectList.get(i).setInside(true, 950, 452);
+						objectList.get(i).setInsideOven(true, 950, 452);
 					}else if(!oven3) {
 						objectList.get(i).setPosition(933, 530);
 						objectList.get(i).ovenChange();
 						oven3 = true;
 						oven3Index = i; 
-						objectList.get(i).setInside(true, 933, 530);
+						objectList.get(i).setInsideOven(true, 933, 530);
 					}else if(!oven4) {
 						objectList.get(i).setPosition(920, 609);
 						objectList.get(i).ovenChange();
 						oven4 = true;
 						oven4Index = i; 
-						objectList.get(i).setInside(true, 920, 609);
+						objectList.get(i).setInsideOven(true, 920, 609);
 					}
 					if(oven1) {
 						new OvenTimer(5, oven1Index);
@@ -663,6 +707,8 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 					objectList.remove(i);
 				}else if(objectList.get(i).isInside()) {
 					objectList.get(i).setPosition(objectList.get(i).getInsideX(), objectList.get(i).getInsideY());
+				}else if(objectList.get(i).isInsideOven()) {
+					objectList.get(i).setPosition(objectList.get(i).getInsideOvenX(), objectList.get(i).getInsideOvenY());
 				}else {
 					objectList.remove(i);
 				}
