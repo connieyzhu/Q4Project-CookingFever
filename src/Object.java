@@ -15,8 +15,8 @@ public class Object{
 	private String type;
 	private AffineTransform tx;
 	private Rectangle rectangle;
-	private boolean insideSquares;
-	private int insideX, insideY;
+	private boolean insideSquares, insideOven;
+	private int insideX, insideY, insideOvenX, insideOvenY;
 	private double scale;
 	private boolean draggable = true;
 	
@@ -255,6 +255,24 @@ public class Object{
 	public int getInsideY() {
 		return insideY;
 	}
+	
+	public boolean isInsideOven() {
+		return insideOven;
+	}
+	
+	public void setInsideOven(boolean b, int ix, int iy) {
+		insideOven = b;
+		insideOvenX = ix;
+		insideOvenY = iy;
+	}
+	
+	public int getInsideOvenX() {
+		return insideOvenX;
+	}
+	
+	public int getInsideOvenY() {
+		return insideOvenY;
+	}
 
 	public void setPosition(int x2, int y2) {
 		// TODO Auto-generated method stub
@@ -283,6 +301,7 @@ public class Object{
 	
 	public int getIndex() {
 		for(int i = 0; i < Runner.getObjectList().size(); i++) {
+			System.out.print(Runner.getObjectList().get(i).getType());
 			if(type.equals(Runner.getObjectList().get(i).getType()) && x == Runner.getObjectList().get(i).getX()) {
 				return i;
 			}
