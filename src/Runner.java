@@ -209,7 +209,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 						
 			g.setColor(Color.black);
 			g.setFont(new Font("Serif", Font.PLAIN, 40));
-			g.drawString("Press Space to Play Again", 460, 370);
+			g.drawString("Exit Out to Play Again", 460, 370);
 			if(count == 3) {
 				g.setColor(Color.WHITE);
 				g.setFont(new Font("Serif", Font.PLAIN, 90));
@@ -472,7 +472,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 						}
 					}
 				}
-				objectList.remove(hitBox.getIndex());
+				objectList.remove(hitBox);
 			}
 			if(timer.itemIsInside(px, py)) {
 				for(int j = 0; j < timer.custOrder().size(); j++) {
