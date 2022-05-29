@@ -19,7 +19,7 @@ public class Object{
 	private int insideX, insideY, insideOvenX, insideOvenY;
 	private double scale;
 	private boolean draggable = true;
-	
+	private int ovenNumber;
 
 	public Object(int x, int y, String s, double setScale){
 		this.x = x;
@@ -135,7 +135,7 @@ public class Object{
 		type = "CoffeeFull";
 	}
 	
-	public void ovenChange() {
+	public void ovenChange(int oven) {
 		if(type.equals("VanStrawBatter")) {
 			changePicture("/imgs/VanStrawOven.png");
 			type = "VanStrawOven";
@@ -154,6 +154,23 @@ public class Object{
 		if(type.equals("ChocBlueBatter")) {
 			changePicture("/imgs/ChocBlueOven.png");
 			type = "ChocBlueOven";
+		}
+		ovenNumber = oven;
+		if(ovenNumber == 1) {
+			x = 970;
+			y = 375;
+		}
+		if(ovenNumber == 2) {
+			x = 950;
+			y = 452;
+		}
+		if(ovenNumber == 3) {
+			x = 933;
+			y = 530;
+		}
+		if(ovenNumber == 4) {
+			x = 920;
+			y = 609;
 		}
 	}
 	
@@ -177,12 +194,29 @@ public class Object{
 			changePicture("/imgs/ChocBlueBakeOven.png");
 			type = "ChocBlueBakeOven";
 		}
+		if(ovenNumber == 1) {
+			x = 970;
+			y = 375;
+		}
+		if(ovenNumber == 2) {
+			x = 950;
+			y = 452;
+		}
+		if(ovenNumber == 3) {
+			x = 933;
+			y = 530;
+		}
+		if(ovenNumber == 4) {
+			x = 920;
+			y = 609;
+		}
 	}
 	
 	public void fullBakeChange() {
 		if(type.equals("VanStrawBakeOven")) {
 			changePicture("/imgs/VanStrawBake.png");
 			type = "VanStrawBake"; 
+			
 		}
 		
 		if(type.equals("VanBlueBakeOven")) {
@@ -198,6 +232,22 @@ public class Object{
 		if(type.equals("ChocBlueBakeOven")) {
 			changePicture("/imgs/ChocBlueBake.png");
 			type = "ChocBlueBake";
+		}
+		if(ovenNumber == 1) {
+			x = 970;
+			y = 375;
+		}
+		if(ovenNumber == 2) {
+			x = 950;
+			y = 452;
+		}
+		if(ovenNumber == 3) {
+			x = 933;
+			y = 530;
+		}
+		if(ovenNumber == 4) {
+			x = 920;
+			y = 609;
 		}
 	}
 	public void addFruitChange(String fruit) {
@@ -301,7 +351,6 @@ public class Object{
 	
 	public int getIndex() {
 		for(int i = 0; i < Runner.getObjectList().size(); i++) {
-			System.out.print(Runner.getObjectList().get(i).getType());
 			if(type.equals(Runner.getObjectList().get(i).getType()) && x == Runner.getObjectList().get(i).getX()) {
 				return i;
 			}
