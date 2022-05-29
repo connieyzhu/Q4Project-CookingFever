@@ -689,10 +689,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	//@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		if(arg0.getKeyCode() == 32 && playAgain) {
-			playAgain = false;
-			restart = true;
-		}
 	}
 
 	//@Override
