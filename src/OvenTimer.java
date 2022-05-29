@@ -14,6 +14,7 @@ public class OvenTimer {
         public void run() {
             for(int i = 3; i < Runner.getObjectList().size(); i++) {
             	Runner.getObject(index).bakeChange(); 
+            	System.out.println("Oven Starting: Done in 5 seconds");
             	
             }
             timer.cancel(); //Terminate the timer thread
