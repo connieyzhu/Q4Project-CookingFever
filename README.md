@@ -6,15 +6,16 @@ We hope you have fun playing our new version of Cooking Fever!
 
 ## Description 
 
-In this game, the goal is to collect as many coins as possible from all the customers in the allocated amount of time. Make sure to complete as many orders as you can without sending away any customers! There is a three-second timer on the coffee machine, and a 5 second timer on the oven for the cakes. Drag the coffee, toppings, and cakes to complete the orders and don't forget to have fun!!!
+In this game, the goal is to collect as many coins as possible from all the customers. Make sure to complete as many orders as you can without sending away more than three customers, otherwise the game is over. There is a 5 second timer on the coffee machine, and a 5 second timer on the oven for the cakes. Drag the coffee, toppings, and cakes to complete the orders and don't forget to have fun!!!
 
 ## How to Play
 
-- Press ___ to start
-- use mouse to drag the items
-- there is a three-second timer for the coffee machine!
-- there is a 5 second bake time for the oven! 
-- Press ___ to restart 
+- Press "tutorial" to review instructions
+- Press "start" to begin
+- Use mouse to drag the items
+- Start the coffee machine timer by clicking on the machine
+- Start the oven timer by dragging an unbaked cake to an open oven slot
+- Exit out to restart 
 
 ## CLASSES
 
@@ -26,7 +27,7 @@ The background class contains the image for the cafe setting, including the chai
 
 ### Customer Class
 
-The customer class contains the constructor for the customer object, getter and setter methods, and a changing picture method. There four different custromers, Daphne, Kyle, Francis, and Linda, and each object operates on a timer schedule!
+The customer class contains the constructor for the customer object, getter and setter methods, and a changing picture method. There are four different custromers, Daphne, Kyle, Francis, and Linda, and each object operates on a timer schedule!
 
 ![L1](https://user-images.githubusercontent.com/78383220/167712746-b9da7b1b-4720-40da-822c-47677847cd3a.png)  ![K1](https://user-images.githubusercontent.com/78383220/167712784-b68b83d2-fcc0-4dc6-9e77-3c28a87683cc.png) ![F1](https://user-images.githubusercontent.com/78383220/167712805-404e3f91-85fd-4ad2-9fdb-4b7c1311ab73.png) ![D1](https://user-images.githubusercontent.com/78383220/167712818-5678712d-7ed7-495a-a39b-3ad048ef59bf.png)
 
