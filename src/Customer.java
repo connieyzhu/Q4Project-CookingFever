@@ -30,7 +30,6 @@ public class Customer {
 	
 	public Customer(int x, int x1, int y, String custName) {
 		this.x1 = x1;
-		System.out.println("Pos " + x1);
 		this.x = x; 
 		this.y = y;
 		vx = 0;
