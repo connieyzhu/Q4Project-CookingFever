@@ -35,7 +35,6 @@ public class OrderTimer {
 		
 	    public OrderTimer(int x, int y, int seconds, int wait) {
 	    	personX = x-10;
-	    	System.out.println("person " + personX);
 	    	this.x = x; 
 	    	this.y = y;
 			gx = x;
@@ -224,12 +223,9 @@ public class OrderTimer {
 	    }
 	    
 	   public boolean itemIsInside(int xVal, int yVal) {
-		   System.out.println("location: " + numX1 + " " + numX2);
 		   if(xVal >= numX1 && xVal <= numX2 && yVal >= 50 && yVal <= 330) {
-	    		System.out.println(xVal + " " + yVal);  
 			   return true;
 	    	}
-	    	System.out.println("itemfalse");
 		   return false;
 	    }
 	   
