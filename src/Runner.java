@@ -224,7 +224,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	public Runner() {
 		JFrame f = new JFrame("Cooking Fever");
  		f.setSize(new Dimension(1280, 750));
-		//f.setBackground();
 		f.add(this);
 		f.addMouseListener(this);
 		f.addMouseMotionListener(this);
@@ -346,7 +345,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				tutorial = false;
 				restart = false;
 			}else if(arg0.getX() >= 1165 && arg0.getX() <= 1268 && arg0.getY() >= 80 && arg0.getY() <= 145) { 
-				//	g.fillRect(1165, 80, 100, 40);
 				tutorial = true;
 			}
 		}
@@ -442,11 +440,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				objectList.get(hitBox.getIndex()).fullBakeChange(); 
 			}
 		}
-		/*
-		 * g.drawRect(195, 485, 60, 60);
-		 * g.drawRect(255, 490, 60, 60);
-		 * g.drawRect(315, 495, 60, 60);
-		 */
+
 		if(arg0.getX() >= 195 && arg0.getX() <= 195+60 && arg0.getY() >= 485 && arg0.getY() <= 485+60) {
 			coffee1Selected = true;
 		}else if(arg0.getX() >= 255 && arg0.getX() <= 255+60 && arg0.getY() >= 490 && arg0.getY() <= 490+60) {
