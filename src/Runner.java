@@ -59,10 +59,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	
 	Music music = new Music();
 	
-	//Person: (100, 130), (390, 130), (680,130), 970, 130)
-	//Order Form: (20, 70), (310, 70), (600, 70), 890, 70)
-	//Timer: (110, 75), (400, 75), (690, 75), (980, 75)
-	
 	int mouseY = MouseInfo.getPointerInfo().getLocation().y; 
 	int mouseX = MouseInfo.getPointerInfo().getLocation().x;
 	
