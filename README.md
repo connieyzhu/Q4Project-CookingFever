@@ -22,9 +22,8 @@ In this game, the goal is to collect as many coins as possible from all the cust
 ### Background Class
 
 The background class contains the image for the cafe setting, including the chairs, counter, and baking items. 
-<img width="546" alt="Screen Shot 2022-05-30 at 4 55 45 PM" src="https://user-images.githubusercontent.com/90798447/171069442-869c5ce4-9ff2-4484-8247-6188f34c2ec4.png">
+<img width="546" alt="Screen Shot 2022-05-30 at 4 55 45 PM" src="https://user-images.githubusercontent.com/90798447/171069442-869c5ce4-9ff2-4484-8247-6188f34c2ec4.png"> <img width="520" alt="Screen Shot 2022-05-30 at 4 59 01 PM" src="https://user-images.githubusercontent.com/90798447/171069459-25f09ce2-a5a3-40bf-8de3-a8aa899840b9.png">
 
-(img)
 
 ### Customer Class
 
