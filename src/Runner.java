@@ -90,17 +90,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		timer2.paint(g);
 		timer3.paint(g);
 		
-		g.drawRect(195, 485, 60, 60);
-		g.drawRect(255, 490, 60, 60);
-		g.drawRect(315, 495, 60, 60);
-		
-		
-		g.drawRect(940, 375, 190, 75);
-		g.drawRect(940, 455, 190, 75);
-		g.drawRect(915, 535, 190, 75);
-		g.drawRect(915, 615, 190, 75);
-		
-		
 		Music.play();
 		checkSpots();
 		checkOven(); 
@@ -123,8 +112,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		}
 		//start button
 		if(restart) {
-			//System.out.println("list size " + objectList.size());
-						
 			playAgain = false;
 			timer.reset(false);
 			timer1.reset(false);
@@ -206,8 +193,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 			objectList.add(coffee2);
 			objectList.add(coffee3);
 					
-			System.out.println("list size " + objectList.size());
-						
 			g.setColor(Color.PINK);
 			g.fillRect(0, 0, 1280, 750);
 						
@@ -258,11 +243,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 	}
 	
 	public void checkOven() {
-		
-		//g.drawRect(940, 375, 190, 75);
-		//g.drawRect(940, 455, 190, 75);
-		//g.drawRect(915, 535, 190, 75);
-		//g.drawRect(915, 615, 190, 75);
 		for(int i = 3; i< objectList.size(); i++) {
 			if(objectList.get(i).getX() == 970 && objectList.get(i).getY() == 375) {
 				oven1 = true;
@@ -374,7 +354,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 			int x = timer.getCoin().getX();
 			int y = timer.getCoin().getY();
 			if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
-				System.out.println("collect");
 				timer.getCoin().setCollect(false);
 				total += timer.getTotal();
 			}
@@ -384,7 +363,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 			int x = timer1.getCoin().getX();
 			int y = timer1.getCoin().getY();
 			if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
-				System.out.println("collect");
 				timer1.getCoin().setCollect(false);
 				total += timer1.getTotal();
 			}
@@ -394,7 +372,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 			int x = timer2.getCoin().getX();
 			int y = timer2.getCoin().getY();
 			if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
-				System.out.println("collect");
 				timer2.getCoin().setCollect(false);
 				total += timer2.getTotal();
 			}
@@ -404,7 +381,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 			int x = timer3.getCoin().getX();
 			int y = timer3.getCoin().getY();
 			if(arg0.getX() >= x && arg0.getX() <= x+50 && arg0.getY() >= y && arg0.getY() <= y+80) {
-				System.out.println("collect");
 				timer3.getCoin().setCollect(false);
 				total += timer3.getTotal();
 			}
@@ -479,13 +455,6 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 			coffee3Selected = true;
 		}
 		
-		for(int i = 3; i < objectList.size(); i++) {
-			System.out.println(Runner.getObjectList().get(i).getType() + " " + 
-					Runner.getObjectList().get(i).getX()+Runner.getObjectList().get(i).getY());
-		}
-		
-		System.out.println("Spot " + spot1 + " " + spot2 + " " + spot3 + " " + spot4);
-		System.out.println("Oven " + oven1 + " " + oven2 + " " + oven3 + " " + oven4);
 	}
 
 	//@Override
@@ -497,7 +466,7 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 		Point mp = arg0.getPoint();
 		int px = arg0.getX();
 		int py = arg0.getY();
-		//System.out.println("MouseLocation: " + px + " " + py);
+
 		for(int i = 0; i < objectList.size(); i++) {
 			if(hitBox.getType().equals("Blueberry") || hitBox.getType().equals("Strawberry")) {
 				for(Object batter:objectList) {
