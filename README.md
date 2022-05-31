@@ -32,7 +32,7 @@ The Customer class contains the constructor for the customer object, with the pa
 
 ### Object Class
 
-The object class has a constructor that is made up of three parameters. The first two are ints to get the position of an object, and the last parameter is a string that represents the type of object, such as "Strawberry" or "VanillaBatter". 
+The object class has a constructor that is made up of three parameters. The first two are ints to get the position of an object, and the last parameter is a string that represents the type of object, such as "Strawberry" or "VanillaBatter". The various methods included in this class are utilized in Runner to determine functions such as when fruit is added to cake batter or when cake is done baking in the oven. 
 
 ![CoffeeFull](https://user-images.githubusercontent.com/78383220/167712855-5b4a7ac7-a391-487e-85cf-ce8e58eed4f8.png)  ![VanBlueBake](https://user-images.githubusercontent.com/78383220/167712951-ed2df547-d8a3-4cb5-b75b-e61bf91e27af.png) ![ChocStrawBake](https://user-images.githubusercontent.com/78383220/167712999-2ba00bb5-d3ca-49f8-a752-d88a1d0958ab.png)
 
@@ -40,7 +40,7 @@ The object class has a constructor that is made up of three parameters. The firs
 
 The position class is able to track the position of each customer at all times, and it is made up of 8 arrays!!!
 
-![L2](https://user-images.githubusercontent.com/78383220/167713062-d0e320aa-1440-46a2-a5d3-589ee0cc1134.png)  ![K2](https://user-images.githubusercontent.com/78383220/167713105-3ab415a8-30ae-455a-ad63-706a68b48778.png) ![F2](https://user-images.githubusercontent.com/78383220/167713167-04bca766-1a60-4daf-8880-a7a5f8b0aec2.png)  ![D2](https://user-images.githubusercontent.com/78383220/167713191-ee35291d-1a14-4407-8ca6-219e817f671e.png)
+<img width="1190" alt="Screen Shot 2022-05-30 at 5 06 33 PM" src="https://user-images.githubusercontent.com/90798447/171069849-09dd94bc-724e-4fb5-98b6-dfaba3ab7bb4.png">
 
 ## METHODS
 
