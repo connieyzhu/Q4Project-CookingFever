@@ -624,25 +624,29 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 						objectList.get(i).setPosition(970, 375);
 						objectList.get(i).ovenChange(1);
 						oven1 = true;
-						new OvenTimer(5, objectList.get(i).getIndex());
+						new OvenTimer(10, objectList.get(i).getIndex());
+						System.out.println("Oven Starting: Done in 10 seconds");
 						objectList.get(i).setInsideOven(true, 970, 375);
 					}else if(!oven2) {
 						objectList.get(i).setPosition(950, 452);
 						objectList.get(i).ovenChange(2);
 						oven2 = true;
-						new OvenTimer(5, objectList.get(i).getIndex());
+						new OvenTimer(10, objectList.get(i).getIndex());
+						System.out.println("Oven Starting: Done in 10 seconds");
 						objectList.get(i).setInsideOven(true, 950, 452);
 					}else if(!oven3) {
 						objectList.get(i).setPosition(933, 530);
 						objectList.get(i).ovenChange(3);
 						oven3 = true;
-						new OvenTimer(5, objectList.get(i).getIndex());
+						new OvenTimer(10, objectList.get(i).getIndex());
+						System.out.println("Oven Starting: Done in 10 seconds");
 						objectList.get(i).setInsideOven(true, 933, 530);
 					}else if(!oven4) {
 						objectList.get(i).setPosition(920, 609);
 						objectList.get(i).ovenChange(4);
 						oven4 = true;
-						new OvenTimer(5, objectList.get(i).getIndex());
+						new OvenTimer(10, objectList.get(i).getIndex());
+						System.out.println("Oven Starting: Done in 10 seconds");
 						objectList.get(i).setInsideOven(true, 920, 609);
 					}
 				}else if(px>=60 && px<= 190 && py >= 600 && py <= 720) {
