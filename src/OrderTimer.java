@@ -122,10 +122,8 @@ public class OrderTimer {
 				g.setColor(Color.green);
 				if(y >= 180 && y < 210) {
 					g.setColor(Color.yellow);
-					//cust.changePicture("/imgs/" + custName.substring(0,1) + "2.png");
 				}else if(y >= 200) {
 					g.setColor(Color.red);
-					//cust.changePicture("/imgs/" + custName.substring(0,1) + "3.png");
 				}
 				g.fillRect(x, y, tx, ty);
 				order.paint(g);
@@ -256,7 +254,7 @@ public class OrderTimer {
 	        	}else {
 	    			y += 1;
 	    			ty -= 1;
-	    			timer.schedule(new RemindTask(), sec*secondsAmt); //400
+	    			timer.schedule(new RemindTask(), sec*secondsAmt);  
 	    		}
 	        }
 	    }
