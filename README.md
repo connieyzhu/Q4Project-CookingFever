@@ -32,15 +32,16 @@ The Customer class contains the constructor for the customer object, with the pa
 
 ### Object Class
 
-The object class has a constructor that is made up of three parameters. The first two are ints to get the position of an object, and the last parameter is a string that represents the type of object, such as "Strawberry" or "VanillaBatter". The various methods included in this class are utilized in Runner to determine functions such as when fruit is added to cake batter or when cake is done baking in the oven. 
+The Object class has a constructor that is made up of three parameters. The first two are ints to get the position of an object, and the last parameter is a string that represents the type of object, such as "Strawberry" or "VanillaBatter". The various methods included in this class are utilized in Runner to determine functions such as when fruit is added to cake batter or when cake is done baking in the oven. 
 
 ![CoffeeFull](https://user-images.githubusercontent.com/78383220/167712855-5b4a7ac7-a391-487e-85cf-ce8e58eed4f8.png)  ![VanBlueBake](https://user-images.githubusercontent.com/78383220/167712951-ed2df547-d8a3-4cb5-b75b-e61bf91e27af.png) ![ChocStrawBake](https://user-images.githubusercontent.com/78383220/167712999-2ba00bb5-d3ca-49f8-a752-d88a1d0958ab.png)
 
 ### Position Class
 
-The position class is able to track the position of each customer at all times, and it is made up of 8 arrays!!!
+The Position class used to randomize the assignment of locations and orders, such as the waiting position of the person, the ordering position of a person, and the random order of a person. Additional boolean arrays prevent the duplication of location assignments to customers to prevent two customers in any one position.  
 
 <img width="1190" alt="Screen Shot 2022-05-30 at 5 06 33 PM" src="https://user-images.githubusercontent.com/90798447/171069849-09dd94bc-724e-4fb5-98b6-dfaba3ab7bb4.png">
+![Screen Shot 2022-05-30 at 5 14 50 PM](https://user-images.githubusercontent.com/90798447/171070268-fd97f361-5805-46ee-bb0e-ad76753ca372.png)
 
 ## METHODS
 
