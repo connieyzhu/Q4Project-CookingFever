@@ -41,7 +41,9 @@ The Object class has a constructor that is made up of three parameters. The firs
 The Position class used to randomize the assignment of locations and orders, such as the waiting position of the person, the ordering position of a person, and the random order of a person. Additional boolean arrays prevent the duplication of location assignments to customers to prevent two customers in any one position.  
 
 <img width="1190" alt="Screen Shot 2022-05-30 at 5 06 33 PM" src="https://user-images.githubusercontent.com/90798447/171069849-09dd94bc-724e-4fb5-98b6-dfaba3ab7bb4.png">
-![Screen Shot 2022-05-30 at 5 14 50 PM](https://user-images.githubusercontent.com/90798447/171070268-fd97f361-5805-46ee-bb0e-ad76753ca372.png)
+<img width="546" alt="Screen Shot 2022-05-30 at 5 14 50 PM" src="https://user-images.githubusercontent.com/90798447/171070342-08e82d58-12d5-4e96-84fa-70fdbe10cc2f.png">
+![Screen Shot 2022-05-30 at 5 14 50 PM](https://user-images.githubusercontent.com/90798447/171070342-08e82d58-12d5-4e96-84fa-70fdbe10cc2f.png)
+
 
 ## METHODS
 
