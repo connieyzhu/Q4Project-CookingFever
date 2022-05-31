@@ -28,8 +28,7 @@ The Background class constructor contains a parameter to input the image URL, wh
 
 The Customer class contains the constructor for the customer object, with the parameter, custName, that allows the picture of the customer to be changed. There are four different custromer images, Daphne, Kyle, Francis, and Linda, and each object operates on a timer schedule. This timer determines when the customer enters, waits, and leaves and when the customer changes to another person's image. Additionally, there are getters and setters that are accessed in the OrderTimer class. 
 
-![linda](https://user-images.githubusercontent.com/90798447/171072815-d446a519-e049-4eb7-9322-aed6ce08f96d.png)
-
+<img width="460" alt="L1" src="https://user-images.githubusercontent.com/78383220/167712746-b9da7b1b-4720-40da-822c-47677847cd3a.png">
 
 
 ![L1](https://user-images.githubusercontent.com/78383220/167712746-b9da7b1b-4720-40da-822c-47677847cd3a.png)  ![K1](https://user-images.githubusercontent.com/78383220/167712784-b68b83d2-fcc0-4dc6-9e77-3c28a87683cc.png) ![F1](https://user-images.githubusercontent.com/78383220/167712805-404e3f91-85fd-4ad2-9fdb-4b7c1311ab73.png) ![D1](https://user-images.githubusercontent.com/78383220/167712818-5678712d-7ed7-495a-a39b-3ad048ef59bf.png)
