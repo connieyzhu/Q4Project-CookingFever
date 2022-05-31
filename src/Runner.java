@@ -133,9 +133,9 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 						
 			if(tutorial) {
 				g.setColor(Color.WHITE);
-				g.fillRect(10, 350, 110, 70); //coffee
-				g.fillRect(360, 555, 115, 70); //cake batter
-				g.fillRect(1150, 350, 100, 90); //bake cake
+				g.fillRect(200, 400, 110, 70); //coffee
+				g.fillRect(560, 415, 125, 70); //cake batter
+				g.fillRect(1000, 350, 110, 90); //bake cake
 				g.fillRect(200, 620, 90, 70); // trash
 				g.fillRect(400, 240, 180, 130); // customers
 				g.fillRect(300, 15, 150, 90); //lost customer count
@@ -150,18 +150,18 @@ public class Runner extends JPanel implements ActionListener, MouseListener, Key
 				g.drawString("and click on earned money", 410, 340);
 				g.drawString("from completing their orders", 410, 360);
 							
-				g.drawString("2: Coffee ", 20, 370);
-				g.drawString("click on machine", 20, 390);
-				g.drawString("wait 5 seconds", 20, 410);
+				g.drawString("2: Coffee ", 210, 420);
+				g.drawString("click on machine", 210, 440);
+				g.drawString("wait 5 seconds", 210, 460);
 							
-				g.drawString("3: Cake Batter ", 365, 575);
-				g.drawString("drag batter & fruit", 365, 595);
-				g.drawString("onto tray", 365, 615);
+				g.drawString("3: Cake Batter ", 570, 435);
+				g.drawString("drag batter & fruit", 570, 455);
+				g.drawString("onto tray", 570, 475);
 							
-				g.drawString("4: Bake Cake ", 1155, 370);
-				g.drawString("drag batter to ", 1155, 390);
-				g.drawString("available oven ", 1155, 410);
-				g.drawString("wait 5 seconds", 1155, 430);
+				g.drawString("4: Bake Cake ", 1010, 370);
+				g.drawString("drag batter to ", 1010, 390);
+				g.drawString("available oven ", 1010, 410);
+				g.drawString("wait 10 seconds", 1010, 430);
 							
 				g.drawString("5: Trash Can ", 210, 640);
 				g.drawString("drag items ", 210, 660);
