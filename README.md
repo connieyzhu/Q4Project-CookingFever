@@ -2,7 +2,7 @@
 
 We hope you have fun playing our new version of Cooking Fever!
 
-!(The GIF goes Here)
+![Screen_Recording_2022-05-30_at_5_46_05_PM_AdobeCreativeCloudExpress](https://user-images.githubusercontent.com/90798447/171072385-be8668ed-278d-46d0-bfc9-e2d77fb32f35.gif)
 
 ## Description 
 
