@@ -34,7 +34,7 @@ public class Customer {
 		this.y = y;
 		vx = 0;
 		count = 0;
-		numReturns = ThreadLocalRandom.current().nextInt(4, 7);//4, 7
+		numReturns = ThreadLocalRandom.current().nextInt(4, 7); 
 		originalX1 = x1;
 		ready = false;
 		done = false;
