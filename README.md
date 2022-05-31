@@ -6,7 +6,7 @@ We hope you have fun playing our new version of Cooking Fever!
 
 ## Description 
 
-In this game, the goal is to collect as many coins as possible from all the customers. Make sure to complete as many orders as you can without sending away more than three customers, otherwise the game is over. There is a 5 second timer on the coffee machine, and a 5 second timer on the oven for the cakes. Drag the coffee, toppings, and cakes to complete the orders and don't forget to have fun!!!
+In this game, the goal is to collect as many coins as possible from all the customers. Make sure to complete as many orders as you can without sending away more than three customers, otherwise the game is over. There is a 5 second timer on the coffee machine, and a 5 second timer on the oven for the cakes. Drag the coffee, toppings, and cakes to complete the orders and don't forget to have fun!!
 
 ## How to Play
 
@@ -66,7 +66,7 @@ The change picture method is located in every class, and it allows the images of
 
 ## Help
 
-Reopen or relaunch eclipse or the game if you run into any issues!
+Reopen or relaunch eclipse or the game if you run into any issues.
 
 ## Authors 
 
