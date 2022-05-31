@@ -42,8 +42,13 @@ The Position class used to randomize the assignment of locations and orders, suc
 
 <img width="1190" alt="Screen Shot 2022-05-30 at 5 06 33 PM" src="https://user-images.githubusercontent.com/90798447/171069849-09dd94bc-724e-4fb5-98b6-dfaba3ab7bb4.png">
 <img width="546" alt="Screen Shot 2022-05-30 at 5 14 50 PM" src="https://user-images.githubusercontent.com/90798447/171070342-08e82d58-12d5-4e96-84fa-70fdbe10cc2f.png">
-![Screen Shot 2022-05-30 at 5 14 50 PM](https://user-images.githubusercontent.com/90798447/171070342-08e82d58-12d5-4e96-84fa-70fdbe10cc2f.png)
 
+### OrderTimer Class
+
+The OrderTimer class is in charge of the timer that is used when the customer waits for their order to be completed. This class paints aspects like the order and timer while the customer is still waiting there, and it sets certain variables of its customer to true when the timer is over, which signals the customer to leave and to stop painting these elements. The timer is then reset, ready to start again when the customer is back to their ordering position, and their order is also newly generated. 
+
+<img width="560" alt="Screen Shot 2022-05-30 at 5 23 45 PM" src="https://user-images.githubusercontent.com/90798447/171070805-231cb33d-19f2-47d2-8370-c3610dc52822.png">
+<img width="560" alt="Screen Shot 2022-05-30 at 5 23 30 PM" src="https://user-images.githubusercontent.com/90798447/171070857-5ce05069-becc-4d68-ab0f-cd48db5fcb39.png">
 
 ## METHODS
 
