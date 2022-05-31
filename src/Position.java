@@ -84,24 +84,6 @@ public class Position {
 		}
 		count = 0;
 	}
-	public void updateXAvail() {
-		/*for(int i = 0; i < available.length; i++) {
-			available[i] = true;
-		}*/
-		
-		int posCount = 0;
-		for(int i = 0; i < available.length; i++) {
-			if(!available[i]) {
-				posCount++;
-			}
-		}
-		if(posCount == 4) {
-			for(int i = 0; i < available.length; i++) {
-				available[i] = true;
-			}
-		}
-		posCount = 0;
-	}
 	
 	public int newNum() {
 		num = ThreadLocalRandom.current().nextInt(0, 4);
@@ -126,7 +108,6 @@ public class Position {
 	
 	public int getX() {
 		newNum();
-		//updateXAvail();
 		if(!available[num]) {
 			newNum();
 			getX();
@@ -134,9 +115,6 @@ public class Position {
 		available[num] = false;
 		posCount++;
 		
-		if(posCount%4 == 0) {
-			updateXAvail();
-		}
 		return arr[num];
 	}
 	
