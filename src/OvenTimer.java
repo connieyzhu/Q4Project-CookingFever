@@ -2,18 +2,20 @@ import java.util.Timer;
 import java.util.TimerTask;
 public class OvenTimer {
 	Timer timer;
-	protected int index;
+	protected Object obj;
 
-    public OvenTimer(int seconds, int ind) {
+    public OvenTimer(int seconds, Object o) {
         timer = new Timer();
-        index = ind;
+        obj = o;
         timer.schedule(new RemindTask(), seconds*1000); // schedule the task
     }
 
     class RemindTask extends TimerTask {
         public void run() {
             for(int i = 3; i < Runner.getObjectList().size(); i++) {
-            	Runner.getObject(index).bakeChange(); 
+            	if(Runner.getObjectList().get(i).equals(obj)) {
+            		Runner.getObjectList().get(i).bakeChange(); 
+            	}
             	
             }
             timer.cancel(); //Terminate the timer thread
