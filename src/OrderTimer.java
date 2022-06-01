@@ -75,10 +75,10 @@ public class OrderTimer {
 				secondsAmt = 140;
 			}
 			if(orders.size() == 2) {
-				secondsAmt = 200;
+				secondsAmt = 230;
 			}
 			if(orders.size() == 3) {
-				secondsAmt = 300;
+				secondsAmt = 400;
 			}
 	    	 
 			waiting = new Position("wait");
@@ -177,10 +177,10 @@ public class OrderTimer {
 				secondsAmt = 140;
 			}
 			if(orders.size() == 2) {
-				secondsAmt = 200;
+				secondsAmt = 230;
 			}
 			if(orders.size() == 3) {
-				secondsAmt = 300;
+				secondsAmt = 400;
 			}
 	    }
 	    
